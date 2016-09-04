@@ -14,4 +14,13 @@ public class Movie {
     private List<String> genres;
     private int length;
 
+    @Override
+    public String toString() {
+        return "Movie{" +
+                "title='" + title + '\'' +
+                ", description='" + description + '\'' +
+                ", length=" + length +
+                ", minAge=" + minAge +
+                '}';
+    }
 }

@@ -36,4 +36,8 @@ public class Cinema {
                 "name='" + name + '\'' +
                 '}';
     }
+
+    public String getCity() {
+        return city;
+    }
 }
