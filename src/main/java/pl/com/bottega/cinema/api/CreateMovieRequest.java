@@ -2,6 +2,7 @@ package pl.com.bottega.cinema.api;
 
 import pl.com.bottega.cinema.domain.Actor;
 import pl.com.bottega.cinema.domain.Genre;
+import pl.com.bottega.cinema.domain.Movie;
 
 import java.util.Collection;
 
@@ -9,6 +10,7 @@ import java.util.Collection;
  * Created by bernard.boguszewski on 04.09.2016.
  */
 public class CreateMovieRequest {
+
 
     private String title;
     private String description;
@@ -78,5 +80,17 @@ public class CreateMovieRequest {
             throw new InvalidRequestException("Min age is required");
         if (length == null || length <= 0)
             throw new InvalidRequestException("Length is required");
+    }
+
+    @Override
+    public String toString() {
+        return "CreateMovieRequest{" +
+                "title='" + title + '\'' +
+                ", description='" + description + '\'' +
+                ", actors=" + actors +
+                ", genres=" + genres +
+                ", minAge=" + minAge +
+                ", length=" + length +
+                '}';
     }
 }
