@@ -21,6 +21,7 @@ public class ErrorHandler {
                 "{'error': 'invalid_request_exception'}",
                 headers,
                 HttpStatus.UNPROCESSABLE_ENTITY
+
         );
     }
 }
