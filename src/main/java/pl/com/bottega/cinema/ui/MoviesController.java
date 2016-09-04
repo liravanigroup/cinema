@@ -16,6 +16,7 @@ public class MoviesController {
 
     @PutMapping
     public void create(@RequestBody CreateMovieRequest createMovieRequest) {
+        System.out.println(createMovieRequest.toString());
         createMovieRequest.validate();
         adminPanel.createMovie(createMovieRequest);
     }
