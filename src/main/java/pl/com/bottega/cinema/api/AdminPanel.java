@@ -5,11 +5,14 @@ package pl.com.bottega.cinema.api;
  */
 public class AdminPanel {
 
+
+
+
     public void createCinema(CreateCinemaRequest request){
 
     }
 
-    public void crateMovie(CreateMovieRequest request){
+    public void createMovie(CreateMovieRequest request){
 
     }
 
