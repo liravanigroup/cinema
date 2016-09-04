@@ -28,4 +28,11 @@ public class CinemaDto {
     public void setCity(String city) {
         this.city = city;
     }
+
+    public void validate() throws InvalidRequestException{
+        if (name == null || city.length() == 0)
+            throw new InvalidRequestException("Cinema name is required!");
+        if (name == null || city.length() == 0)
+            throw  new InvalidRequestException("City name is required!");
+    }
 }

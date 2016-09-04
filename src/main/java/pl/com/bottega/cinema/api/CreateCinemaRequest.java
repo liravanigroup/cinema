@@ -21,12 +21,7 @@ public class CreateCinemaRequest {
         this.cinema = cinemaDto;
     }
 
-    public void validate() throws InvalidRequestException{
-        if (cinema.getName() == null || cinema.getName().length() == 0)
-            throw new InvalidRequestException("Cinema name is required!");
-        if (cinema.getName() == null || cinema.getName().length() == 0)
-            throw  new InvalidRequestException("City name is required!");
-    }
+
 
 
 }
