@@ -66,17 +66,17 @@ public class CreateMovieRequest {
     }
 
     public void validate() {
-        if (title == null)
+        if (title == null || title.trim().length() <= 2)
             throw new InvalidRequestException("Title is required");
-        if (description == null)
+        if (description == null || description.trim().length() <= 10)
             throw new InvalidRequestException("Description is required");
-        if (actors == null)
+        if (actors == null || actors.size() <= 0)
             throw new InvalidRequestException("Actors is required");
-        if (genres == null)
+        if (genres == null || genres.size() <= 0)
             throw new InvalidRequestException("Genres is required");
-        if (minAge == null)
+        if (minAge == null || minAge <= 0)
             throw new InvalidRequestException("Min age is required");
-        if (length == null)
+        if (length == null || length <= 0)
             throw new InvalidRequestException("Length is required");
     }
 }
