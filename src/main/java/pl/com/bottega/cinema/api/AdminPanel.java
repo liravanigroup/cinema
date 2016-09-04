@@ -1,6 +1,7 @@
 package pl.com.bottega.cinema.api;
 
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import pl.com.bottega.cinema.domain.Cinema;
 import pl.com.bottega.cinema.domain.CinemaRepository;
 
@@ -16,10 +17,10 @@ public class AdminPanel {
         this.cinemaRepository = cinemaRepository;
     }
 
+    @Transactional
     public void createCinema(CreateCinemaRequest request){
         Cinema cinema = new Cinema(request.getCity(), request.getName());
         cinemaRepository.save(cinema);
-
     }
 
     public void createMovie(CreateMovieRequest request){

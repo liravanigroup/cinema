@@ -7,5 +7,5 @@ public interface CinemaRepository {
 
     void save(Cinema cinema);
 
-    void load(String name, String cinema);
+    Cinema load(String name, String city);
 }
