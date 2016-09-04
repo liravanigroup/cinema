@@ -1,5 +1,10 @@
 package pl.com.bottega.cinema.api;
 
+import pl.com.bottega.cinema.domain.Actor;
+import pl.com.bottega.cinema.domain.Genre;
+
+import java.util.Collection;
+
 /**
  * Created by bernard.boguszewski on 04.09.2016.
  */
@@ -20,8 +25,33 @@ public class CreateMovieRequest {
     }
 
 
+
     @Override
     public String toString() {
         return movie.toString();
+    }
+
+    public String getTitle() {
+        return movie.getTitle();
+    }
+
+    public String getDescription() {
+        return movie.getDescription();
+    }
+
+    public Integer getMinAge() {
+        return movie.getMinAge();
+    }
+
+    public Collection<Actor> getActors() {
+        return movie.getActors();
+    }
+
+    public Collection<Genre> getGenres() {
+        return movie.getGenres();
+    }
+
+    public Integer getLength() {
+        return movie.getLength();
     }
 }
