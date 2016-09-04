@@ -18,6 +18,8 @@ public class Actor {
         this.name = name;
     }
 
+    public Actor() {}
+
     public Long getId() {
         return id;
     }

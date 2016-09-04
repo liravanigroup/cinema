@@ -19,6 +19,8 @@ public class Genre {
         this.name = name;
     }
 
+    public Genre() {}
+
     public Long getId() {
         return id;
     }
