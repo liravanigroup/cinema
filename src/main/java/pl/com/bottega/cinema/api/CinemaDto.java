@@ -35,4 +35,12 @@ public class CinemaDto {
         if (name == null || city.length() == 0)
             throw  new InvalidRequestException("City name is required!");
     }
+
+    @Override
+    public String toString() {
+        return "CinemaDto{" +
+                "name='" + name + '\'' +
+                ", city='" + city + '\'' +
+                '}';
+    }
 }

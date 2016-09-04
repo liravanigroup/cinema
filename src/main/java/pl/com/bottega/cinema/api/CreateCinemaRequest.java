@@ -21,7 +21,12 @@ public class CreateCinemaRequest {
         this.cinema = cinemaDto;
     }
 
+    @Override
+    public String toString() {
+        return cinema.toString();
+    }
 
-
-
+    public void validate() {
+        cinema.validate();
+    }
 }
