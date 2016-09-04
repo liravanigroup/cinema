@@ -8,5 +8,10 @@ public class Cinema {
     public Cinema() {
     }
 
-
+    @Override
+    public String toString() {
+        return "Cinema{" +
+                "name='" + name + '\'' +
+                '}';
+    }
 }
