@@ -5,6 +5,8 @@ import java.util.List;
 /**
  * Created by anna on 04.09.2016.
  */
+
+
 public class Movie {
 
     private String title;
