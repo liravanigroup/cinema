@@ -9,29 +9,24 @@ import static com.google.common.base.Preconditions.checkNotNull;
  */
 public class CreateCinemaRequest {
 
-    private String name;
-    private String city;
+    private CinemaDto cinema;
 
-    public String getName() {
-        return name;
+
+
+    public CinemaDto getCinemaDto() {
+        return cinema;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setCinemaDto(CinemaDto cinemaDto) {
+        this.cinema = cinemaDto;
     }
 
-    public String getCity() {
-        return city;
-    }
-
-    public void setCity(String city) {
-        this.city = city;
-    }
-
-    public void validate(CinemaRepository repository) throws InvalidRequestException{
-        if (name == null || name.length() == 0)
+    public void validate() throws InvalidRequestException{
+        if (cinema.getName() == null || cinema.getName().length() == 0)
             throw new InvalidRequestException("Cinema name is required!");
-        if (city == null || city.length() == 0)
+        if (cinema.getName() == null || cinema.getName().length() == 0)
             throw  new InvalidRequestException("City name is required!");
     }
+
+
 }
