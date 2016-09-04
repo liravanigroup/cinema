@@ -4,6 +4,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
+import java.util.Collection;
 import java.util.List;
 
 /**
@@ -19,12 +20,12 @@ public class Movie {
     private String description;
     private Integer minAge;
     @OneToMany
-    private List<Actor> actors;
+    private Collection<Actor> actors;
     @OneToMany
-    private List<Genre> genres;
+    private Collection<Genre> genres;
     private Integer length;
 
-    public Movie(String title, String description, Integer minAge, List<Actor> actors, List<Genre> genres, Integer length) {
+    public Movie(String title, String description, Integer minAge, Collection<Actor> actors, Collection<Genre> genres, Integer length) {
         this.title = title;
         this.description = description;
         this.minAge = minAge;
@@ -65,7 +66,7 @@ public class Movie {
         this.minAge = minAge;
     }
 
-    public List<Actor> getActors() {
+    public Collection<Actor> getActors() {
         return actors;
     }
 
@@ -73,7 +74,7 @@ public class Movie {
         this.actors = actors;
     }
 
-    public List<Genre> getGenres() {
+    public Collection<Genre> getGenres() {
         return genres;
     }
 
