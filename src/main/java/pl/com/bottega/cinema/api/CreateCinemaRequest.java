@@ -2,6 +2,8 @@ package pl.com.bottega.cinema.api;
 
 import pl.com.bottega.cinema.domain.CinemaRepository;
 
+import static com.google.common.base.Preconditions.checkNotNull;
+
 /**
  * Created by bernard.boguszewski on 04.09.2016.
  */
@@ -26,7 +28,8 @@ public class CreateCinemaRequest {
         this.city = city;
     }
 
-    public void validate(CinemaRepository repository){
-
+    public void validate(CinemaRepository repository) throws InvalidRequestException{
+        checkNotNull(name);
+        checkNotNull(city);
     }
 }

@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.RestController;
 import pl.com.bottega.cinema.api.AdminPanel;
 import pl.com.bottega.cinema.api.CreateCinemaRequest;
 import pl.com.bottega.cinema.domain.Cinema;
+import pl.com.bottega.cinema.domain.CinemaRepository;
 
 /**
  * Created by anna on 04.09.2016.
@@ -16,13 +17,16 @@ import pl.com.bottega.cinema.domain.Cinema;
 public class CinemasController {
 
     private AdminPanel adminPanel;
+    private CinemaRepository cinemaRepository;
 
-    public CinemasController(AdminPanel adminPanel) {
+    public CinemasController(AdminPanel adminPanel, CinemaRepository cinemaRepository) {
         this.adminPanel = adminPanel;
+        this.cinemaRepository = cinemaRepository;
     }
 
     @PutMapping
     public void create(@RequestBody CreateCinemaRequest request) {
+        request.validate(cinemaRepository);
         adminPanel.createCinema(request);
     }
 
