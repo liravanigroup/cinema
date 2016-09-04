@@ -2,7 +2,11 @@ package pl.com.bottega.cinema.api;
 
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import pl.com.bottega.cinema.domain.Cinema;
+import pl.com.bottega.cinema.domain.Movie;
+import pl.com.bottega.cinema.domain.MovieRepository;
 import pl.com.bottega.cinema.domain.CinemaRepository;
 
 /**
@@ -10,7 +14,7 @@ import pl.com.bottega.cinema.domain.CinemaRepository;
  */
 @Service
 public class AdminPanel {
-
+    private MovieRepository movieRepository;
     private CinemaRepository cinemaRepository;
 
     public AdminPanel(CinemaRepository cinemaRepository) {
@@ -23,11 +27,13 @@ public class AdminPanel {
         cinemaRepository.save(cinema);
     }
 
-    public void createMovie(CreateMovieRequest request){
-
+    @Transactional
+    public void createMovie(CreateMovieRequest createMovieRequest) {
+        Movie movie = MovieFactory.createMovie(createMovieRequest);
+        movieRepository.save(movie);
     }
 
-    public void createShow(CreateShowsRequest request){
+    public void createShow(CreateShowsRequest request) {
 
     }
 }

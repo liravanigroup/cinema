@@ -9,8 +9,8 @@ import static com.google.common.base.Preconditions.checkNotNull;
  */
 public class CreateCinemaRequest {
 
-    String name;
-    String city;
+    private String name;
+    private String city;
 
     public String getName() {
         return name;
