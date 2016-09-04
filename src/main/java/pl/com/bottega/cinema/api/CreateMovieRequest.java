@@ -65,7 +65,7 @@ public class CreateMovieRequest {
         this.length = length;
     }
 
-    public void validate(String title, String description, Collection<Actor> actors, Collection<Genre> genres, Integer minAge, Integer length) {
+    public void validate() {
         if (title == null)
             throw new InvalidRequestException("Title is required");
         if (description == null)
