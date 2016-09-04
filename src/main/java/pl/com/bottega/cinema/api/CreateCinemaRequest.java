@@ -29,7 +29,9 @@ public class CreateCinemaRequest {
     }
 
     public void validate(CinemaRepository repository) throws InvalidRequestException{
-        checkNotNull(name);
-        checkNotNull(city);
+        if (name == null)
+            throw new InvalidRequestException("Cinema name is required!");
+        if (city == null)
+            throw  new InvalidRequestException("City name is required!");
     }
 }
