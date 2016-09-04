@@ -25,6 +25,8 @@ public class Movie {
     private Collection<Genre> genres;
     private Integer length;
 
+    public Movie() {}
+
     public Movie(String title, String description, Integer minAge, Collection<Actor> actors, Collection<Genre> genres, Integer length) {
         this.title = title;
         this.description = description;
