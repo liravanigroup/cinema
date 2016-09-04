@@ -29,9 +29,9 @@ public class CreateCinemaRequest {
     }
 
     public void validate(CinemaRepository repository) throws InvalidRequestException{
-        if (name == null)
+        if (name == null || name.length() == 0)
             throw new InvalidRequestException("Cinema name is required!");
-        if (city == null)
+        if (city == null || city.length() == 0)
             throw  new InvalidRequestException("City name is required!");
     }
 }
