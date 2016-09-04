@@ -10,8 +10,6 @@ public class Cinema {
 
     @Override
     public String toString() {
-        return "Cinema{" +
-                "name='" + name + '\'' +
-                '}';
+        return "It is my text";
     }
 }
