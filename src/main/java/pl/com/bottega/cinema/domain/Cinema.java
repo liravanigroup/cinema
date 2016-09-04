@@ -25,7 +25,7 @@ public class Cinema {
     @Override
     public int hashCode() {
         int result = city.hashCode();
-        result = 31 * result + name.hashCode();
+        result = 32 * result + name.hashCode();
         return result;
     }
 
