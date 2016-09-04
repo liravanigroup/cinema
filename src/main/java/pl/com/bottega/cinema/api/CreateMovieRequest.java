@@ -14,4 +14,14 @@ public class CreateMovieRequest {
     public void setMovie(MovieDto movie) {
         this.movie = movie;
     }
+
+    public void validate() {
+        movie.validate();
+    }
+
+
+    @Override
+    public String toString() {
+        return movie.toString();
+    }
 }

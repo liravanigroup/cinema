@@ -4,11 +4,7 @@ import pl.com.bottega.cinema.domain.Actor;
 import pl.com.bottega.cinema.domain.Genre;
 
 import java.util.Collection;
-import java.util.function.Function;
 import java.util.stream.Collectors;
-import java.util.stream.Stream;
-
-import static javafx.scene.input.KeyCode.R;
 
 public class MovieDto {
 
@@ -18,7 +14,6 @@ public class MovieDto {
     private Collection<Genre> genres;
     private Integer minAge;
     private Integer length;
-
 
 
     public void setTitle(String title) {
@@ -80,5 +75,15 @@ public class MovieDto {
             throw new InvalidRequestException("Length is required");
     }
 
-
+    @Override
+    public String toString() {
+        return "MovieDto{" +
+                "title='" + title + '\'' +
+                ", description='" + description + '\'' +
+                ", actors=" + actors +
+                ", genres=" + genres +
+                ", minAge=" + minAge +
+                ", length=" + length +
+                '}';
+    }
 }
