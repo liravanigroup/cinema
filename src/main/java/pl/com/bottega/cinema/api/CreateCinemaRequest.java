@@ -9,8 +9,8 @@ import static com.google.common.base.Preconditions.checkNotNull;
  */
 public class CreateCinemaRequest {
 
-    String name;
-    String city;
+    private String name;
+    private String city;
 
     public String getName() {
         return name;
@@ -29,7 +29,9 @@ public class CreateCinemaRequest {
     }
 
     public void validate(CinemaRepository repository) throws InvalidRequestException{
-        checkNotNull(name);
-        checkNotNull(city);
+        if (name == null || name.length() == 0)
+            throw new InvalidRequestException("Cinema name is required!");
+        if (city == null || city.length() == 0)
+            throw  new InvalidRequestException("City name is required!");
     }
 }

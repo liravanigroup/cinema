@@ -1,7 +1,13 @@
 package pl.com.bottega.cinema.domain;
 
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+
 public class Cinema {
 
+    @Id
+    @GeneratedValue
+    private Long id;
     private String city;
     private String name;
 
