@@ -25,9 +25,8 @@ public class CinemasController {
 
     @PutMapping
     public void create(@RequestBody CreateCinemaRequest request) {
-        System.out.println(request);
-        //request.validate();
-        //adminPanel.createCinema(request);
+        request.validate();
+        adminPanel.createCinema(request);
     }
 
     public ListAllCinemasResponse listAll() {

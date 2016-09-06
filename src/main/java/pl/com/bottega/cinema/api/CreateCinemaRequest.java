@@ -1,9 +1,5 @@
 package pl.com.bottega.cinema.api;
 
-import pl.com.bottega.cinema.api.CinemaDto;
-
-import static com.google.common.base.Preconditions.checkNotNull;
-
 /**
  * Created by bernard.boguszewski on 04.09.2016.
  */
@@ -11,19 +7,12 @@ public class CreateCinemaRequest {
 
     private CinemaDto cinema;
 
-
-
-    public CinemaDto getCinemaDto() {
+    public CinemaDto getCinema() {
         return cinema;
     }
 
-    public void setCinemaDto(CinemaDto cinemaDto) {
-        this.cinema = cinemaDto;
-    }
-
-    @Override
-    public String toString() {
-        return cinema.toString();
+    public void setCinema(CinemaDto cinema) {
+        this.cinema = cinema;
     }
 
     public void validate() {
@@ -37,4 +26,6 @@ public class CreateCinemaRequest {
     public String getCity() {
         return cinema.getCity();
     }
+
+
 }

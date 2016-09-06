@@ -24,13 +24,6 @@ public class CreateMovieRequest {
         movie.validate();
     }
 
-
-
-    @Override
-    public String toString() {
-        return movie.toString();
-    }
-
     public String getTitle() {
         return movie.getTitle();
     }

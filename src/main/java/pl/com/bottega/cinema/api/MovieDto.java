@@ -79,16 +79,4 @@ public class MovieDto {
         if (length == null || length <= 0)
             throw new InvalidRequestException("Length is required");
     }
-
-    @Override
-    public String toString() {
-        return "MovieDto{" +
-                "title='" + title + '\'' +
-                ", description='" + description + '\'' +
-                ", actors=" + actors +
-                ", genres=" + genres +
-                ", minAge=" + minAge +
-                ", length=" + length +
-                '}';
-    }
 }

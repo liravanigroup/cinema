@@ -5,11 +5,8 @@ package pl.com.bottega.cinema.api;
  */
 public class CinemaDto {
 
-
     private String name;
     private String city;
-
-
 
     public String getName() {
         return name;

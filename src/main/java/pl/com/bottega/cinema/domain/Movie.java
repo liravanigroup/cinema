@@ -1,11 +1,10 @@
 package pl.com.bottega.cinema.domain;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.OneToMany;
+import javax.persistence.*;
 import java.util.Collection;
 import java.util.List;
+
+import static javax.persistence.CascadeType.ALL;
 
 /**
  * Created by anna on 04.09.2016.
@@ -19,9 +18,9 @@ public class Movie {
     private String title;
     private String description;
     private Integer minAge;
-    @OneToMany
+    @OneToMany(cascade = ALL)
     private Collection<Actor> actors;
-    @OneToMany
+    @OneToMany(cascade = ALL)
     private Collection<Genre> genres;
     private Integer length;
 
