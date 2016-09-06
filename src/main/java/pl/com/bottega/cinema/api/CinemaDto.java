@@ -1,7 +1,5 @@
 package pl.com.bottega.cinema.api;
 
-import pl.com.bottega.cinema.ui.ListAllCinemasResponse;
-
 /**
  * Created by bernard.boguszewski on 04.09.2016.
  */
@@ -29,7 +27,7 @@ public class CinemaDto {
         this.city = city;
     }
 
-    public void validate() throws InvalidRequestException{
+    public void validate() throws InvalidRequestException {
         if (name == null || city.length() == 0)
             throw new InvalidRequestException("Cinema name is required!");
         if (name == null || city.length() == 0)

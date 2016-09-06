@@ -21,8 +21,9 @@ public class AdminPanel {
     }
 
     @Transactional
-    public void createCinema(CreateCinemaRequest request){
-        Cinema cinema = new Cinema(request.getCinemaDto().getCity(), request.getCinemaDto().getName());
+    public void createCinema(CreateCinemaRequest createCinemaRequest){
+        //Cinema cinema = new Cinema(request.getCinemaDto().getCity(), request.getCinemaDto().getName());
+        Cinema cinema = CinemaFactory.createCinema(createCinemaRequest);
         cinemaRepository.save(cinema);
     }
 

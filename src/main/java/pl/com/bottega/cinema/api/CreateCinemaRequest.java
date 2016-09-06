@@ -1,6 +1,6 @@
 package pl.com.bottega.cinema.api;
 
-import pl.com.bottega.cinema.domain.CinemaRepository;
+import pl.com.bottega.cinema.api.CinemaDto;
 
 import static com.google.common.base.Preconditions.checkNotNull;
 
@@ -28,5 +28,13 @@ public class CreateCinemaRequest {
 
     public void validate() {
         cinema.validate();
+    }
+
+    public String getName() {
+        return cinema.getName();
+    }
+
+    public String getCity() {
+        return cinema.getCity();
     }
 }

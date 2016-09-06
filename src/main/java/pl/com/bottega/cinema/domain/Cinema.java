@@ -13,9 +13,12 @@ public class Cinema {
     private String city;
     private String name;
 
-    public Cinema(String city, String name) {
-        this.city = city;
+    public Cinema(String name, String city) {
         this.name = name;
+        this.city = city;
+    }
+
+    public Cinema() {
     }
 
     public Long getId() {
