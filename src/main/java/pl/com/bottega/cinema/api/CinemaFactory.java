@@ -7,6 +7,6 @@ import pl.com.bottega.cinema.domain.Cinema;
  */
 public class CinemaFactory {
     public static Cinema createCinema(CreateCinemaRequest request) {
-        return new Cinema(request.getCity(), request.getName());
+        return new Cinema(request.getName(), request.getCity());
     }
 }
