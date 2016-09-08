@@ -14,16 +14,18 @@ import pl.com.bottega.cinema.domain.MovieRepository;
 public class AdminPanel {
     private MovieRepository movieRepository;
     private CinemaRepository cinemaRepository;
+    private CinemaFactory cinemaFactory;
 
-    public AdminPanel(MovieRepository movieRepository, CinemaRepository cinemaRepository) {
+    public AdminPanel(MovieRepository movieRepository, CinemaRepository cinemaRepository, CinemaFactory cinemaFactory) {
         this.movieRepository = movieRepository;
         this.cinemaRepository = cinemaRepository;
+        this.cinemaFactory = cinemaFactory;
     }
 
     @Transactional
     public void createCinema(CreateCinemaRequest createCinemaRequest){
         //Cinema cinema = new Cinema(request.getCinemaDto().getCity(), request.getCinemaDto().getName());
-        Cinema cinema = CinemaFactory.createCinema(createCinemaRequest);
+        Cinema cinema = cinemaFactory.createCinema(createCinemaRequest);
         cinemaRepository.save(cinema);
     }
 

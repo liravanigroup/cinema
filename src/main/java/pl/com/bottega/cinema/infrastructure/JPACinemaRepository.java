@@ -1,10 +1,12 @@
 package pl.com.bottega.cinema.infrastructure;
 
 import org.springframework.stereotype.Repository;
+import pl.com.bottega.cinema.api.InvalidRequestException;
 import pl.com.bottega.cinema.domain.Cinema;
 import pl.com.bottega.cinema.domain.CinemaRepository;
 import pl.com.bottega.cinema.domain.Movie;
 
+import javax.persistence.EntityExistsException;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 
@@ -19,7 +21,12 @@ public class JPACinemaRepository implements CinemaRepository {
 
     @Override
     public void save(Cinema cinema) {
-        entityManager.merge(cinema);
+        try {
+            entityManager.persist(cinema);
+        }catch (EntityExistsException ex) {
+            throw new InvalidRequestException("Cinema already has been created");
+        }
+
     }
 
     @Override

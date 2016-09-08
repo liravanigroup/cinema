@@ -1,10 +1,8 @@
 package pl.com.bottega.cinema.ui;
 
-import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import pl.com.bottega.cinema.api.AdminPanel;
+import pl.com.bottega.cinema.api.CinemaCatalog;
 import pl.com.bottega.cinema.api.CreateCinemaRequest;
 import pl.com.bottega.cinema.domain.CinemaRepository;
 
@@ -17,6 +15,7 @@ public class CinemasController {
 
     private AdminPanel adminPanel;
     private CinemaRepository cinemaRepository;
+    private CinemaCatalog cinemaCatalog;
 
     public CinemasController(AdminPanel adminPanel, CinemaRepository cinemaRepository) {
         this.adminPanel = adminPanel;
@@ -29,7 +28,8 @@ public class CinemasController {
         adminPanel.createCinema(request);
     }
 
+    @GetMapping
     public ListAllCinemasResponse listAll() {
-        return null;
+        return cinemaCatalog.listAll();
     }
 }
