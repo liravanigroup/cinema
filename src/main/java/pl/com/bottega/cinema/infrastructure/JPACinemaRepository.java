@@ -24,9 +24,8 @@ public class JPACinemaRepository implements CinemaRepository {
         try {
             entityManager.persist(cinema);
         }catch (EntityExistsException ex) {
-            throw new InvalidRequestException("Cinema already has been created");
+            throw new InvalidRequestException("Cinema has already been created");
         }
-
     }
 
     @Override
