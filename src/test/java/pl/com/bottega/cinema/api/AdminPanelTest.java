@@ -9,8 +9,7 @@ import pl.com.bottega.cinema.domain.Cinema;
 import pl.com.bottega.cinema.domain.CinemaRepository;
 import pl.com.bottega.cinema.domain.MovieRepository;
 
-import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.when;
+import static org.mockito.Mockito.*;
 
 /**
  * Created by anna on 06.09.2016.
@@ -59,8 +58,7 @@ public class AdminPanelTest {
     @Test(expected = InvalidRequestException.class)
     public void shouldThrownInvalidRequestExWhenAddedCinemaAlreadyExists(){
         //given
-
-        //when(anyCinemaRepository.save(anyCinema)).thenThrow(InvalidRequestException.class);
+        doThrow(InvalidRequestException.class).when(anyCinemaRepository).save(anyCinema);
 
         when(anyCinemaFactory.createCinema(anyCreateCinemaRequest)).thenReturn(anyCinema);
         adminPanel.createCinema(anyCreateCinemaRequest);
