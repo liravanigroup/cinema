@@ -2,6 +2,7 @@ package pl.com.bottega.cinema.infrastructure;
 
 import org.springframework.stereotype.Component;
 import pl.com.bottega.cinema.api.CinemaCatalog;
+import pl.com.bottega.cinema.api.CinemaDto;
 import pl.com.bottega.cinema.domain.Cinema;
 import pl.com.bottega.cinema.domain.Cinema_;
 import pl.com.bottega.cinema.ui.ListAllCinemasResponse;
@@ -26,19 +27,18 @@ public class JPACinemaCatalog implements CinemaCatalog {
 
     @Override
     public ListAllCinemasResponse listAll() {
-        checkNotNull(id);
+
         CriteriaBuilder builder = entityManager.getCriteriaBuilder();
-        CriteriaQuery<ListAllCinemasResponse> query = builder.createQuery(ListAllCinemasResponse.class);
+        CriteriaQuery<CinemaDto> query = builder.createQuery(CinemaDto.class);
         Root<Cinema> root = query.from(Cinema.class);
-        query.where(builder.and(
-                builder.equal(root.get(id), id))
-        );
-        selectListAllCinemasResponse(builder, query, root);
-        return entityManager.createQuery(query).getSingleResult();
+        selectCinemaDto(builder, query,root);
+        Query jpaQuery = entityManager.createQuery(query);
+
+        return new ListAllCinemasResponse(jpaQuery.getResultList());
     }
 
-    private void selectListAllCinemasResponse(CriteriaBuilder builder, CriteriaQuery<ListAllCinemasResponse> query, Root<Cinema> root) {
-        query.select(builder.construct(ListAllCinemasResponse.class,
+    private void selectCinemaDto(CriteriaBuilder builder, CriteriaQuery<CinemaDto> query, Root<Cinema> root){
+        query.select(builder.construct(CinemaDto.class,
                 root.get(Cinema_.id),
                 root.get(Cinema_.name),
                 root.get(Cinema_.city)

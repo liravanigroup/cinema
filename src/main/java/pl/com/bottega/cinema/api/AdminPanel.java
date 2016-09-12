@@ -23,10 +23,14 @@ public class AdminPanel {
     }
 
     @Transactional
-    public void createCinema(CreateCinemaRequest createCinemaRequest){
-        //Cinema cinema = new Cinema(request.getCinemaDto().getCity(), request.getCinemaDto().getName());
-        Cinema cinema = cinemaFactory.createCinema(createCinemaRequest);
-        cinemaRepository.save(cinema);
+    public void createCinema(CreateCinemaRequest request) throws InvalidRequestException {
+        Cinema cinema = cinemaRepository.load(request.getName(), request.getCity());
+        if (cinema == null) {
+            cinema = cinemaFactory.createCinema(request.getName(), request.getCity());
+            cinemaRepository.save(cinema);
+        }
+        else
+            throw new InvalidRequestException("Cinema already exists!");
     }
 
     @Transactional

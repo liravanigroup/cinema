@@ -5,6 +5,7 @@ package pl.com.bottega.cinema.api;
  */
 public class CinemaDto {
 
+    private Long id;
     private String name;
     private String city;
 

@@ -9,6 +9,7 @@ import pl.com.bottega.cinema.domain.Movie;
 import javax.persistence.EntityExistsException;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import java.util.List;
 
 /**
  * Created by bernard.boguszewski on 04.09.2016.
@@ -22,7 +23,7 @@ public class JPACinemaRepository implements CinemaRepository {
     @Override
     public void save(Cinema cinema) {
         try {
-            entityManager.persist(cinema);
+            entityManager.merge(cinema);
         }catch (EntityExistsException ex) {
             throw new InvalidRequestException("Cinema has already been created");
         }
@@ -30,7 +31,11 @@ public class JPACinemaRepository implements CinemaRepository {
 
     @Override
     public Cinema load(String name, String city) {
-        return null;
+        List<Cinema> cinemas = entityManager.createQuery("FROM Cinema c WHERE c.name =:name AND c.city =:city ", Cinema.class).setParameter("city", city)
+                .setParameter("name", name).getResultList();
+        if (cinemas.isEmpty())
+            return null;
+        return cinemas.get(0);
     }
 
 
