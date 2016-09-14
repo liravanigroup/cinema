@@ -15,11 +15,11 @@ public class CreateCinemaRequest {
         this.cinema = cinema;
     }
 
-    public void validate() throws InvalidRequestException {
-        if (cinema.getName() == null || cinema.getName().length() == 0)
-            throw new InvalidRequestException("Cinema name is required!");
-        if (cinema.getCity() == null || cinema.getCity().length() == 0)
-            throw new InvalidRequestException("City name is required!");
+    /**
+     * @throws InvalidRequestException if validation is failed and course of exception
+     */
+    public void validate() {
+        cinema.validate();
     }
 
     public String getName() {

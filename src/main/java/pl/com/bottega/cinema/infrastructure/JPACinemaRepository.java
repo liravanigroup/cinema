@@ -21,13 +21,7 @@ public class JPACinemaRepository implements CinemaRepository {
 
     @Override
     public void save(Cinema cinema) {
-        try {
-            entityManager.persist(cinema);
-        } catch (Exception ex) {
-            throw new InvalidRequestException(
-                    String.format("Cinema %s has already been created in %s", cinema.getName(), cinema.getCity())
-            );
-        }
+        entityManager.persist(cinema);
     }
 
     @Override

@@ -16,6 +16,14 @@ public class CinemaDto {
         this.name = c.getName();
     }
 
+    public CinemaDto(String name, String city) {
+        this.name = name;
+        this.city = city;
+    }
+
+    public CinemaDto() {
+    }
+
     public String getName() {
         return name;
     }
@@ -37,5 +45,14 @@ public class CinemaDto {
             throw new InvalidRequestException("Cinema name is required");
         if (city == null || city.length() == 0)
             throw  new InvalidRequestException("City name is required");
+    }
+
+    @Override
+    public String toString() {
+        return "CinemaDto{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", city='" + city + '\'' +
+                '}';
     }
 }

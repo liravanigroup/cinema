@@ -1,10 +1,12 @@
 package pl.com.bottega.cinema.domain;
 
-import javax.persistence.*;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
 import java.io.Serializable;
 
 @Entity
-@Table(name = "CINEMA", uniqueConstraints = {@UniqueConstraint(columnNames = {"CITY", "NAME"})})
 public class Cinema implements Serializable {
 
     private static final long serialVersionUID = -3247581407541832720L;
@@ -13,7 +15,6 @@ public class Cinema implements Serializable {
     @GeneratedValue
     private Long id;
 
-    @Column(length = 50, nullable = false)
     private String city, name;
 
     public Cinema(String city, String name) {
