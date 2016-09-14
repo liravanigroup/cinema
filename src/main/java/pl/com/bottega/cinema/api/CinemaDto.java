@@ -10,6 +10,9 @@ public class CinemaDto {
     private Long id;
     private String name, city;
 
+    public CinemaDto() {
+    }
+
     public CinemaDto(Cinema c) {
         this.id = c.getId();
         this.city = c.getCity();
@@ -22,6 +25,15 @@ public class CinemaDto {
     }
 
     public CinemaDto() {
+    }
+
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
     }
 
     public String getName() {
@@ -45,14 +57,5 @@ public class CinemaDto {
             throw new InvalidRequestException("Cinema name is required");
         if (city == null || city.length() == 0)
             throw  new InvalidRequestException("City name is required");
-    }
-
-    @Override
-    public String toString() {
-        return "CinemaDto{" +
-                "id=" + id +
-                ", name='" + name + '\'' +
-                ", city='" + city + '\'' +
-                '}';
     }
 }
