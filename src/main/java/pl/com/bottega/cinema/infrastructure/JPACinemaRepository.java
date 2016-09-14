@@ -1,12 +1,11 @@
 package pl.com.bottega.cinema.infrastructure;
 
 import org.springframework.stereotype.Repository;
+import pl.com.bottega.cinema.api.CreateCinemaRequest;
 import pl.com.bottega.cinema.api.InvalidRequestException;
 import pl.com.bottega.cinema.domain.Cinema;
 import pl.com.bottega.cinema.domain.CinemaRepository;
-import pl.com.bottega.cinema.domain.Movie;
 
-import javax.persistence.EntityExistsException;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import java.util.List;
@@ -23,16 +22,21 @@ public class JPACinemaRepository implements CinemaRepository {
     @Override
     public void save(Cinema cinema) {
         try {
-            entityManager.merge(cinema);
-        }catch (EntityExistsException ex) {
-            throw new InvalidRequestException("Cinema has already been created");
+            entityManager.persist(cinema);
+        } catch (Exception ex) {
+            throw new InvalidRequestException(
+                    String.format("Cinema %s has already been created in %s", cinema.getName(), cinema.getCity())
+            );
         }
     }
 
     @Override
-    public Cinema load(String name, String city) {
-        List<Cinema> cinemas = entityManager.createQuery("FROM Cinema c WHERE c.name =:name AND c.city =:city ", Cinema.class).setParameter("city", city)
-                .setParameter("name", name).getResultList();
+    public Cinema load(CreateCinemaRequest request) {
+        List<Cinema> cinemas = entityManager
+                .createQuery("FROM Cinema c WHERE c.name =:name AND c.city =:city ", Cinema.class)
+                .setParameter("city", request.getCity())
+                .setParameter("name", request.getName())
+                .getResultList();
         if (cinemas.isEmpty())
             return null;
         return cinemas.get(0);

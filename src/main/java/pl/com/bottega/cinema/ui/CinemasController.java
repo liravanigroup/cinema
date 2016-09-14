@@ -14,12 +14,11 @@ import pl.com.bottega.cinema.domain.CinemaRepository;
 public class CinemasController {
 
     private AdminPanel adminPanel;
-    private CinemaRepository cinemaRepository;
     private CinemaCatalog cinemaCatalog;
 
-    public CinemasController(AdminPanel adminPanel, CinemaRepository cinemaRepository) {
+    public CinemasController(AdminPanel adminPanel, CinemaRepository cinemaRepository, CinemaCatalog cinemaCatalog) {
         this.adminPanel = adminPanel;
-        this.cinemaRepository = cinemaRepository;
+        this.cinemaCatalog = cinemaCatalog;
     }
 
     @PutMapping
