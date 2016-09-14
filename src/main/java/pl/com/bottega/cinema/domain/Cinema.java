@@ -22,8 +22,7 @@ public class Cinema implements Serializable {
         this.name = name;
     }
 
-    public Cinema() {
-    }
+    public Cinema() {}
 
     public String getCity() {
         return city;

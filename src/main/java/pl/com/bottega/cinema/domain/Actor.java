@@ -9,16 +9,20 @@ import javax.persistence.Id;
  */
 @Entity
 public class Actor {
+
+
     @Id
     @GeneratedValue
     private Long id;
     private String name;
 
+    public Actor() {
+    }
+
     public Actor(String name) {
         this.name = name;
     }
 
-    public Actor() {}
 
     public Long getId() {
         return id;
@@ -32,7 +36,12 @@ public class Actor {
         return name;
     }
 
-    public void setName(String lastName) {
+    public void setName(String name) {
         this.name = name;
+    }
+
+    @Override
+    public String toString() {
+        return name;
     }
 }
