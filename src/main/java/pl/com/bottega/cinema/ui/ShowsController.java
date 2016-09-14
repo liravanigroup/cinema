@@ -1,8 +1,6 @@
 package pl.com.bottega.cinema.ui;
 
-import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import pl.com.bottega.cinema.api.AdminPanel;
 import pl.com.bottega.cinema.api.CreateShowsRequest;
 
@@ -19,8 +17,8 @@ public class ShowsController {
         this.adminPanel = adminPanel;
     }
 
-    @PutMapping
-    public void create(CreateShowsRequest request){
+    @PutMapping("/{cinemaId}/shows")
+    public void create(@PathVariable("cinemaId") Long id, @RequestBody CreateShowsRequest request){
         adminPanel.createShow(request);
     }
 }

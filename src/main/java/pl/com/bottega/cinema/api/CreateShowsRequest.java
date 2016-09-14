@@ -36,4 +36,13 @@ public class CreateShowsRequest {
     }
 
     public void validate() {}
+
+    @Override
+    public String toString() {
+        return "CreateShowsRequest{" +
+                "movieId=" + movieId +
+                ", dates=" + dates +
+                ", calendar=" + calendar +
+                '}';
+    }
 }

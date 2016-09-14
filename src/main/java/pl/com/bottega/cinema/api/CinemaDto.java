@@ -24,10 +24,6 @@ public class CinemaDto {
         this.city = city;
     }
 
-    public CinemaDto() {
-    }
-
-
     public Long getId() {
         return id;
     }

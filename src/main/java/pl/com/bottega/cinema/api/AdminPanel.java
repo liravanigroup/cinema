@@ -30,7 +30,7 @@ public class AdminPanel {
         this.showsRepository = showsRepository;
     }
 
-    @Transactional(rollbackFor = PersistenceException.class)
+    @Transactional
     public void createCinema(CreateCinemaRequest request) {
         Cinema cinema = cinemaFactory.createCinema(request);
         cinemaRepository.save(cinema);
