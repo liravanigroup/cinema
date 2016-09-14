@@ -17,9 +17,9 @@ public class CreateCinemaRequest {
 
     public void validate() throws InvalidRequestException {
         if (cinema.getName() == null || cinema.getName().length() == 0)
-        throw new InvalidRequestException("Cinema name is required!");
+            throw new InvalidRequestException("Cinema name is required!");
         if (cinema.getCity() == null || cinema.getCity().length() == 0)
-            throw  new InvalidRequestException("City name is required!");
+            throw new InvalidRequestException("City name is required!");
     }
 
     public String getName() {
@@ -29,6 +29,4 @@ public class CreateCinemaRequest {
     public String getCity() {
         return cinema.getCity();
     }
-
-
 }

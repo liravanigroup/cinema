@@ -1,13 +1,20 @@
 package pl.com.bottega.cinema.api;
 
+import pl.com.bottega.cinema.domain.Cinema;
+
 /**
  * Created by bernard.boguszewski on 04.09.2016.
  */
 public class CinemaDto {
 
     private Long id;
-    private String name;
-    private String city;
+    private String name, city;
+
+    public CinemaDto(Cinema c) {
+        this.id = c.getId();
+        this.city = c.getCity();
+        this.name = c.getName();
+    }
 
     public String getName() {
         return name;
@@ -25,18 +32,10 @@ public class CinemaDto {
         this.city = city;
     }
 
-    public void validate() throws InvalidRequestException {
-        if (name == null || city.length() == 0)
-            throw new InvalidRequestException("Cinema name is required!");
-        if (name == null || city.length() == 0)
-            throw  new InvalidRequestException("City name is required!");
-    }
-
-    @Override
-    public String toString() {
-        return "CinemaDto{" +
-                "name='" + name + '\'' +
-                ", city='" + city + '\'' +
-                '}';
+    public void validate() {
+        if (name == null || name.length() == 0)
+            throw new InvalidRequestException("Cinema name is required");
+        if (city == null || city.length() == 0)
+            throw  new InvalidRequestException("City name is required");
     }
 }
