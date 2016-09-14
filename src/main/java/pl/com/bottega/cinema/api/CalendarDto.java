@@ -7,25 +7,25 @@ import java.util.Date;
  * Created by Admin on 10.09.2016.
  */
 public class CalendarDto {
-    private Date fromData;
-    private Date untilData;
+    private Date fromDate;
+    private Date untilDate;
     private Collection<String> weekDays;
     private Collection<String> hours;
 
-    public Date getFromData() {
-        return fromData;
+    public Date getFromDate() {
+        return fromDate;
     }
 
-    public void setFromData(Date fromData) {
-        this.fromData = fromData;
+    public void setFromDate(Date fromDate) {
+        this.fromDate = fromDate;
     }
 
-    public Date getUntilData() {
-        return untilData;
+    public Date getUntilDate() {
+        return untilDate;
     }
 
-    public void setUntilData(Date untilData) {
-        this.untilData = untilData;
+    public void setUntilDate(Date untilDate) {
+        this.untilDate = untilDate;
     }
 
     public Collection<String> getWeekDays() {
@@ -45,9 +45,9 @@ public class CalendarDto {
     }
 
     public void validate() {
-        if (fromData == null)
+        if (fromDate == null || fromDate.getTime() < new Date().getTime())
             throw new InvalidRequestException("First date of movie showing is required");
-        if (untilData == null)
+        if (untilDate == null || untilDate.getTime() < fromDate.getTime())
             throw new InvalidRequestException("Last date of movie showing is required");
         if (weekDays == null || weekDays.size() <= 0)
             throw new InvalidRequestException("Week days of movie showing is required");

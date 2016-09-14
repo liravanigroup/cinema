@@ -51,10 +51,10 @@ public class AdminPanelTest {
                 anyCinemaFactory,anyMovieFactory,anyShowsFactory,anyShowsRepository);
     }
 
-    /*@Test
+    @Test
     public void shouldCreateNewCinema() {
         //given
-        when(anyCinemaFactory.createCinema(anyCreateCinemaRequest.getName(), anyCreateCinemaRequest.getCity())).thenReturn(anyCinema);
+   //     when(anyCinemaFactory.createCinema(anyCreateCinemaRequest.getName(), anyCreateCinemaRequest.getCity())).thenReturn(anyCinema);
 
         //when
         adminPanel.createCinema(anyCreateCinemaRequest);
@@ -69,10 +69,10 @@ public class AdminPanelTest {
         //when(anyCinemaRepository.save(anyCinema)).thenThrow(InvalidRequestException.class);
         doThrow(InvalidRequestException.class).when(anyCinemaRepository).save(anyCinema);
 
-        when(anyCinemaFactory.createCinema(anyCreateCinemaRequest.getName(), anyCreateCinemaRequest.getCity())).thenReturn(anyCinema);
+  //      when(anyCinemaFactory.createCinema(anyCreateCinemaRequest.getName(), anyCreateCinemaRequest.getCity())).thenReturn(anyCinema);
         adminPanel.createCinema(anyCreateCinemaRequest);
 
         //when
         adminPanel.createCinema(anyCreateCinemaRequest);
-    }*/
+    }
 }

@@ -35,14 +35,11 @@ public class CreateShowsRequest {
         this.calendar = calendar;
     }
 
-    public void validate() {}
-
-    @Override
-    public String toString() {
-        return "CreateShowsRequest{" +
-                "movieId=" + movieId +
-                ", dates=" + dates +
-                ", calendar=" + calendar +
-                '}';
+    public void validate() {
+        if (movieId == null)
+            throw new InvalidRequestException("Movie Id is required");
+        if (dates == null || dates.size()<=0)
+            throw new IllegalArgumentException("Dates of show is required");
+        calendar.validate();
     }
 }

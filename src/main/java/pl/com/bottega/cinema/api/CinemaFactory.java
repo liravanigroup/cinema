@@ -9,7 +9,7 @@ import pl.com.bottega.cinema.domain.Cinema;
 @Component
 public class CinemaFactory {
 
-    public Cinema createCinema(String name, String city) {
-        return new Cinema(name, city);
+    public Cinema createCinema(CreateCinemaRequest request) {
+        return new Cinema(request.getName(), request.getCity());
     }
 }
