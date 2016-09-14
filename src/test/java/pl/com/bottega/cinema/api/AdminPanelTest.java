@@ -42,7 +42,7 @@ public class AdminPanelTest {
     @Test
     public void shouldCreateNewCinema() {
         //given
-        when(anyCinemaFactory.createCinema(anyCinema.getName(), anyCinema.getCity())).thenReturn(anyCinema);
+        when(anyCinemaFactory.createCinema(anyCreateCinemaRequest.getName(), anyCreateCinemaRequest.getCity())).thenReturn(anyCinema);
 
         //when
         adminPanel.createCinema(anyCreateCinemaRequest);
@@ -54,10 +54,10 @@ public class AdminPanelTest {
     @Test(expected = InvalidRequestException.class)
     public void shouldThrownInvalidRequestExWhenAddedCinemaAlreadyExists(){
         //given
-        doThrow(InvalidRequestException.class).when(anyCinemaRepository).save(anyCinema);
         //when(anyCinemaRepository.save(anyCinema)).thenThrow(InvalidRequestException.class);
+        doThrow(InvalidRequestException.class).when(anyCinemaRepository).save(anyCinema);
 
-        when(anyCinemaFactory.createCinema(anyCinema.getName(), anyCinema.getCity())).thenReturn(anyCinema);
+        when(anyCinemaFactory.createCinema(anyCreateCinemaRequest.getName(), anyCreateCinemaRequest.getCity())).thenReturn(anyCinema);
         adminPanel.createCinema(anyCreateCinemaRequest);
 
         //when
