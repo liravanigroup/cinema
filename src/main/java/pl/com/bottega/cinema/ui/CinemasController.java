@@ -4,6 +4,7 @@ import org.springframework.web.bind.annotation.*;
 import pl.com.bottega.cinema.api.AdminPanel;
 import pl.com.bottega.cinema.api.CinemaCatalog;
 import pl.com.bottega.cinema.api.CreateCinemaRequest;
+import pl.com.bottega.cinema.domain.CinemaRepository;
 
 /**
  * Created by anna on 04.09.2016.
@@ -15,7 +16,7 @@ public class CinemasController {
     private AdminPanel adminPanel;
     private CinemaCatalog cinemaCatalog;
 
-    public CinemasController(AdminPanel adminPanel, CinemaCatalog cinemaCatalog) {
+    public CinemasController(AdminPanel adminPanel, CinemaRepository cinemaRepository, CinemaCatalog cinemaCatalog) {
         this.adminPanel = adminPanel;
         this.cinemaCatalog = cinemaCatalog;
     }

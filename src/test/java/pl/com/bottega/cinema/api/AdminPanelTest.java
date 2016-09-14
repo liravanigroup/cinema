@@ -14,7 +14,7 @@ import static org.mockito.Mockito.*;
 /**
  * Created by anna on 06.09.2016.
  */
-/*
+
 @RunWith(MockitoJUnitRunner.class)
 
 public class AdminPanelTest {
@@ -39,14 +39,14 @@ public class AdminPanelTest {
 
     @Before
     public void setUp() {
-        //adminPanel = new AdminPanel(anyMovieRepository, anyCinemaRepository, anyCinemaFactory);
+        adminPanel = new AdminPanel(anyMovieRepository, anyCinemaRepository, anyCinemaFactory);
     }
 
 
     @Test
     public void shouldCreateNewCinema() {
         //given
-        when(anyCinemaFactory.createCinema(anyCreateCinemaRequest)).thenReturn(anyCinema);
+        when(anyCinemaFactory.createCinema(anyCreateCinemaRequest.getName(), anyCreateCinemaRequest.getCity())).thenReturn(anyCinema);
 
         //when
         adminPanel.createCinema(anyCreateCinemaRequest);
@@ -57,11 +57,11 @@ public class AdminPanelTest {
 
 
     @Test(expected = InvalidRequestException.class)
-    public void shouldThrownInvalidRequestExWhenAddedCinemaAlreadyExists(){
+    public void shouldThrownInvalidRequestExWhenAddedCinemaAlreadyExists() {
         //given
         doThrow(InvalidRequestException.class).when(anyCinemaRepository).save(anyCinema);
 
-        when(anyCinemaFactory.createCinema(anyCreateCinemaRequest)).thenReturn(anyCinema);
+        when(anyCinemaFactory.createCinema(anyCreateCinemaRequest.getName(), anyCreateCinemaRequest.getCity())).thenReturn(anyCinema);
         adminPanel.createCinema(anyCreateCinemaRequest);
 
         //when
@@ -70,4 +70,4 @@ public class AdminPanelTest {
 
 
 }
-*/
+

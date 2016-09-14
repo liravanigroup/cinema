@@ -10,10 +10,22 @@ public class CinemaDto {
     private Long id;
     private String name, city;
 
+    public CinemaDto() {
+    }
+
     public CinemaDto(Cinema c) {
         this.id = c.getId();
         this.city = c.getCity();
         this.name = c.getName();
+    }
+
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
     }
 
     public String getName() {
