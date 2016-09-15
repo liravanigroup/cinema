@@ -33,6 +33,8 @@ public class ShowsFactory {
 
 
     private Collection<Show> createShow(Long cinemaId, Long movieId, LocalDateTime from, LocalDateTime until, Collection<DayOfWeek> days, Collection<LocalTime> hours) {
+        Collection<Show> result = new LinkedList<>();
+
         System.out.println(cinemaId);
         System.out.println(movieId);
         System.out.println(from);

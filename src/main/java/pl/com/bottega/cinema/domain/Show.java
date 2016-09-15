@@ -2,7 +2,6 @@ package pl.com.bottega.cinema.domain;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
-import java.util.Date;
 
 /**
  * Created by bernard.boguszewski on 04.09.2016.
@@ -17,16 +16,16 @@ public class Show {
     @ManyToOne(cascade = CascadeType.ALL)
     private Cinema cinema;
     @ManyToOne(cascade = CascadeType.ALL)
-    private Movie Movie;
+    private Movie movie;
 
     private LocalDateTime date;
 
     public Show() {
     }
 
-    public Show(Cinema Cinema, Movie Movie, LocalDateTime date) {
-        this.cinema = Cinema;
-        this.Movie = Movie;
+    public Show(Cinema cinema, Movie Movie, LocalDateTime date) {
+        this.cinema = cinema;
+        this.movie = Movie;
         this.date = date;
     }
 
@@ -42,16 +41,16 @@ public class Show {
         return cinema;
     }
 
-    public void setCinema(Cinema Cinema) {
-        this.cinema = Cinema;
+    public void setCinema(Cinema cinema) {
+        this.cinema = cinema;
     }
 
     public Movie getMovie() {
-        return Movie;
+        return movie;
     }
 
     public void setMovie(Movie Movie) {
-        this.Movie = Movie;
+        this.movie = Movie;
     }
 
     public LocalDateTime getDate() {
