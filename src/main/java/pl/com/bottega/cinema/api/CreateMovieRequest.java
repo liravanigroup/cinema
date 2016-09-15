@@ -47,4 +47,11 @@ public class CreateMovieRequest {
     public Integer getLength() {
         return movie.getLength();
     }
+
+    @Override
+    public String toString() {
+        return "CreateMovieRequest{" +
+                "movie=" + movie +
+                '}';
+    }
 }

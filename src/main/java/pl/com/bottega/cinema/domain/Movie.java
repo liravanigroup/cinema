@@ -1,9 +1,7 @@
 package pl.com.bottega.cinema.domain;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.OneToMany;
+import javax.persistence.*;
+import java.io.Serializable;
 import java.util.Collection;
 import java.util.List;
 
@@ -14,19 +12,24 @@ import static javax.persistence.FetchType.EAGER;
  * Created by anna on 04.09.2016.
  */
 @Entity
-public class Movie {
+public class Movie implements Serializable{
+
+    private static final long serialVersionUID = -4979533539276386479L;
 
     @Id
     @GeneratedValue
     private Long id;
+
     private String title;
+    @Lob
     private String description;
-    private Integer minAge;
+    private Integer minAge, length;
+
     @OneToMany(cascade = ALL)
     private Collection<Actor> actors;
     @OneToMany(cascade = ALL)
     private Collection<Genre> genres;
-    private Integer length;
+
 
     public Movie() {}
 
@@ -38,6 +41,7 @@ public class Movie {
         this.genres = genres;
         this.length = length;
     }
+
 
     public Long getId() {
         return id;
@@ -71,11 +75,19 @@ public class Movie {
         this.minAge = minAge;
     }
 
+    public Integer getLength() {
+        return length;
+    }
+
+    public void setLength(Integer length) {
+        this.length = length;
+    }
+
     public Collection<Actor> getActors() {
         return actors;
     }
 
-    public void setActors(List<Actor> actors) {
+    public void setActors(Collection<Actor> actors) {
         this.actors = actors;
     }
 
@@ -83,15 +95,7 @@ public class Movie {
         return genres;
     }
 
-    public void setGenres(List<Genre> genres) {
+    public void setGenres(Collection<Genre> genres) {
         this.genres = genres;
-    }
-
-    public Integer getLength() {
-        return length;
-    }
-
-    public void setLength(Integer length) {
-        this.length = length;
     }
 }

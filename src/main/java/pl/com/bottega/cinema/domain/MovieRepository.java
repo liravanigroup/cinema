@@ -7,4 +7,5 @@ public interface MovieRepository {
 
     void save(Movie movie);
 
+    Movie load(Long movieId);
 }
