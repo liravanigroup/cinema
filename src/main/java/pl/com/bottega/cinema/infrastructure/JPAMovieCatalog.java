@@ -30,9 +30,9 @@ public class JPAMovieCatalog implements MovieCatalog{
         System.out.println(date);
 
         List<Movie> movies = entityManager.createQuery(
-                "SELECT m FROM Movie AS m JOIN Show AS s ON m.id = s.movie.id JOIN Cinema AS c ON c.id = s.cinema.id WHERE c.id=:cinemaId", Movie.class)
+                "SELECT m FROM Movie AS m JOIN Show AS s ON m.id = s.movie.id JOIN Cinema AS c ON c.id = s.cinema.id WHERE c.id=:cinemaId AND s.date=:date", Movie.class)
                 .setParameter("cinemaId", cinemaId)
-                //.setParameter("date", date)
+                .setParameter("date", date)
                 .getResultList();
 
         System.out.println(movies);
