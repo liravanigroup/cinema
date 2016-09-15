@@ -6,6 +6,7 @@ import pl.com.bottega.cinema.domain.ShowsRepository;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import java.util.Collection;
 
 /**
  * Created by Admin on 14.09.2016.
@@ -19,5 +20,10 @@ public class JPAShowsRepository implements ShowsRepository{
     @Override
     public void save(Show show) {
         entityManager.merge(show);
+    }
+
+    @Override
+    public void save(Collection<Show> shows) {
+        shows.stream().forEach(this::save);
     }
 }

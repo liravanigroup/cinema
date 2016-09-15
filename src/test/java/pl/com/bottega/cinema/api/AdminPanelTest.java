@@ -47,7 +47,7 @@ public class AdminPanelTest {
     @Before
     public void setUp() {
         adminPanel = new AdminPanel(anyMovieRepository, anyCinemaRepository,
-                anyCinemaFactory,anyMovieFactory,anyShowsFactory,anyShowsRepository);
+                anyCinemaFactory, anyMovieFactory, anyShowsFactory, anyShowsRepository);
     }
 
     @Test
@@ -63,20 +63,18 @@ public class AdminPanelTest {
     }
 
     @Test(expected = InvalidRequestException.class)
-    public void shouldThrownInvalidRequestExWhenAddedCinemaAlreadyExists(){
+    public void shouldThrownInvalidRequestExWhenAddedCinemaAlreadyExists() {
         //given
-        //when(anyCinemaRepository.save(anyCinema)).thenThrow(InvalidRequestException.class);
         doThrow(InvalidRequestException.class).when(anyCinemaRepository).save(anyCinema);
 
         when(anyCinemaFactory.createCinema(anyCreateCinemaRequest)).thenReturn(anyCinema);
-        adminPanel.createCinema(anyCreateCinemaRequest);
 
         //when
         adminPanel.createCinema(anyCreateCinemaRequest);
     }
 
     @Test
-    public void shouldCreateMovie(){
+    public void shouldCreateMovie() {
         //given
 
         //when
@@ -86,7 +84,11 @@ public class AdminPanelTest {
     }
 
     @Test
-    public void shouldCreateShows(){
+    public void shouldCreateShows() {
+        //given
 
+        //when
+
+        //then
     }
 }
