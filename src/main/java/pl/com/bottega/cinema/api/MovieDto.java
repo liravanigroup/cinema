@@ -1,11 +1,19 @@
 package pl.com.bottega.cinema.api;/* Created by Sergej on 04.09.2016. Bottega IT Solutions */
 
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 import pl.com.bottega.cinema.domain.Actor;
 import pl.com.bottega.cinema.domain.Genre;
 
 import java.util.Collection;
 import java.util.stream.Collectors;
 
+@Getter
+@Setter
+@AllArgsConstructor
+@NoArgsConstructor
 public class MovieDto {
 
     private String title;
@@ -15,53 +23,12 @@ public class MovieDto {
     private Integer minAge;
     private Integer length;
 
-
-    public String getTitle() {
-        return title;
-    }
-
-    public void setTitle(String title) {
-        this.title = title;
-    }
-
-    public String getDescription() {
-        return description;
-    }
-
-    public void setDescription(String description) {
-        this.description = description;
-    }
-
-    public Collection<Actor> getActors() {
-        return actors;
-    }
-
     public void setActors(Collection<String> actors) {
-        this.actors = actors.stream().map(name -> new Actor(name)).collect(Collectors.toList());
-    }
-
-    public Collection<Genre> getGenres() {
-        return genres;
+        this.actors = actors.stream().map(Actor::new).collect(Collectors.toList());
     }
 
     public void setGenres(Collection<String> genres) {
-        this.genres = genres.stream().map(g -> new Genre(g)).collect(Collectors.toList());
-    }
-
-    public Integer getMinAge() {
-        return minAge;
-    }
-
-    public void setMinAge(Integer minAge) {
-        this.minAge = minAge;
-    }
-
-    public Integer getLength() {
-        return length;
-    }
-
-    public void setLength(Integer length) {
-        this.length = length;
+        this.genres = genres.stream().map(Genre::new).collect(Collectors.toList());
     }
 
     public void validate() {
@@ -77,17 +44,5 @@ public class MovieDto {
             throw new InvalidRequestException("Min age is required");
         if (length == null || length <= 0)
             throw new InvalidRequestException("Length is required");
-    }
-
-    @Override
-    public String toString() {
-        return "MovieDto{" +
-                "title='" + title + '\'' +
-                ", description='" + description + '\'' +
-                ", actors=" + actors +
-                ", genres=" + genres +
-                ", minAge=" + minAge +
-                ", length=" + length +
-                '}';
     }
 }

@@ -19,8 +19,6 @@ public class ShowsController {
 
     @PutMapping("/{cinemaId}/shows")
     public void create(@PathVariable("cinemaId") Long cinemaId, @RequestBody CreateShowsRequest request){
-        System.out.println(cinemaId);
-        System.out.println(request);
-        //adminPanel.createShow(cinemaId, request);
+        adminPanel.createShow(cinemaId, request);
     }
 }
