@@ -20,4 +20,9 @@ public class JPAMoviesRepository implements MovieRepository {
     public void save(Movie movie) {
         entityManager.merge(movie);
     }
+
+    @Override
+    public Movie load(Long movieId) {
+        return entityManager.find(Movie.class, movieId);
+    }
 }

@@ -1,6 +1,7 @@
 package pl.com.bottega.cinema.domain;
 
 import javax.persistence.*;
+import java.time.LocalDateTime;
 import java.util.Date;
 
 /**
@@ -10,20 +11,22 @@ import java.util.Date;
 public class Show {
 
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    @ManyToOne
+
+    @ManyToOne(cascade = CascadeType.ALL)
     private Cinema cinema;
-    @ManyToOne
-    private Movie movie;
-    @Temporal(value = TemporalType.TIMESTAMP)
-    private Date date;
+    @ManyToOne(cascade = CascadeType.ALL)
+    private Movie Movie;
 
-    public Show() {}
+    private LocalDateTime date;
 
-    public Show(Cinema cinema, Movie movie, Date date) {
-        this.cinema = cinema;
-        this.movie = movie;
+    public Show() {
+    }
+
+    public Show(Cinema Cinema, Movie Movie, LocalDateTime date) {
+        this.cinema = Cinema;
+        this.Movie = Movie;
         this.date = date;
     }
 
@@ -39,23 +42,23 @@ public class Show {
         return cinema;
     }
 
-    public void setCinema(Cinema cinema) {
-        this.cinema = cinema;
+    public void setCinema(Cinema Cinema) {
+        this.cinema = Cinema;
     }
 
     public Movie getMovie() {
-        return movie;
+        return Movie;
     }
 
-    public void setMovie(Movie movie) {
-        this.movie = movie;
+    public void setMovie(Movie Movie) {
+        this.Movie = Movie;
     }
 
-    public Date getDate() {
+    public LocalDateTime getDate() {
         return date;
     }
 
-    public void setDate(Date date) {
+    public void setDate(LocalDateTime date) {
         this.date = date;
     }
 }

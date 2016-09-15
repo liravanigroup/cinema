@@ -1,6 +1,5 @@
 package pl.com.bottega.cinema.api;/* Created by Sergej on 04.09.2016. Bottega IT Solutions */
 
-import pl.com.bottega.cinema.api.InvalidRequestException;
 import pl.com.bottega.cinema.domain.Actor;
 import pl.com.bottega.cinema.domain.Genre;
 
@@ -78,5 +77,17 @@ public class MovieDto {
             throw new InvalidRequestException("Min age is required");
         if (length == null || length <= 0)
             throw new InvalidRequestException("Length is required");
+    }
+
+    @Override
+    public String toString() {
+        return "MovieDto{" +
+                "title='" + title + '\'' +
+                ", description='" + description + '\'' +
+                ", actors=" + actors +
+                ", genres=" + genres +
+                ", minAge=" + minAge +
+                ", length=" + length +
+                '}';
     }
 }

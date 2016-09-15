@@ -1,8 +1,6 @@
 package pl.com.bottega.cinema.infrastructure;
 
 import org.springframework.stereotype.Repository;
-import pl.com.bottega.cinema.api.CreateCinemaRequest;
-import pl.com.bottega.cinema.api.InvalidRequestException;
 import pl.com.bottega.cinema.domain.Cinema;
 import pl.com.bottega.cinema.domain.CinemaRepository;
 
@@ -25,15 +23,20 @@ public class JPACinemaRepository implements CinemaRepository {
     }
 
     @Override
-    public Cinema load(CreateCinemaRequest request) {
+    public Cinema load(String name, String city) {
         List<Cinema> cinemas = entityManager
                 .createQuery("FROM Cinema c WHERE c.name =:name AND c.city =:city ", Cinema.class)
-                .setParameter("city", request.getCity())
-                .setParameter("name", request.getName())
+                .setParameter("city", name)
+                .setParameter("name", city)
                 .getResultList();
         if (cinemas.isEmpty())
             return null;
         return cinemas.get(0);
+    }
+
+    @Override
+    public Cinema load(Long cinemaId) {
+        return entityManager.find(Cinema.class, cinemaId);
     }
 
 

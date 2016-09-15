@@ -43,8 +43,8 @@ public class AdminPanel {
     }
 
     @Transactional
-    public void createShow(CreateShowsRequest request) {
-        Collection<Show> shows = showsFactory.createShow(request);
+    public void createShow(Long cinemaId, CreateShowsRequest request) {
+        Collection<Show> shows = showsFactory.createShow(cinemaId, request);
         shows.stream().forEach(show -> showsRepository.save(show));
     }
 }

@@ -1,9 +1,6 @@
 package pl.com.bottega.cinema.domain;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
+import javax.persistence.*;
 import java.io.Serializable;
 
 @Entity
@@ -22,7 +19,16 @@ public class Cinema implements Serializable {
         this.name = name;
     }
 
-    public Cinema() {}
+    public Cinema() {
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
 
     public String getCity() {
         return city;
@@ -38,10 +44,6 @@ public class Cinema implements Serializable {
 
     public void setName(String name) {
         this.name = name;
-    }
-
-    public Long getId() {
-        return id;
     }
 }
 
