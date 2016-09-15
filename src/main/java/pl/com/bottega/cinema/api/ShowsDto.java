@@ -1,7 +1,6 @@
 package pl.com.bottega.cinema.api;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
-
 import java.time.LocalDateTime;
 import java.util.Collection;
 
@@ -15,7 +14,6 @@ public class ShowsDto {
     private Collection<LocalDateTime> dates;
     private CalendarDto calendar;
 
-
     public CalendarDto getCalendar() {
         return calendar;
     }
@@ -24,8 +22,7 @@ public class ShowsDto {
         this.calendar = calendar;
     }
 
-    public ShowsDto() {
-    }
+    public ShowsDto() {}
 
     public Long getMovieId() {
         return movieId;

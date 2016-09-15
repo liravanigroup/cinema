@@ -6,6 +6,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import pl.com.bottega.cinema.domain.Actor;
 import pl.com.bottega.cinema.domain.Genre;
+import pl.com.bottega.cinema.domain.Show;
 
 import java.util.Collection;
 import java.util.stream.Collectors;
