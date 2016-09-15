@@ -7,7 +7,8 @@ import pl.com.bottega.cinema.domain.Movie;
 public class MovieFactory {
 
     public Movie createMovie(CreateMovieRequest request) {
-        return new Movie(request.getTitle(), request.getDescription(), request.getMinAge(), request.getActors(),
-                request.getGenres(), request.getLength());
+        MovieDto movie = request.getMovie();
+        return new Movie(movie.getTitle(), movie.getDescription(), movie.getMinAge(), movie.getActors(),
+                movie.getGenres(), movie.getLength());
     }
 }

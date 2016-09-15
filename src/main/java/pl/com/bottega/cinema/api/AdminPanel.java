@@ -1,16 +1,16 @@
 package pl.com.bottega.cinema.api;
 
+import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import pl.com.bottega.cinema.domain.*;
 
-import javax.persistence.PersistenceException;
 import java.util.Collection;
-import java.util.function.Consumer;
 
 /**
  * Created by bernard.boguszewski on 04.09.2016.
  */
+@AllArgsConstructor
 @Service
 public class AdminPanel {
 
@@ -20,15 +20,6 @@ public class AdminPanel {
     private MovieFactory movieFactory;
     private ShowsFactory showsFactory;
     private ShowsRepository showsRepository;
-
-    public AdminPanel(MovieRepository movieRepository, CinemaRepository cinemaRepository, CinemaFactory cinemaFactory, MovieFactory movieFactory, ShowsFactory showsFactory, ShowsRepository showsRepository) {
-        this.movieRepository = movieRepository;
-        this.cinemaRepository = cinemaRepository;
-        this.cinemaFactory = cinemaFactory;
-        this.movieFactory = movieFactory;
-        this.showsFactory = showsFactory;
-        this.showsRepository = showsRepository;
-    }
 
     @Transactional
     public void createCinema(CreateCinemaRequest request) {

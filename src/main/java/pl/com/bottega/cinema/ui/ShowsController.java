@@ -1,5 +1,6 @@
 package pl.com.bottega.cinema.ui;
 
+import lombok.AllArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 import pl.com.bottega.cinema.api.AdminPanel;
 import pl.com.bottega.cinema.api.CreateShowsRequest;
@@ -9,13 +10,10 @@ import pl.com.bottega.cinema.api.CreateShowsRequest;
  */
 @RestController
 @RequestMapping("/cinemas")
+@AllArgsConstructor
 public class ShowsController {
 
     private AdminPanel adminPanel;
-
-    public ShowsController(AdminPanel adminPanel) {
-        this.adminPanel = adminPanel;
-    }
 
     @PutMapping("/{cinemaId}/shows")
     public void create(@PathVariable("cinemaId") Long cinemaId, @RequestBody CreateShowsRequest request){

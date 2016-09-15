@@ -5,8 +5,6 @@ package pl.com.bottega.cinema.api;
  */
 public class InvalidRequestException extends RuntimeException {
 
-    private String error;
-
     public InvalidRequestException(String message) {
         super(message);
     }

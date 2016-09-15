@@ -1,11 +1,11 @@
 package pl.com.bottega.cinema.domain;
 
-import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
+import java.io.Serializable;
 import java.time.LocalDateTime;
 
 import static javax.persistence.CascadeType.ALL;
@@ -17,7 +17,10 @@ import static javax.persistence.CascadeType.ALL;
 @Setter
 @NoArgsConstructor
 @Entity
-public class Show {
+public class Show implements Serializable {
+
+    private static final long serialVersionUID = -3411664175982363078L;
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;

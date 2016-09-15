@@ -1,6 +1,7 @@
 package pl.com.bottega.cinema.domain;
 
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
@@ -17,14 +18,14 @@ import static javax.persistence.FetchType.EAGER;
 @Entity
 @Getter
 @Setter
+@NoArgsConstructor
 public class Movie implements Serializable{
 
     private static final long serialVersionUID = -4979533539276386479L;
 
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-
     private String title;
     @Lob
     private String description;
@@ -34,9 +35,6 @@ public class Movie implements Serializable{
     private Collection<Actor> actors;
     @OneToMany(cascade = ALL)
     private Collection<Genre> genres;
-
-
-    public Movie() {}
 
     public Movie(String title, String description, Integer minAge, Collection<Actor> actors, Collection<Genre> genres, Integer length) {
         this.title = title;

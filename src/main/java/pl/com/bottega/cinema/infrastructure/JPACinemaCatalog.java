@@ -22,7 +22,7 @@ public class JPACinemaCatalog implements CinemaCatalog {
 
     @Override
     public ListAllCinemasResponse listAll() {
-        List<Cinema> cinemas = entityManager.createQuery("SELECT c FROM Cinema c").getResultList();
+        List<Cinema> cinemas = entityManager.createQuery("FROM Cinema", Cinema.class).getResultList();
         List<CinemaDto> cinemaDtos = cinemas
                 .stream()
                 .map(CinemaDto::new)

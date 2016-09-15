@@ -1,5 +1,6 @@
 package pl.com.bottega.cinema.api;
 
+import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Component;
 import pl.com.bottega.cinema.domain.*;
 
@@ -15,15 +16,11 @@ import java.util.Set;
  */
 
 @Component
+@AllArgsConstructor
 public class ShowsFactory {
 
     private CinemaRepository cinemaRepository;
     private MovieRepository movieRepository;
-
-    public ShowsFactory(CinemaRepository cinemaRepository, MovieRepository movieRepository) {
-        this.cinemaRepository = cinemaRepository;
-        this.movieRepository = movieRepository;
-    }
 
     private Collection<Show> createShow(Cinema cinema, Movie movie, Collection<LocalDateTime> dates) {
         Collection<Show> result = new LinkedList<>();
@@ -50,12 +47,7 @@ public class ShowsFactory {
         return result;
     }
 
-    private void validate(Cinema cinema, Movie movie) {
-        if (cinema == null)
-            throw new InvalidRequestException("Cinema is absent");
-        if (movie == null)
-            throw new InvalidRequestException("Movie is absent");
-    }
+
 
     private LocalDateTime getFromDate(LocalDateTime from, LocalDateTime thisDayOfWeek) {
         LocalDateTime fromDate;
@@ -82,6 +74,12 @@ public class ShowsFactory {
             return createShow(cinema, movie, calendarDto.getFromDate(), calendarDto.getUntilDate(),
                     calendarDto.getWeekDays(), calendarDto.getHours());
         }
+    }
 
+    private void validate(Cinema cinema, Movie movie) {
+        if (cinema == null)
+            throw new InvalidRequestException("Cinema is absent");
+        if (movie == null)
+            throw new InvalidRequestException("Movie is absent");
     }
 }

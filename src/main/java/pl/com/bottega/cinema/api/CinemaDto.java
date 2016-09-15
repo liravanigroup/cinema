@@ -1,6 +1,7 @@
 package pl.com.bottega.cinema.api;
 
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 import pl.com.bottega.cinema.domain.Cinema;
 
@@ -9,18 +10,16 @@ import pl.com.bottega.cinema.domain.Cinema;
  */
 @Getter
 @Setter
+@NoArgsConstructor
 public class CinemaDto {
 
     private Long id;
     private String name, city;
 
-    public CinemaDto() {
-    }
-
-    public CinemaDto(Cinema c) {
-        this.id = c.getId();
-        this.city = c.getCity();
-        this.name = c.getName();
+    public CinemaDto(Cinema cinema) {
+        this.id = cinema.getId();
+        this.city = cinema.getCity();
+        this.name = cinema.getName();
     }
 
     public CinemaDto(String name, String city) {
