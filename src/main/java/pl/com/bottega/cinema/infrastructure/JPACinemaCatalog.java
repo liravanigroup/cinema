@@ -1,5 +1,6 @@
 package pl.com.bottega.cinema.infrastructure;
 
+import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Repository;
 import pl.com.bottega.cinema.api.CinemaCatalog;
 import pl.com.bottega.cinema.api.CinemaDto;
@@ -14,7 +15,7 @@ import java.util.stream.Collectors;
 /**
  * Created by anna on 08.09.2016.
  */
-@Repository
+@Component
 public class JPACinemaCatalog implements CinemaCatalog {
 
     @PersistenceContext

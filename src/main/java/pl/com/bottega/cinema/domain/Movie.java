@@ -34,12 +34,12 @@ public class Movie implements Serializable {
     private String description;
     private Integer minAge, length;
 
-    @ManyToMany(cascade = ALL, fetch = EAGER)
-    private Set<Actor> actors;
-    @ManyToMany(cascade = ALL, fetch = EAGER)
-    private Set<Genre> genres;
+    @ElementCollection
+    private Set<String> actors;
+    @ElementCollection
+    private Set<String> genres;
 
-    public Movie(String title, String description, Integer minAge, Set<Actor> actors, Set<Genre> genres, Integer length) {
+    public Movie(String title, String description, Integer minAge, Set<String> actors, Set<String> genres, Integer length) {
         this.title = title;
         this.description = description;
         this.minAge = minAge;

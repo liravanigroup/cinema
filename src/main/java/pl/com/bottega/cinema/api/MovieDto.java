@@ -4,13 +4,8 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import pl.com.bottega.cinema.domain.Actor;
-import pl.com.bottega.cinema.domain.Genre;
-import pl.com.bottega.cinema.domain.Show;
 
-import java.util.Collection;
 import java.util.Set;
-import java.util.stream.Collectors;
 
 @Getter
 @Setter
@@ -20,18 +15,10 @@ class MovieDto {
 
     private String title;
     private String description;
-    private Set<Actor> actors;
-    private Set<Genre> genres;
+    private Set<String> actors;
+    private Set<String> genres;
     private Integer minAge;
     private Integer length;
-
-    public void setActors(Set<String> actors) {
-        this.actors = actors.stream().map(Actor::new).collect(Collectors.toSet());
-    }
-
-    public void setGenres(Set<String> genres) {
-        this.genres = genres.stream().map(Genre::new).collect(Collectors.toSet());
-    }
 
     void validate() {
         if (title == null || title.trim().length() <= 2)

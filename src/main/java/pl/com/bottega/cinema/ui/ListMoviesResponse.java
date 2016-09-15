@@ -14,5 +14,4 @@ import java.util.Collection;
 @AllArgsConstructor
 public class ListMoviesResponse {
     private Collection<MovieResponseDto> movies;
-
 }

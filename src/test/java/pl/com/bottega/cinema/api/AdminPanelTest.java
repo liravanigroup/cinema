@@ -46,8 +46,7 @@ public class AdminPanelTest {
 
     @Before
     public void setUp() {
-        adminPanel = new AdminPanel(anyMovieRepository,
-                anyCinemaRepository,
+        adminPanel = new AdminPanel(anyMovieRepository, anyCinemaRepository,
                 anyCinemaFactory,anyMovieFactory,anyShowsFactory,anyShowsRepository);
     }
 
@@ -74,5 +73,20 @@ public class AdminPanelTest {
 
         //when
         adminPanel.createCinema(anyCreateCinemaRequest);
+    }
+
+    @Test
+    public void shouldCreateMovie(){
+        //given
+
+        //when
+
+        //then
+
+    }
+
+    @Test
+    public void shouldCreateShows(){
+
     }
 }

@@ -1,10 +1,12 @@
 package pl.com.bottega.cinema.ui;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.time.LocalDateTime;
 import java.time.LocalTime;
 
 /**
@@ -15,6 +17,7 @@ import java.time.LocalTime;
 @AllArgsConstructor
 @NoArgsConstructor
 public class ShowData {
-    private Long cinemaId;
+    private Long id;
+    @JsonFormat(pattern="HH:mm")
     private LocalTime time;
 }
