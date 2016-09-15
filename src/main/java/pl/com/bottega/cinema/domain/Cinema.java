@@ -1,5 +1,6 @@
 package pl.com.bottega.cinema.domain;
 
+import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -10,6 +11,7 @@ import java.io.Serializable;
 @Getter
 @Setter
 @NoArgsConstructor
+@EqualsAndHashCode(exclude = {"id"})
 @Entity
 public class Cinema implements Serializable {
 

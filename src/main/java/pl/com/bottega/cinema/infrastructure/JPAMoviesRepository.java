@@ -1,6 +1,7 @@
 package pl.com.bottega.cinema.infrastructure;
 
 import org.springframework.stereotype.Repository;
+import pl.com.bottega.cinema.api.InvalidRequestException;
 import pl.com.bottega.cinema.domain.Movie;
 import pl.com.bottega.cinema.domain.MovieRepository;
 
@@ -23,6 +24,8 @@ public class JPAMoviesRepository implements MovieRepository {
 
     @Override
     public Movie load(Long movieId) {
+        if(movieId == null)
+            throw new InvalidRequestException("Movie id is required");
         return entityManager.find(Movie.class, movieId);
     }
 }

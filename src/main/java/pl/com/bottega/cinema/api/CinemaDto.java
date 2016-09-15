@@ -27,10 +27,14 @@ public class CinemaDto {
         this.city = city;
     }
 
-    public void validate() {
+    void validate() {
         if (name == null || name.length() == 0)
             throw new InvalidRequestException("Cinema name is required");
+        if (name.length() < 4)
+            throw new InvalidRequestException("Cinema name should be longer then 5 symbols");
         if (city == null || city.length() == 0)
-            throw  new InvalidRequestException("City name is required");
+            throw new InvalidRequestException("City name is required");
+        if (city.length() < 4)
+            throw new InvalidRequestException("City name should be longer then 5 symbols");
     }
 }

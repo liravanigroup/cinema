@@ -1,5 +1,6 @@
 package pl.com.bottega.cinema.domain;
 
+import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -8,6 +9,7 @@ import javax.persistence.*;
 import java.io.Serializable;
 import java.util.Collection;
 import java.util.List;
+import java.util.Set;
 
 import static javax.persistence.CascadeType.ALL;
 import static javax.persistence.FetchType.EAGER;
@@ -19,7 +21,8 @@ import static javax.persistence.FetchType.EAGER;
 @Getter
 @Setter
 @NoArgsConstructor
-public class Movie implements Serializable{
+@EqualsAndHashCode(exclude = {"id"})
+public class Movie implements Serializable {
 
     private static final long serialVersionUID = -4979533539276386479L;
 
@@ -31,12 +34,12 @@ public class Movie implements Serializable{
     private String description;
     private Integer minAge, length;
 
-    @OneToMany(cascade = ALL)
-    private Collection<Actor> actors;
-    @OneToMany(cascade = ALL)
-    private Collection<Genre> genres;
+    @ManyToMany(cascade = ALL, fetch = EAGER)
+    private Set<Actor> actors;
+    @ManyToMany(cascade = ALL, fetch = EAGER)
+    private Set<Genre> genres;
 
-    public Movie(String title, String description, Integer minAge, Collection<Actor> actors, Collection<Genre> genres, Integer length) {
+    public Movie(String title, String description, Integer minAge, Set<Actor> actors, Set<Genre> genres, Integer length) {
         this.title = title;
         this.description = description;
         this.minAge = minAge;

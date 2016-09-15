@@ -9,7 +9,6 @@ import lombok.Setter;
 import java.time.DayOfWeek;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
-import java.util.Collection;
 import java.util.Set;
 
 /**
@@ -19,15 +18,15 @@ import java.util.Set;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-public class CalendarDto {
+class CalendarDto {
 
     @JsonFormat(pattern = "yyyy/MM/dd HH:mm")
     private LocalDateTime fromDate, untilDate;
     private Set<DayOfWeek> weekDays;
     @JsonFormat(pattern = "HH:mm")
-    private Collection<LocalTime> hours;
+    private Set<LocalTime> hours;
 
-    public void validate() {
+    void validate() {
         if (fromDate == null)
             throw new InvalidRequestException("First date of movie showing is required");
         if (untilDate == null)
