@@ -4,7 +4,6 @@ import org.springframework.stereotype.Component;
 import pl.com.bottega.cinema.domain.*;
 
 import java.time.DayOfWeek;
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.util.Collection;
