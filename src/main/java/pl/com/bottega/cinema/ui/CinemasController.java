@@ -2,10 +2,7 @@ package pl.com.bottega.cinema.ui;
 
 import lombok.AllArgsConstructor;
 import org.springframework.web.bind.annotation.*;
-import pl.com.bottega.cinema.api.AdminPanel;
-import pl.com.bottega.cinema.api.CinemaCatalog;
-import pl.com.bottega.cinema.api.CreateCinemaRequest;
-import pl.com.bottega.cinema.api.MovieCatalog;
+import pl.com.bottega.cinema.api.*;
 
 import java.time.Instant;
 import java.time.LocalDate;
@@ -40,7 +37,17 @@ public class CinemasController {
 
     @GetMapping("/{cinemaId}/movies")
     public ListMoviesResponse findMoviesAtDate(@PathVariable("cinemaId") Long cinemaId, Date date) {
+        validate(cinemaId, date);
         return movieCatalog.findMoviesInCinemaByDate(cinemaId, convertToLocalDate(date));
+    }
+
+    private void validate(Long cinemaId, Date date) {
+        if (cinemaId == null)
+            throw new InvalidRequestException("Ciname id is required");
+        if (cinemaId < 0)
+            throw new InvalidRequestException("Ciname id is wrong");
+        if(date == null)
+            throw new InvalidRequestException("Date of show is required");
     }
 
     private LocalDate convertToLocalDate(Date date) {

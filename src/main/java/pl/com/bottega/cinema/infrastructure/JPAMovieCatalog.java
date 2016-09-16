@@ -49,7 +49,10 @@ public class JPAMovieCatalog implements MovieCatalog {
             result.setGenres(movie.getGenres());
             result.setShows(getSortedShows(cinemaId, date, movie));
             return result;
-        }).sorted((o1, o2) -> o1.getTitle().compareTo(o2.getTitle())).collect(Collectors.toList());
+        })
+                .filter(movieResponseDto -> movieResponseDto.getShows().size() > 0)
+                .sorted((o1, o2) -> o1.getTitle().compareTo(o2.getTitle()))
+                .collect(Collectors.toList());
     }
 
     private List<ShowData> getSortedShows(Long cinemaId, LocalDate date, Movie movie) {
