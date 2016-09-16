@@ -1,13 +1,16 @@
 package pl.com.bottega.cinema.acceptance;
 
 import org.junit.Before;
+import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.runners.MockitoJUnitRunner;
 import org.springframework.beans.factory.annotation.Autowired;
-import pl.com.bottega.cinema.api.AdminPanel;
-import pl.com.bottega.cinema.api.CinemaFactory;
-import pl.com.bottega.cinema.api.MovieFactory;
-import pl.com.bottega.cinema.api.ShowsFactory;
+import org.springframework.test.context.ContextConfiguration;
+import org.springframework.test.context.TestPropertySource;
+import org.springframework.test.context.junit4.SpringRunner;
+import org.springframework.test.context.web.WebAppConfiguration;
+import org.springframework.transaction.annotation.Transactional;
+import pl.com.bottega.cinema.api.*;
 import pl.com.bottega.cinema.domain.CinemaRepository;
 import pl.com.bottega.cinema.domain.MovieRepository;
 import pl.com.bottega.cinema.domain.ShowsRepository;
@@ -15,7 +18,10 @@ import pl.com.bottega.cinema.domain.ShowsRepository;
 /**
  * Created by anna on 06.09.2016.
  */
-@RunWith(MockitoJUnitRunner.class)
+@RunWith(SpringRunner.class)
+@ContextConfiguration({"/application.xml", "/mock-auth-context.xml"})
+@TestPropertySource({"/jdbc-test.properties", "/hibernate-test.properties"})
+@WebAppConfiguration
 public class AdminPanelAcceptanceTest {
 
     @Autowired
@@ -44,5 +50,22 @@ public class AdminPanelAcceptanceTest {
                 cinemaFactory, movieFactory, showsFactory, showsRepository);
     }
 
+    @Test
+    @Transactional
+    public void shouldCreateCinema(){
+        //given
+        adminPanel.createCinema(null);
 
+        //when
+
+
+        //then
+
+
+    }
+
+
+    private CreateCinemaRequest createCinemaRequest(){
+        return new CreateCinemaRequest();
+    }
 }

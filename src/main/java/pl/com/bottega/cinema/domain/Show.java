@@ -3,10 +3,13 @@ package pl.com.bottega.cinema.domain;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import lombok.ToString;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.time.LocalTime;
 
 import static javax.persistence.CascadeType.ALL;
 
@@ -28,11 +31,13 @@ public class Show implements Serializable {
     private Cinema cinema;
     @ManyToOne(cascade = ALL)
     private Movie movie;
-    private LocalDateTime date;
+    private LocalDate date;
+    private LocalTime time;
 
-    public Show(Cinema cinema, Movie movie, LocalDateTime date){
+    public Show(Cinema cinema, Movie movie, LocalDate date, LocalTime time){
         this.cinema = cinema;
         this.movie = movie;
         this.date = date;
+        this.time = time;
     }
 }

@@ -50,7 +50,7 @@ public class ShowsFactory {
                 for (LocalTime time : hours) {
                     LocalDateTime dateOfShow = LocalDateTime.of(fromDate.getYear(), fromDate.getMonth(), fromDate.getDayOfMonth(), time.getHour(), time.getMinute());
                     if (dateOfShow.isBefore(until)) {
-                        result.add(new Show(cinema, movie, dateOfShow));
+                        result.add(new Show(cinema, movie, dateOfShow.toLocalDate(), dateOfShow.toLocalTime()));
                     }
                 }
                 fromDate = fromDate.plusWeeks(1);
@@ -61,7 +61,7 @@ public class ShowsFactory {
 
     private Collection<Show> createShow(Cinema cinema, Movie movie, Collection<LocalDateTime> dates) {
         Set<Show> result = new HashSet<>();
-        dates.forEach(date -> result.add(new Show(cinema, movie, date)));
+        dates.forEach(date -> result.add(new Show(cinema, movie, date.toLocalDate(), date.toLocalTime())));
         return result;
     }
 

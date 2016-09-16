@@ -7,13 +7,17 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.TestPropertySource;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.context.web.WebAppConfiguration;
+import pl.com.bottega.cinema.api.MovieCatalog;
+import pl.com.bottega.cinema.domain.Movie;
 import pl.com.bottega.cinema.domain.ShowsRepository;
-import pl.com.bottega.cinema.ui.ShowData;
+import pl.com.bottega.cinema.ui.ListMoviesResponse;
 
 import java.time.LocalDate;
-import java.util.Collection;
+import java.time.Month;
+import java.util.List;
 
 import static java.time.Month.SEPTEMBER;
+import static org.junit.Assert.*;
 
 /**
  * Created by Sergej Povzaniuk on 16.09.2016.
@@ -22,28 +26,22 @@ import static java.time.Month.SEPTEMBER;
 @ContextConfiguration({"/application.xml", "/mock-auth-context.xml"})
 @TestPropertySource({"/jdbc.properties", "/hibernate.properties"})
 @WebAppConfiguration
-public class JPAShowsRepositoryTest {
+public class JPAMovieCatalogTest {
 
     @Autowired
-    private ShowsRepository showsRepository;
+    private MovieCatalog movieCatalog;
 
 
     @Test
-    public void save() throws Exception {
-
-    }
-
-
-    @Test
-    public void shouldLoadShowsByCinemaIdAndMovieIdAndDate(){
+    public void ShouldFindMoviesInCinemaByDate() throws Exception {
         //given
-        Collection<ShowData> shows = showsRepository.load(1L, 1L, LocalDate.of(2016, SEPTEMBER, 5));
+
 
         //when
-        System.out.println("here is list of shows");
-        System.out.println(shows);
+        ListMoviesResponse listMoviesResponse = movieCatalog.findMoviesInCinemaByDate(1L, LocalDate.of(2016, SEPTEMBER, 5));
 
         //then
+        System.out.println(listMoviesResponse);
 
     }
 

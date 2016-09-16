@@ -7,7 +7,12 @@ import pl.com.bottega.cinema.api.CinemaCatalog;
 import pl.com.bottega.cinema.api.CreateCinemaRequest;
 import pl.com.bottega.cinema.api.MovieCatalog;
 
+import java.time.Instant;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.ZoneId;
 import java.util.Date;
+
 
 /**
  * Created by anna on 04.09.2016.
@@ -35,6 +40,11 @@ public class CinemasController {
 
     @GetMapping("/{cinemaId}/movies")
     public ListMoviesResponse findMoviesAtDate(@PathVariable("cinemaId") Long cinemaId, Date date) {
-        return movieCatalog.findMoviesInCinemaByDate(cinemaId, date);
+        return movieCatalog.findMoviesInCinemaByDate(cinemaId, convertToLocalDate(date));
+    }
+
+    private LocalDate convertToLocalDate(Date date) {
+        Instant instant = Instant.ofEpochMilli(date.getTime());
+        return LocalDateTime.ofInstant(instant, ZoneId.systemDefault()).toLocalDate();
     }
 }

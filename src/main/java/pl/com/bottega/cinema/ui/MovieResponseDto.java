@@ -5,6 +5,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.util.Collection;
 import java.util.Set;
 
 /**
@@ -21,5 +22,5 @@ public class MovieResponseDto {
     private Set<String> genres;
     private Integer minAge;
     private Integer length;
-    private Set<ShowData> shows;
+    private Collection<ShowData> shows;
 }

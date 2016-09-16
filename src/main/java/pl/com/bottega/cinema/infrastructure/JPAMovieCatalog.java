@@ -1,15 +1,19 @@
 package pl.com.bottega.cinema.infrastructure;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import pl.com.bottega.cinema.api.MovieCatalog;
+import pl.com.bottega.cinema.domain.Movie;
+import pl.com.bottega.cinema.domain.MovieRepository;
+import pl.com.bottega.cinema.domain.ShowsRepository;
 import pl.com.bottega.cinema.ui.ListMoviesResponse;
 import pl.com.bottega.cinema.ui.MovieResponseDto;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
-import javax.persistence.Query;
-import java.util.Date;
+import java.time.LocalDate;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import static com.google.common.base.Preconditions.checkNotNull;
 
@@ -21,24 +25,32 @@ public class JPAMovieCatalog implements MovieCatalog {
 
     @PersistenceContext
     private EntityManager entityManager;
+    @Autowired
+    private ShowsRepository showsRepository;
 
     @Override
-    public ListMoviesResponse findMoviesInCinemaByDate(Long cinemaId, Date date) {
+    public ListMoviesResponse findMoviesInCinemaByDate(Long cinemaId, LocalDate date) {
         checkNotNull(cinemaId);
         checkNotNull(date);
+        List<Movie> movies = findAllMovieByCinemaIdAndDate(cinemaId, date);
+        List<MovieResponseDto> moviesResult = movies.stream().map(movie -> {
+            MovieResponseDto result = new MovieResponseDto();
+            result.setTitle(movie.getTitle());
+            result.setDescription(movie.getDescription());
+            result.setMinAge(movie.getMinAge());
+            result.setLength(movie.getLength());
+            result.setActors(movie.getActors());
+            result.setGenres(movie.getGenres());
+            result.setShows(showsRepository.load(cinemaId, movie.getId(), date));
+            return result;
+        }).collect(Collectors.toList());
+        return new ListMoviesResponse(moviesResult);
+    }
 
-        String jpql = "SELECT new pl.com.bottega.cinema.ui.MovieResponseDto(" +
-                "m.title," +
-                "m.description, " +
-                "m.actors," +
-                "m.genres," +
-                "m.minAge," +
-                "m.length, shows), new pl.com.bottega.cinema.ui.ShowData(" +
-                "s.id, s.date) AS shows " +
-                "FROM Movie AS m JOIN Show AS s ON m.id = s.movie.id JOIN Cinema AS c ON c.id = s.cinema.id WHERE c.id=:cinemaId AND s.date=:date";
-
-        Query query = entityManager.createQuery(jpql, MovieResponseDto.class);
-        List<MovieResponseDto> movies = query.setParameter("cinemaId", cinemaId).setParameter("date", date).getResultList();
-        return new ListMoviesResponse(movies);
+    private List<Movie> findAllMovieByCinemaIdAndDate(Long cinemaId, LocalDate date) {
+        return entityManager.createQuery("SELECT m FROM Movie m JOIN Show s ON m.id = s.movie.id JOIN Cinema c ON c.id = s.cinema.id WHERE c.id=:cinemaId AND s.date=:date", Movie.class)
+                .setParameter("cinemaId", cinemaId)
+                .setParameter("date", date)
+                .getResultList();
     }
 }
