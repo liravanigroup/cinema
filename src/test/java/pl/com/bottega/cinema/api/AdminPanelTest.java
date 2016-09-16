@@ -5,10 +5,9 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.runners.MockitoJUnitRunner;
-import pl.com.bottega.cinema.domain.Cinema;
-import pl.com.bottega.cinema.domain.CinemaRepository;
-import pl.com.bottega.cinema.domain.MovieRepository;
-import pl.com.bottega.cinema.domain.ShowsRepository;
+import pl.com.bottega.cinema.domain.*;
+
+import java.util.Collection;
 
 import static org.mockito.Mockito.*;
 
@@ -40,7 +39,21 @@ public class AdminPanelTest {
     private CreateCinemaRequest anyCreateCinemaRequest;
 
     @Mock
+    private CreateMovieRequest anyCreateMovieRequest;
+
+    @Mock
+    private CreateShowsRequest anyCreateShowsRequest;
+
+    @Mock
     private Cinema anyCinema;
+
+    @Mock
+    private Movie anyMovie;
+
+    @Mock
+    private Collection<Show> anyShow;
+
+    private Long anyCinemaId;
 
     private AdminPanel adminPanel;
 
@@ -76,19 +89,24 @@ public class AdminPanelTest {
     @Test
     public void shouldCreateMovie() {
         //given
+        when(anyMovieFactory.createMovie(anyCreateMovieRequest)).thenReturn(anyMovie);
 
         //when
+        adminPanel.createMovie(anyCreateMovieRequest);
 
         //then
-
+        verify(anyMovieRepository).save(anyMovie);
     }
 
     @Test
     public void shouldCreateShows() {
         //given
+        when(anyShowsFactory.createShow(anyCinemaId, anyCreateShowsRequest)).thenReturn(anyShow);
 
         //when
+        adminPanel.createShows(anyCinemaId, anyCreateShowsRequest);
 
         //then
+        verify(anyShowsRepository).save(anyShow);
     }
 }
