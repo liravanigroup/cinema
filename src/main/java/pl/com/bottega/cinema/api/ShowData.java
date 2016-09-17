@@ -1,4 +1,4 @@
-package pl.com.bottega.cinema.ui;
+package pl.com.bottega.cinema.api;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.*;

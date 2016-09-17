@@ -8,13 +8,12 @@ import pl.com.bottega.cinema.domain.Movie;
 import pl.com.bottega.cinema.domain.ShowsRepository;
 import pl.com.bottega.cinema.ui.ListMoviesResponse;
 import pl.com.bottega.cinema.api.MovieResponseDto;
-import pl.com.bottega.cinema.ui.ShowData;
+import pl.com.bottega.cinema.api.ShowData;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import java.time.LocalDate;
 import java.time.LocalTime;
-import java.util.Date;
 import java.util.List;
 import java.util.stream.Collectors;
 

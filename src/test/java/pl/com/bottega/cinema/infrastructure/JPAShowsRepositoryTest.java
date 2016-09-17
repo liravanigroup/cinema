@@ -8,7 +8,7 @@ import org.springframework.test.context.TestPropertySource;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.context.web.WebAppConfiguration;
 import pl.com.bottega.cinema.domain.ShowsRepository;
-import pl.com.bottega.cinema.ui.ShowData;
+import pl.com.bottega.cinema.api.ShowData;
 
 import java.time.LocalDate;
 import java.util.Collection;

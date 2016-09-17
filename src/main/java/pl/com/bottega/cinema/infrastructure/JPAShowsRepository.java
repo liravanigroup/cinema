@@ -3,7 +3,7 @@ package pl.com.bottega.cinema.infrastructure;
 import org.springframework.stereotype.Repository;
 import pl.com.bottega.cinema.domain.Show;
 import pl.com.bottega.cinema.domain.ShowsRepository;
-import pl.com.bottega.cinema.ui.ShowData;
+import pl.com.bottega.cinema.api.ShowData;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -37,7 +37,7 @@ public class JPAShowsRepository implements ShowsRepository{
         checkNotNull(movieId);
         checkNotNull(date);
 
-        return entityManager.createQuery("SELECT new pl.com.bottega.cinema.ui.ShowData(" +
+        return entityManager.createQuery("SELECT new pl.com.bottega.cinema.api.ShowData(" +
                 "s.id, s.time) FROM Show s WHERE s.cinema.id=:cinemaId AND s.movie.id=:movieId AND s.date=:date", ShowData.class)
                 .setParameter("cinemaId", cinemaId)
                 .setParameter("movieId", movieId)
