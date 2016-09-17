@@ -34,10 +34,10 @@ public class Show implements Serializable {
     private LocalDate date;
     private LocalTime time;
 
-    public Show(Cinema cinema, Movie movie, LocalDate date, LocalTime time){
+    public Show(Cinema cinema, Movie movie, LocalDateTime dateOfShow){
         this.cinema = cinema;
         this.movie = movie;
-        this.date = date;
-        this.time = time;
+        this.date = dateOfShow.toLocalDate();
+        this.time = dateOfShow.toLocalTime();
     }
 }
