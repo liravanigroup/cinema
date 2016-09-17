@@ -2,17 +2,19 @@ package pl.com.bottega.cinema.infrastructure;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+import pl.com.bottega.cinema.api.InvalidRequestException;
 import pl.com.bottega.cinema.api.MovieCatalog;
 import pl.com.bottega.cinema.domain.Movie;
 import pl.com.bottega.cinema.domain.ShowsRepository;
 import pl.com.bottega.cinema.ui.ListMoviesResponse;
-import pl.com.bottega.cinema.ui.MovieResponseDto;
+import pl.com.bottega.cinema.api.MovieResponseDto;
 import pl.com.bottega.cinema.ui.ShowData;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import java.time.LocalDate;
 import java.time.LocalTime;
+import java.util.Date;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -68,9 +70,19 @@ public class JPAMovieCatalog implements MovieCatalog {
     }
 
     private List<Movie> findAllMovieByCinemaIdAndDate(Long cinemaId, LocalDate date) {
+        validate(cinemaId, date);
         return entityManager.createQuery("SELECT DISTINCT m FROM Movie m JOIN Show s ON m.id = s.movie.id JOIN Cinema c ON c.id = s.cinema.id WHERE c.id=:cinemaId AND s.date=:date", Movie.class)
                 .setParameter("cinemaId", cinemaId)
                 .setParameter("date", date)
                 .getResultList();
+    }
+
+    private void validate(Long cinemaId, LocalDate date) {
+        if (cinemaId == null)
+            throw new InvalidRequestException("Ciname id is required");
+        if (cinemaId < 0)
+            throw new InvalidRequestException("Ciname id is wrong");
+        if(date == null)
+            throw new InvalidRequestException("Date of show is required");
     }
 }

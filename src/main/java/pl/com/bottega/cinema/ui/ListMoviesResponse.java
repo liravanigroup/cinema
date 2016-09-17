@@ -3,6 +3,7 @@ package pl.com.bottega.cinema.ui;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.Setter;
+import pl.com.bottega.cinema.api.MovieResponseDto;
 
 import java.util.Collection;
 

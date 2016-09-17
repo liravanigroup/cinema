@@ -23,13 +23,15 @@ public class AdminPanel {
 
     @Transactional
     public void createCinema(CreateCinemaRequest request) {
+        request.validate();
         Cinema cinema = cinemaFactory.createCinema(request);
         cinemaRepository.save(cinema);
     }
 
     @Transactional
-    public void createMovie(CreateMovieRequest createMovieRequest) {
-        Movie movie = movieFactory.createMovie(createMovieRequest);
+    public void createMovie(CreateMovieRequest request) {
+        request.validate();
+        Movie movie = movieFactory.createMovie(request);
         movieRepository.save(movie);
     }
 

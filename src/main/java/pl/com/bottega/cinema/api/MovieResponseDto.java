@@ -1,9 +1,10 @@
-package pl.com.bottega.cinema.ui;
+package pl.com.bottega.cinema.api;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import pl.com.bottega.cinema.ui.ShowData;
 
 import java.util.Collection;
 import java.util.Set;

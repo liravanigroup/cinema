@@ -26,7 +26,6 @@ public class CinemasController {
 
     @PutMapping
     public void create(@RequestBody CreateCinemaRequest request) {
-        request.validate();
         adminPanel.createCinema(request);
     }
 
@@ -37,17 +36,7 @@ public class CinemasController {
 
     @GetMapping("/{cinemaId}/movies")
     public ListMoviesResponse findMoviesAtDate(@PathVariable("cinemaId") Long cinemaId, Date date) {
-        validate(cinemaId, date);
         return movieCatalog.findMoviesInCinemaByDate(cinemaId, convertToLocalDate(date));
-    }
-
-    private void validate(Long cinemaId, Date date) {
-        if (cinemaId == null)
-            throw new InvalidRequestException("Ciname id is required");
-        if (cinemaId < 0)
-            throw new InvalidRequestException("Ciname id is wrong");
-        if(date == null)
-            throw new InvalidRequestException("Date of show is required");
     }
 
     private LocalDate convertToLocalDate(Date date) {
