@@ -6,7 +6,7 @@ import pl.com.bottega.cinema.api.InvalidRequestException;
 import pl.com.bottega.cinema.api.MovieCatalog;
 import pl.com.bottega.cinema.domain.Movie;
 import pl.com.bottega.cinema.domain.ShowsRepository;
-import pl.com.bottega.cinema.ui.ListMoviesResponse;
+import pl.com.bottega.cinema.api.ListMoviesResponse;
 import pl.com.bottega.cinema.api.MovieResponseDto;
 import pl.com.bottega.cinema.api.ShowData;
 

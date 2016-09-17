@@ -8,16 +8,11 @@ import org.springframework.test.context.TestPropertySource;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.context.web.WebAppConfiguration;
 import pl.com.bottega.cinema.api.MovieCatalog;
-import pl.com.bottega.cinema.domain.Movie;
-import pl.com.bottega.cinema.domain.ShowsRepository;
-import pl.com.bottega.cinema.ui.ListMoviesResponse;
+import pl.com.bottega.cinema.api.ListMoviesResponse;
 
 import java.time.LocalDate;
-import java.time.Month;
-import java.util.List;
 
 import static java.time.Month.SEPTEMBER;
-import static org.junit.Assert.*;
 
 /**
  * Created by Sergej Povzaniuk on 16.09.2016.

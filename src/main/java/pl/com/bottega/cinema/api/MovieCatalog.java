@@ -1,7 +1,5 @@
 package pl.com.bottega.cinema.api;
 
-import pl.com.bottega.cinema.ui.ListMoviesResponse;
-
 import java.time.LocalDate;
 
 /**

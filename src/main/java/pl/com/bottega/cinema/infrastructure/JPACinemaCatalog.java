@@ -1,11 +1,10 @@
 package pl.com.bottega.cinema.infrastructure;
 
 import org.springframework.stereotype.Component;
-import org.springframework.stereotype.Repository;
 import pl.com.bottega.cinema.api.CinemaCatalog;
 import pl.com.bottega.cinema.api.CinemaDto;
 import pl.com.bottega.cinema.domain.Cinema;
-import pl.com.bottega.cinema.ui.ListAllCinemasResponse;
+import pl.com.bottega.cinema.api.ListAllCinemasResponse;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
