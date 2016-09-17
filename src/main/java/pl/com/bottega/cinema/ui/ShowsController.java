@@ -19,4 +19,5 @@ public class ShowsController {
     public void create(@PathVariable("cinemaId") Long cinemaId, @RequestBody CreateShowsRequest request){
         adminPanel.createShows(cinemaId, request);
     }
+
 }

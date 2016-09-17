@@ -21,15 +21,7 @@ public class JPACinemaRepository implements CinemaRepository {
 
     @Override
     public void save(Cinema cinema) {
-        Cinema loadedCinema = load(cinema.getName(), cinema.getCity());
-        System.out.println(loadedCinema);
-        if (loadedCinema == null) {
-            entityManager.persist(cinema);
-        } else {
-            throw new InvalidRequestException(
-                    String.format("Cinema %s has already been created in %s", cinema.getName(), cinema.getCity())
-            );
-        }
+        entityManager.persist(cinema);
     }
 
     @Override
