@@ -11,6 +11,7 @@ import pl.com.bottega.cinema.api.MovieCatalog;
 import pl.com.bottega.cinema.api.ListMoviesResponse;
 
 import java.time.LocalDate;
+import java.util.Date;
 
 import static java.time.Month.SEPTEMBER;
 
@@ -33,7 +34,7 @@ public class JPAMovieCatalogTest {
 
 
         //when
-        ListMoviesResponse listMoviesResponse = movieCatalog.findMoviesInCinemaByDate(1L, LocalDate.of(2016, SEPTEMBER, 5));
+        ListMoviesResponse listMoviesResponse = movieCatalog.findMoviesInCinemaByDate(1L, new Date(2016, 9, 20));
 
         //then
         System.out.println(listMoviesResponse);

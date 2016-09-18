@@ -38,9 +38,6 @@ public class Movie implements Serializable {
     @ElementCollection(fetch = EAGER)
     private Set<String> genres;
 
-    @OneToMany(mappedBy = "movie", cascade = CascadeType.ALL)
-    private Set<TicketPrice> prices;
-
     public Movie(String title, String description, Integer minAge, Set<String> actors, Set<String> genres, Integer length) {
         this.title = title;
         this.description = description;

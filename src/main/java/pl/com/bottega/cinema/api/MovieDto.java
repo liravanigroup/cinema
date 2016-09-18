@@ -11,7 +11,7 @@ import java.util.Set;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-class MovieDto {
+public class MovieDto {
 
     private String title;
     private String description;

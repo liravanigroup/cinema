@@ -76,12 +76,9 @@ public class ShowsFactory {
         return from.with(day);
     }
 
-
-
     private LocalDateTime getDateOfPeriodStart(LocalDateTime from, LocalDateTime thisDayOfWeek) {
         return from.isAfter(thisDayOfWeek) ? getNextDateForActualDay(thisDayOfWeek) : thisDayOfWeek;
     }
-
 
     private Movie getMovie(ShowsDto showsDto) {
         Movie movie = movieRepository.load(showsDto.getMovieId());

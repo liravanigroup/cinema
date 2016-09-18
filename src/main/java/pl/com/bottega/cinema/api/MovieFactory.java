@@ -5,10 +5,7 @@ import pl.com.bottega.cinema.domain.Movie;
 
 @Component
 public class MovieFactory {
-
     Movie createMovie(CreateMovieRequest request) {
-        MovieDto movie = request.getMovie();
-        return new Movie(movie.getTitle(), movie.getDescription(), movie.getMinAge(), movie.getActors(),
-                movie.getGenres(), movie.getLength());
+        return new Movie(request.getMovie());
     }
 }

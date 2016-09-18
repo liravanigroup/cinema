@@ -35,7 +35,4 @@ public class TicketPrice {
         this.price = price;
     }
 
-
-
-
 }

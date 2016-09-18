@@ -28,16 +28,12 @@ public class AdminPanel {
     @Transactional
     public void createCinema(CreateCinemaRequest request) {
         request.validate();
-        Cinema loadedCinema = cinemaRepository.load(request.getCinema().getName(), request.getCinema().getCity());
-        Cinema cinema = new Cinema();
-        if (loadedCinema == null) {
+        Cinema cinema = cinemaRepository.load(request.getCinema().getName(), request.getCinema().getCity());
+        if (cinema == null) {
             cinema = cinemaFactory.createCinema(request);
-        } else {
-            throw new InvalidRequestException(
-                    String.format("Cinema %s has already been created in %s", cinema.getName(), cinema.getCity())
-            );
-        }
-        cinemaRepository.save(cinema);
+            cinemaRepository.save(cinema);
+        } else
+            throw new InvalidRequestException(String.format("Cinema %s has already been created in %s", cinema.getName(), cinema.getCity()));
     }
 
     @Transactional

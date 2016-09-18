@@ -12,6 +12,7 @@ import java.time.LocalDateTime;
 import java.time.LocalTime;
 
 import static javax.persistence.CascadeType.ALL;
+import static javax.persistence.FetchType.EAGER;
 
 /**
  * Created by bernard.boguszewski on 04.09.2016.
@@ -29,8 +30,10 @@ public class Show implements Serializable {
     private Long id;
     @ManyToOne(cascade = ALL)
     private Cinema cinema;
+
     @ManyToOne(cascade = ALL)
     private Movie movie;
+
     private LocalDate date;
     private LocalTime time;
 
