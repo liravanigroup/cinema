@@ -16,4 +16,16 @@ import java.util.Map;
 public class UpdatePricesRequest {
 
     private Map<String, BigDecimal> prices;
+
+    public void validate(){
+        for(String name : prices.keySet()){
+            if (!prices.containsKey("regular") || !prices.containsKey("student"))
+                throw new InvalidRequestException("Ticket type must by regular or student!");
+            if(name == null || name.equals(""))
+                throw new InvalidRequestException("Ticket type does not exist!");
+            if(prices.get(name) == null || prices.get(name).signum() < 0)
+                throw new InvalidRequestException("Price must be greater or equal than zero!");
+
+        }
+    }
 }

@@ -11,6 +11,8 @@ import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
 
+import static com.google.common.base.Preconditions.checkNotNull;
+
 /**
  * Created by bernard.boguszewski on 04.09.2016.
  */
@@ -55,7 +57,11 @@ public class AdminPanel {
 
     @Transactional
     public void updatePrices(Long movieId, UpdatePricesRequest request) {
+        checkNotNull(request);
+        request.validate();
         Movie movie = movieRepository.load(movieId);
+        if(movie == null)
+            throw new InvalidRequestException("This movie does not exist");
         Set<TicketPrice> ticketPrices = new HashSet<>();
         for (String ticketName : request.getPrices().keySet()){
             ticketPrices.add(new TicketPrice(ticketName, request.getPrices().get(ticketName), movie));
