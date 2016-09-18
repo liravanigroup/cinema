@@ -1,23 +1,21 @@
 package pl.com.bottega.cinema.infrastructure;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import pl.com.bottega.cinema.api.InvalidRequestException;
-import pl.com.bottega.cinema.api.MovieCatalog;
-import pl.com.bottega.cinema.domain.Movie;
-import pl.com.bottega.cinema.domain.ShowsRepository;
 import pl.com.bottega.cinema.api.ListMoviesResponse;
+import pl.com.bottega.cinema.api.MovieCatalog;
 import pl.com.bottega.cinema.api.MovieResponseDto;
-import pl.com.bottega.cinema.api.ShowData;
+import pl.com.bottega.cinema.domain.Movie;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import java.time.Instant;
 import java.time.LocalDate;
-import java.time.LocalTime;
+import java.time.LocalDateTime;
+import java.time.ZoneId;
+import java.util.Date;
 import java.util.List;
 import java.util.stream.Collectors;
-
-import static com.google.common.base.Preconditions.checkNotNull;
 
 /**
  * Created by Admin on 14.09.2016.
@@ -27,61 +25,33 @@ public class JPAMovieCatalog implements MovieCatalog {
 
     @PersistenceContext
     private EntityManager entityManager;
-    @Autowired
-    private ShowsRepository showsRepository;
 
     @Override
-    public ListMoviesResponse findMoviesInCinemaByDate(Long cinemaId, LocalDate date) {
-        checkNotNull(cinemaId);
-        checkNotNull(date);
-        List<Movie> movies = findAllMovieByCinemaIdAndDate(cinemaId, date);
-        List<MovieResponseDto> moviesResult = getMovieResponseDtoList(cinemaId, date, movies);
-        return new ListMoviesResponse(moviesResult);
-    }
-
-    private List<MovieResponseDto> getMovieResponseDtoList(Long cinemaId, LocalDate date, List<Movie> movies) {
-        return movies.stream().map(movie -> {
-            MovieResponseDto result = new MovieResponseDto();
-            result.setTitle(movie.getTitle());
-            result.setDescription(movie.getDescription());
-            result.setMinAge(movie.getMinAge());
-            result.setLength(movie.getLength());
-            result.setActors(movie.getActors());
-            result.setGenres(movie.getGenres());
-            result.setShows(getSortedShows(cinemaId, date, movie));
-            return result;
-        })
-                .filter(movieResponseDto -> movieResponseDto.getShows().size() > 0)
-                .sorted((o1, o2) -> o1.getTitle().compareTo(o2.getTitle()))
-                .collect(Collectors.toList());
-    }
-
-    private List<ShowData> getSortedShows(Long cinemaId, LocalDate date, Movie movie) {
-        return showsRepository.load(cinemaId, movie.getId(), date).stream().sorted((o1, o2) -> {
-            LocalTime time1 = o1.getTime();
-            LocalTime time2 = o2.getTime();
-            if (time1.isAfter(time2))
-                return 1;
-            if (time1.isBefore(time2))
-                return -1;
-            return 0;
-        }).collect(Collectors.toList());
-    }
-
-    private List<Movie> findAllMovieByCinemaIdAndDate(Long cinemaId, LocalDate date) {
+    public ListMoviesResponse findMoviesInCinemaByDate(Long cinemaId, Date date) {
         validate(cinemaId, date);
-        return entityManager.createQuery("SELECT DISTINCT m FROM Movie m JOIN Show s ON m.id = s.movie.id JOIN Cinema c ON c.id = s.cinema.id WHERE c.id=:cinemaId AND s.date=:date", Movie.class)
+        LocalDate showDate = convertToLocalDate(date);
+        return new ListMoviesResponse(getMoviesDto(cinemaId, showDate));
+    }
+
+    private List<MovieResponseDto> getMoviesDto(Long cinemaId, LocalDate date) {
+        return entityManager.createQuery("Select m FROM Movie m JOIN m.shows s JOIN s.cinema c " +
+                "WHERE c.id=:cinemaId AND s.date=:date ORDER BY m.title, s.time", Movie.class)
                 .setParameter("cinemaId", cinemaId)
                 .setParameter("date", date)
-                .getResultList();
+                .getResultList().stream().map(MovieResponseDto::new).collect(Collectors.toList());
     }
 
-    private void validate(Long cinemaId, LocalDate date) {
+    private LocalDate convertToLocalDate(Date date) {
+        Instant instant = Instant.ofEpochMilli(date.getTime());
+        return LocalDateTime.ofInstant(instant, ZoneId.systemDefault()).toLocalDate();
+    }
+
+    private void validate(Long cinemaId, Date date) {
         if (cinemaId == null)
             throw new InvalidRequestException("Ciname id is required");
         if (cinemaId < 0)
             throw new InvalidRequestException("Ciname id is wrong");
-        if(date == null)
+        if (date == null)
             throw new InvalidRequestException("Date of show is required");
     }
 }

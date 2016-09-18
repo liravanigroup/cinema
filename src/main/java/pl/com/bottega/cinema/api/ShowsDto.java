@@ -1,7 +1,9 @@
 package pl.com.bottega.cinema.api;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
+import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.time.LocalDateTime;
@@ -14,6 +16,8 @@ import java.util.Set;
 
 @Getter
 @Setter
+@NoArgsConstructor
+@AllArgsConstructor
 public class ShowsDto {
 
     private Long movieId;
@@ -26,7 +30,7 @@ public class ShowsDto {
             throw new InvalidRequestException("Movie id is required");
         if(movieId < 0)
             throw new InvalidRequestException("Movie id is wrong");
-        if(dates.size() == 0)
+        if(dates.isEmpty())
             throw new InvalidRequestException("Show date is required");
     }
 }

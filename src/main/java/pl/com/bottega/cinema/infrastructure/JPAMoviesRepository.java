@@ -24,8 +24,12 @@ public class JPAMoviesRepository implements MovieRepository {
 
     @Override
     public Movie load(Long movieId) {
+        validate(movieId);
+        return entityManager.find(Movie.class, movieId);
+    }
+
+    private void validate(Long movieId) {
         if(movieId == null)
             throw new InvalidRequestException("Movie id is required");
-        return entityManager.find(Movie.class, movieId);
     }
 }

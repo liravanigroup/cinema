@@ -8,7 +8,7 @@ import org.springframework.test.context.TestPropertySource;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.context.web.WebAppConfiguration;
 import pl.com.bottega.cinema.domain.ShowsRepository;
-import pl.com.bottega.cinema.api.ShowData;
+import pl.com.bottega.cinema.api.ShowDto;
 
 import java.time.LocalDate;
 import java.util.Collection;
@@ -34,17 +34,5 @@ public class JPAShowsRepositoryTest {
     }
 
 
-    @Test
-    public void shouldLoadShowsByCinemaIdAndMovieIdAndDate(){
-        //given
-        Collection<ShowData> shows = showsRepository.load(1L, 1L, LocalDate.of(2016, SEPTEMBER, 5));
-
-        //when
-        System.out.println("here is list of shows");
-        System.out.println(shows);
-
-        //then
-
-    }
 
 }

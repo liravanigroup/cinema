@@ -36,11 +36,7 @@ public class CinemasController {
 
     @GetMapping("/{cinemaId}/movies")
     public ListMoviesResponse findMoviesAtDate(@PathVariable("cinemaId") Long cinemaId, Date date) {
-        return movieCatalog.findMoviesInCinemaByDate(cinemaId, convertToLocalDate(date));
+        return movieCatalog.findMoviesInCinemaByDate(cinemaId, date);
     }
 
-    private LocalDate convertToLocalDate(Date date) {
-        Instant instant = Instant.ofEpochMilli(date.getTime());
-        return LocalDateTime.ofInstant(instant, ZoneId.systemDefault()).toLocalDate();
-    }
 }
