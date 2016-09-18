@@ -11,14 +11,14 @@ public class CalculatePriceRequest {
 
     private Long showId;
 
-    private Collection<Ticket> ticekts;
+    private Collection<Ticket> tickets;
 
     public void validate() {
         showIdValidation(showId);
-        ticektsValidation(ticekts);
+        ticketsValidation(tickets);
     }
 
-    private void ticektsValidation(Collection<Ticket> ticekts) {
+    private void ticketsValidation(Collection<Ticket> tickets) {
 
     }
 
