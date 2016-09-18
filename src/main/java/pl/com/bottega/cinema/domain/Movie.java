@@ -1,6 +1,7 @@
 package pl.com.bottega.cinema.domain;
 
 import lombok.*;
+import pl.com.bottega.cinema.api.MovieDto;
 
 import javax.persistence.*;
 import java.io.Serializable;
@@ -38,13 +39,20 @@ public class Movie implements Serializable {
     @ElementCollection(fetch = EAGER)
     private Set<String> genres;
 
-    public Movie(String title, String description, Integer minAge, Set<String> actors, Set<String> genres, Integer length) {
-        this.title = title;
-        this.description = description;
-        this.minAge = minAge;
-        this.actors = actors;
-        this.genres = genres;
-        this.length = length;
+    @OneToMany(cascade = ALL, mappedBy = "movie", fetch = EAGER)
+    private Set<Show> shows;
+
+
+    @OneToMany(cascade = ALL, mappedBy = "movie", fetch = EAGER)
+    private Set<TicketPrice> prices;
+
+    public Movie(MovieDto movie) {
+        this.title = movie.getTitle();
+        this.description = movie.getDescription();
+        this.minAge = movie.getMinAge();
+        this.actors = movie.getActors();
+        this.genres = movie.getGenres();
+        this.length = movie.getLength();
     }
 
     public void updatePrices(Set<TicketPrice> prices){
