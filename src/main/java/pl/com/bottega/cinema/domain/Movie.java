@@ -7,6 +7,7 @@ import java.io.Serializable;
 import java.util.Collection;
 import java.util.List;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 import static javax.persistence.CascadeType.ALL;
 import static javax.persistence.FetchType.EAGER;
@@ -37,6 +38,9 @@ public class Movie implements Serializable {
     @ElementCollection(fetch = EAGER)
     private Set<String> genres;
 
+    @OneToMany(mappedBy = "movie", cascade = CascadeType.ALL)
+    private Set<TicketPrice> prices;
+
     public Movie(String title, String description, Integer minAge, Set<String> actors, Set<String> genres, Integer length) {
         this.title = title;
         this.description = description;
@@ -44,5 +48,9 @@ public class Movie implements Serializable {
         this.actors = actors;
         this.genres = genres;
         this.length = length;
+    }
+
+    public void updatePrices(Set<TicketPrice> prices){
+        this.prices = prices;
     }
 }

@@ -5,7 +5,11 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import pl.com.bottega.cinema.domain.*;
 
+import java.math.BigDecimal;
 import java.util.Collection;
+import java.util.HashSet;
+import java.util.Map;
+import java.util.Set;
 
 /**
  * Created by bernard.boguszewski on 04.09.2016.
@@ -47,5 +51,15 @@ public class AdminPanel {
     public void createShows(Long cinemaId, CreateShowsRequest request) {
         Collection<Show> shows = showsFactory.createShow(cinemaId, request);
         showsRepository.save(shows);
+    }
+
+    @Transactional
+    public void updatePrices(Long movieId, UpdatePricesRequest request) {
+        Movie movie = movieRepository.load(movieId);
+        Set<TicketPrice> ticketPrices = new HashSet<>();
+        for (String ticketName : request.getPrices().keySet()){
+            ticketPrices.add(new TicketPrice(ticketName, request.getPrices().get(ticketName), movie));
+        }
+        movie.updatePrices(ticketPrices);
     }
 }
