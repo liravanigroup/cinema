@@ -29,6 +29,7 @@ public class AdminPanel {
 
     @Transactional
     public void createCinema(CreateCinemaRequest request) {
+        checkNotNull(request);
         request.validate();
         Cinema cinema = cinemaRepository.load(request.getCinema().getName(), request.getCinema().getCity());
         if (cinema == null) {
@@ -40,6 +41,7 @@ public class AdminPanel {
 
     @Transactional
     public void createMovie(CreateMovieRequest request) {
+        checkNotNull(request);
         request.validate();
         Movie movie = movieFactory.createMovie(request);
         movieRepository.save(movie);
@@ -47,6 +49,7 @@ public class AdminPanel {
 
     @Transactional
     public void createShows(Long cinemaId, CreateShowsRequest request) {
+        checkNotNull(request);
         Collection<Show> shows = showsFactory.createShow(cinemaId, request);
         showsRepository.save(shows);
     }

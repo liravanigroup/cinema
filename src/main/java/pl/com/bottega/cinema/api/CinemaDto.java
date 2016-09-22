@@ -5,6 +5,8 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import pl.com.bottega.cinema.domain.Cinema;
 
+import static pl.com.bottega.cinema.domain.Validator.stringValidate;
+
 /**
  * Created by bernard.boguszewski on 04.09.2016.
  */
@@ -17,9 +19,8 @@ public class CinemaDto {
     private String name, city;
 
     public CinemaDto(Cinema cinema) {
+        this(cinema.getName(), cinema.getCity());
         this.id = cinema.getId();
-        this.city = cinema.getCity();
-        this.name = cinema.getName();
     }
 
     public CinemaDto(String name, String city) {
@@ -28,13 +29,7 @@ public class CinemaDto {
     }
 
     void validate() {
-        if (name == null || name.length() == 0)
-            throw new InvalidRequestException("Cinema name is required");
-        if (name.length() < 4)
-            throw new InvalidRequestException("Cinema name should be longer then 5 symbols");
-        if (city == null || city.length() == 0)
-            throw new InvalidRequestException("City name is required");
-        if (city.length() < 4)
-            throw new InvalidRequestException("City name should be longer then 5 symbols");
+        stringValidate(name, "Cinema name is required");
+        stringValidate(city, "City name is required");
     }
 }

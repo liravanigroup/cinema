@@ -1,9 +1,6 @@
 package pl.com.bottega.cinema.domain;
 
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
-import lombok.ToString;
+import lombok.*;
 
 import javax.persistence.*;
 import java.io.Serializable;
@@ -20,6 +17,7 @@ import static javax.persistence.FetchType.EAGER;
 @Getter
 @Setter
 @NoArgsConstructor
+@EqualsAndHashCode(exclude = {"id"})
 @Entity
 public class Show implements Serializable {
 
