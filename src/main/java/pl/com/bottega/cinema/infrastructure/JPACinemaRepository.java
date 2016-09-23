@@ -1,13 +1,11 @@
 package pl.com.bottega.cinema.infrastructure;
 
 import org.springframework.stereotype.Repository;
-import pl.com.bottega.cinema.api.InvalidRequestException;
 import pl.com.bottega.cinema.domain.Cinema;
 import pl.com.bottega.cinema.domain.CinemaRepository;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
-import javax.persistence.Query;
 import java.util.List;
 
 /**
@@ -30,7 +28,11 @@ public class JPACinemaRepository implements CinemaRepository {
                 .setParameter("name", name)
                 .setParameter("city", city)
                 .getResultList();
-        return cinemas.size() == 0 ? null : cinemas.get(0);
+        return getSingleCinema(cinemas);
+    }
+
+    private Cinema getSingleCinema(List<Cinema> cinemas) {
+        return cinemas.isEmpty() ? null : cinemas.get(0);
     }
 
     @Override

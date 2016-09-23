@@ -106,7 +106,7 @@ public class AdminPanelTest {
     @Test
     public void shouldCreateShows() {
         //given
-        when(anyShowsFactory.createShow(anyCreateShowsRequest)).thenReturn(anyShow);
+        //when(anyShowsFactory.createShows(anyCreateShowsRequest)).thenReturn(anyShow);
 
         //when
         adminPanel.createShows(anyCreateShowsRequest);

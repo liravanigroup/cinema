@@ -15,7 +15,6 @@ import java.util.Collection;
 import java.util.Set;
 import java.util.stream.Collectors;
 
-import static com.google.common.base.Preconditions.checkNotNull;
 import static pl.com.bottega.cinema.domain.Validator.existingValidation;
 import static pl.com.bottega.cinema.domain.Validator.notNullValidate;
 
@@ -30,39 +29,62 @@ public class AdminPanel {
     private CinemaRepository cinemaRepository;
     private CinemaFactory cinemaFactory;
     private MovieFactory movieFactory;
-    private ShowsFactory showsFactory;
+    private ShowsFactory showFactory;
     private ShowsRepository showsRepository;
 
     @Transactional
     public void createCinema(CreateCinemaRequest request) {
         request.validate();
-        Cinema cinema = cinemaRepository.load(request.getCinema().getName(), request.getCinema().getCity());
-        existingValidation(cinema, String.format("Cinema %s has already been created in %s", cinema.getName(), cinema.getCity()));
-        cinema = cinemaFactory.createCinema(request);
+        preventCinemaDuplication(request);
+        Cinema cinema = cinemaFactory.createCinema(request);
         cinemaRepository.save(cinema);
+    }
+
+    private void preventCinemaDuplication(CreateCinemaRequest request) {
+        Cinema cinema = cinemaRepository.load(request.getName(), request.getCity());
+        existingValidation(cinema, String.format("Cinema %s has already been created in %s", request.getName(), request.getCity()));
     }
 
     @Transactional
     public void createMovie(CreateMovieRequest request) {
         request.validate();
-        Movie movie = movieRepository.load(request.getMovie().getTitle(), request.getMovie().getDescription());
-        existingValidation(movie, "Movie has already been created");
-        movie = movieFactory.createMovie(request);
+        preventMovieDuplication(request);
+        Movie movie = movieFactory.createMovie(request);
         movieRepository.save(movie);
+    }
+
+    private void preventMovieDuplication(CreateMovieRequest request) {
+        Movie movie = movieRepository.load(request.getTitle(), request.getDescription());
+        existingValidation(movie, String.format("Movie %s has already been created", request.getTitle()));
     }
 
     @Transactional
     public void createShows(CreateShowsRequest request) {
         request.validate();
-        Collection<Show> shows = showsFactory.createShow(request);
-        showsRepository.save(shows);
+        Collection<Show> shows = showFactory.createShows(request, getExistingCinema(request.getCinemaId()), getExistingMovie(request.getMovieId()));
+        showsRepository.save(getOnlyNewShows(shows));
+    }
+
+    private Movie getExistingMovie(Long movieId) {
+        Movie movie = movieRepository.load(movieId);
+        notNullValidate(movie, "Movie is not exists");
+        return movie;
+    }
+
+    private Cinema getExistingCinema(Long cinemaId) {
+        Cinema cinema = cinemaRepository.load(cinemaId);
+        notNullValidate(cinema, "Cinema is not exists");
+        return cinema;
+    }
+
+    private Collection<Show> getOnlyNewShows(Collection<Show> shows) {
+        return shows.stream().filter(show -> null == showsRepository.load(show.getCinema().getId(), show.getMovie().getId(), show.getDate(), show.getTime())).collect(Collectors.toList());
     }
 
     @Transactional
     public void updatePrices(UpdatePricesRequest request) {
         request.validate();
-        Movie movie = movieRepository.load(request.getMovieId());
-        notNullValidate(movie, "This movie does not exist");
+        Movie movie = getExistingMovie(request.getMovieId());
         movie.updatePrices(getTicketPrices(request, movie));
     }
 

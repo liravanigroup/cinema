@@ -9,6 +9,9 @@ import pl.com.bottega.cinema.api.InvalidRequestException;
 
 import javax.servlet.http.HttpServletRequest;
 
+import static org.springframework.http.HttpHeaders.CONTENT_TYPE;
+import static org.springframework.http.HttpStatus.UNPROCESSABLE_ENTITY;
+
 /**
  * Created by anna on 04.09.2016.
  */
@@ -18,12 +21,15 @@ public class ErrorHandler {
     @ExceptionHandler(InvalidRequestException.class)
     public ResponseEntity<String> handleInvalidRequestException(HttpServletRequest request, InvalidRequestException ex) {
         HttpHeaders headers = new HttpHeaders();
-        headers.set(HttpHeaders.CONTENT_TYPE, "application/json");
-        return new ResponseEntity<String>(
-                "{'error': " + ex.getMessage() + "}",
-                headers,
-                HttpStatus.UNPROCESSABLE_ENTITY
+        setContentTypeAsJsonFormat(headers);
+        return getStringResponseEntity(ex, headers);
+    }
 
-        );
+    private void setContentTypeAsJsonFormat(HttpHeaders headers) {
+        headers.set(CONTENT_TYPE, "application/json");
+    }
+
+    private ResponseEntity<String> getStringResponseEntity(InvalidRequestException ex, HttpHeaders headers) {
+        return new ResponseEntity<String>("{'error':" + ex.getMessage() + "}", headers, UNPROCESSABLE_ENTITY);
     }
 }

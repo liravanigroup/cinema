@@ -33,6 +33,10 @@ public class JPAMoviesRepository implements MovieRepository {
                 .setParameter("title", title)
                 .setParameter("descr", description)
                 .getResultList();
-       return movies.isEmpty() ? null : movies.get(0);
+       return getSingleMovie(movies);
+    }
+
+    private Movie getSingleMovie(List<Movie> movies) {
+        return movies.isEmpty() ? null : movies.get(0);
     }
 }

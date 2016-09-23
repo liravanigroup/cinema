@@ -19,6 +19,12 @@ import static javax.persistence.CascadeType.ALL;
 @AllArgsConstructor
 @EqualsAndHashCode(exclude = {"id"})
 @Entity
+@NamedQueries({
+        @NamedQuery(name = "Show.findShowsByShowParams",
+                query = "SELECT s FROM Show s " +
+                        "WHERE s.cinema.id = :cinemaId AND s.movie.id = :movieId " +
+                        "AND s.date = :date AND s.time = :time")
+})
 public class Show implements Serializable {
 
     private static final long serialVersionUID = -3411664175982363078L;
@@ -36,7 +42,11 @@ public class Show implements Serializable {
     private LocalDate date;
     private LocalTime time;
 
-    public Show(Cinema cinema, Movie movie, LocalDateTime date){
-        this(null, cinema, movie, date.toLocalDate(), date.toLocalTime());
+    public Show(Cinema cinema, Movie movie, LocalDate dateOfShow, LocalTime timeOfShow) {
+        this(null, cinema, movie, dateOfShow, timeOfShow);
+    }
+
+    public Show(Cinema cinema, Movie movie, LocalDateTime date) {
+        this(cinema, movie, date.toLocalDate(), date.toLocalTime());
     }
 }

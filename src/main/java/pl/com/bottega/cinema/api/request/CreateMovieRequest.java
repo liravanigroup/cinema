@@ -21,4 +21,11 @@ public class CreateMovieRequest {
         movie.validate();
     }
 
+    public String getTitle() {
+        return movie.getTitle();
+    }
+
+    public String getDescription() {
+        return movie.getDescription();
+    }
 }

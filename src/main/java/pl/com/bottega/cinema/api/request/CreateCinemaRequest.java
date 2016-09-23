@@ -20,4 +20,12 @@ public class CreateCinemaRequest {
     public void validate() {
         cinema.validate();
     }
+
+    public String getName() {
+        return cinema.getName();
+    }
+
+    public String getCity() {
+        return cinema.getCity();
+    }
 }
