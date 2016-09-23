@@ -36,6 +36,10 @@ public class JPAShowsRepository implements ShowsRepository {
                 .setParameter("date", date)
                 .setParameter("time", time)
                 .getResultList();
+        return getSingleShow(shows);
+    }
+
+    private Show getSingleShow(List<Show> shows) {
         return shows.isEmpty() ? null : shows.get(0);
     }
 

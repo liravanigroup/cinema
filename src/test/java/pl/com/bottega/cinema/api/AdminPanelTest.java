@@ -5,6 +5,7 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.runners.MockitoJUnitRunner;
+import pl.com.bottega.cinema.api.factory.CinemaFactory;
 import pl.com.bottega.cinema.api.factory.MovieFactory;
 import pl.com.bottega.cinema.api.factory.ShowsFactory;
 import pl.com.bottega.cinema.api.request.CreateCinemaRequest;

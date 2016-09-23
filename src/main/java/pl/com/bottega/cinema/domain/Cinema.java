@@ -13,9 +13,8 @@ import java.io.Serializable;
 @Entity
 @NamedQueries({
         @NamedQuery(name = "Cinema.findByNameAndCity", query = "SELECT c FROM Cinema c WHERE c.name = :name AND c.city = :city"),
-        @NamedQuery(name = "Cinema.findAll", query = "SELECT c FROM Cinema c")
+        @NamedQuery(name = "Cinema.getAll", query = "SELECT c FROM Cinema c")
 })
-
 public class Cinema implements Serializable {
 
     private static final long serialVersionUID = -3247581407541832720L;

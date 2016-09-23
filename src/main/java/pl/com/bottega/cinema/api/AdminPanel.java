@@ -3,6 +3,7 @@ package pl.com.bottega.cinema.api;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import pl.com.bottega.cinema.api.factory.CinemaFactory;
 import pl.com.bottega.cinema.api.factory.MovieFactory;
 import pl.com.bottega.cinema.api.factory.ShowsFactory;
 import pl.com.bottega.cinema.api.request.CreateCinemaRequest;

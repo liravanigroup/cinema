@@ -1,4 +1,4 @@
-package pl.com.bottega.cinema.api;
+package pl.com.bottega.cinema.api.factory;
 
 import org.springframework.stereotype.Component;
 import pl.com.bottega.cinema.api.dto.CinemaDto;
@@ -10,9 +10,7 @@ import pl.com.bottega.cinema.domain.Cinema;
  */
 @Component
 public class CinemaFactory {
-
-    Cinema createCinema(CreateCinemaRequest request) {
-        CinemaDto cinema = request.getCinema();
-        return new Cinema(cinema.getCity(), cinema.getName());
+    public Cinema createCinema(CreateCinemaRequest request) {
+        return new Cinema(request.getCity(), request.getName());
     }
 }

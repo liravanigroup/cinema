@@ -10,6 +10,7 @@ import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.context.web.WebAppConfiguration;
 import org.springframework.transaction.annotation.Transactional;
 import pl.com.bottega.cinema.api.*;
+import pl.com.bottega.cinema.api.factory.CinemaFactory;
 import pl.com.bottega.cinema.api.factory.MovieFactory;
 import pl.com.bottega.cinema.api.factory.ShowsFactory;
 import pl.com.bottega.cinema.api.request.CreateCinemaRequest;
