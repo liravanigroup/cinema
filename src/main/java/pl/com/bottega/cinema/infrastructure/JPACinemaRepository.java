@@ -26,14 +26,11 @@ public class JPACinemaRepository implements CinemaRepository {
 
     @Override
     public Cinema load(String name, String city) {
-        List<Cinema> cinemas = entityManager.createQuery("FROM Cinema c WHERE c.name =:name AND c.city =:city ", Cinema.class)
+        List<Cinema> cinemas = entityManager.createNamedQuery("Cinema.findByNameAndCity", Cinema.class)
                 .setParameter("name", name)
                 .setParameter("city", city)
                 .getResultList();
-        if (cinemas.size() != 0) {
-            return cinemas.get(0);
-        }
-        return null;
+        return cinemas.size() == 0 ? null : cinemas.get(0);
     }
 
     @Override

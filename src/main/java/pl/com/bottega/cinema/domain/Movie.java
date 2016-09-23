@@ -23,7 +23,15 @@ import static javax.persistence.FetchType.EAGER;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-@EqualsAndHashCode(exclude = {"id"})
+@NamedQueries({
+        @NamedQuery(name = "Movie.findByTitleAndDescription",
+                query = "SELECT m FROM Movie m WHERE m.title=:title AND m.description=:descr"),
+        @NamedQuery(name = "Movie.findByCinemaIdAndDate",
+                query = "SELECT DISTINCT m FROM Movie m " +
+                        "JOIN FETCH m.shows s JOIN FETCH s.cinema c " +
+                        "JOIN FETCH m.actors JOIN FETCH m.genres " +
+                        "WHERE c.id = :cinemaId AND s.date= :date")
+})
 public class Movie implements Serializable {
 
     private static final long serialVersionUID = -4979533539276386479L;
@@ -60,7 +68,7 @@ public class Movie implements Serializable {
         this(null, movieTitle, movieDescription, movieMinAge, movieLength, movieActors, movieGenres, null, null);
     }
 
-    public void updatePrices(Set<TicketPrice> prices){
+    public void updatePrices(Set<TicketPrice> prices) {
         this.prices = prices;
     }
 

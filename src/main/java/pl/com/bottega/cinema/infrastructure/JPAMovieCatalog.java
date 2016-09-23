@@ -29,20 +29,12 @@ public class JPAMovieCatalog implements MovieCatalog {
 
     @Override
     public ListMoviesResponse findMoviesInCinemaByDate(Long cinemaId, LocalDate date) {
-
         return null;//new ListMoviesResponse(getMoviesDto(cinemaId, date));
     }
 
 
     private List<MovieResponseDto> getMoviesDto(Long cinemaId, LocalDate date) {
-        String jpa = "SELECT DISTINCT m FROM Movie m " +
-                "JOIN FETCH m.shows s " +
-                "JOIN FETCH s.cinema c " +
-                "JOIN FETCH m.actors " +
-                "JOIN FETCH m.genres " +
-                "WHERE c.id = :cinemaId AND s.date= :date";
-
-        return entityManager.createQuery(jpa, Movie.class)
+        return entityManager.createNamedQuery("Movie.findByCinemaIdAndDate", Movie.class)
                 .setParameter("cinemaId", cinemaId)
                 .setParameter("date", date)
                 .getResultList().stream().map(MovieResponseDto::new).collect(Collectors.toList());

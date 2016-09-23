@@ -29,7 +29,7 @@ public class JPAMoviesRepository implements MovieRepository {
 
     @Override
     public Movie load(String title, String description) {
-        List<Movie> movies =  entityManager.createQuery("select m FROM Movie m WHERE m.title=:title AND m.description=:descr", Movie.class)
+        List<Movie> movies =  entityManager.createNamedQuery("Movie.findByTitleAndDescription", Movie.class)
                 .setParameter("title", title)
                 .setParameter("descr", description)
                 .getResultList();
