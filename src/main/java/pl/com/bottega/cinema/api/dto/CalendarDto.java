@@ -11,9 +11,9 @@ import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.util.Set;
 
-import static pl.com.bottega.cinema.domain.Validator.collectionValidate;
-import static pl.com.bottega.cinema.domain.Validator.dateSequenceValidate;
-import static pl.com.bottega.cinema.domain.Validator.dateValidate;
+import static pl.com.bottega.cinema.domain.validators.Validator.collectionValidate;
+import static pl.com.bottega.cinema.domain.validators.Validator.dateSequenceValidate;
+import static pl.com.bottega.cinema.domain.validators.Validator.dateValidate;
 
 /**
  * Created by Admin on 10.09.2016.

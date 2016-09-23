@@ -13,7 +13,7 @@ import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.util.Collection;
 
-import static pl.com.bottega.cinema.domain.Validator.entityIdValidate;
+import static pl.com.bottega.cinema.domain.validators.Validator.entityIdValidate;
 
 /**
  * Created by bernard.boguszewski on 04.09.2016.

@@ -9,8 +9,8 @@ import lombok.Setter;
 import java.time.LocalDateTime;
 import java.util.Set;
 
-import static pl.com.bottega.cinema.domain.Validator.collectionValidate;
-import static pl.com.bottega.cinema.domain.Validator.entityIdValidate;
+import static pl.com.bottega.cinema.domain.validators.Validator.collectionValidate;
+import static pl.com.bottega.cinema.domain.validators.Validator.entityIdValidate;
 
 /**
  * Created by Sergej Povzaniuk on 14.09.2016.

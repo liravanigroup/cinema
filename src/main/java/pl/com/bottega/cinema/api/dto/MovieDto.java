@@ -7,7 +7,7 @@ import lombok.Setter;
 
 import java.util.Set;
 
-import static pl.com.bottega.cinema.domain.Validator.*;
+import static pl.com.bottega.cinema.domain.validators.Validator.*;
 
 @Getter
 @Setter

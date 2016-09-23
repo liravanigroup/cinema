@@ -6,7 +6,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import pl.com.bottega.cinema.domain.Cinema;
 
-import static pl.com.bottega.cinema.domain.Validator.stringValidate;
+import static pl.com.bottega.cinema.domain.validators.Validator.stringValidate;
 
 /**
  * Created by bernard.boguszewski on 04.09.2016.

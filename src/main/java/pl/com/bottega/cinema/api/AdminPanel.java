@@ -16,8 +16,8 @@ import java.util.Collection;
 import java.util.Set;
 import java.util.stream.Collectors;
 
-import static pl.com.bottega.cinema.domain.Validator.existingValidation;
-import static pl.com.bottega.cinema.domain.Validator.notNullValidate;
+import static pl.com.bottega.cinema.domain.validators.Validator.existingValidation;
+import static pl.com.bottega.cinema.domain.validators.Validator.notNullValidate;
 
 /**
  * Created by bernard.boguszewski on 04.09.2016.

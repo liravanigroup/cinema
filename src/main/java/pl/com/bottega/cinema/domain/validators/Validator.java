@@ -1,4 +1,4 @@
-package pl.com.bottega.cinema.domain;
+package pl.com.bottega.cinema.domain.validators;
 
 import pl.com.bottega.cinema.api.InvalidRequestException;
 

@@ -13,6 +13,7 @@ import java.time.Instant;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.ZoneId;
+import java.util.Collection;
 import java.util.Date;
 import java.util.List;
 import java.util.function.Function;
@@ -28,15 +29,14 @@ public class JPAMovieCatalog implements MovieCatalog {
     private EntityManager entityManager;
 
     @Override
-    public ListMoviesResponse findMoviesInCinemaByDate(Long cinemaId, LocalDate date) {
+    public Collection<Movie> findMoviesInCinemaByDate(Long cinemaId, LocalDate date) {
         return null;//new ListMoviesResponse(getMoviesDto(cinemaId, date));
     }
 
-
-    private List<MovieResponseDto> getMoviesDto(Long cinemaId, LocalDate date) {
+    private List<Movie> getMoviesDto(Long cinemaId, LocalDate date) {
         return entityManager.createNamedQuery("Movie.findByCinemaIdAndDate", Movie.class)
                 .setParameter("cinemaId", cinemaId)
                 .setParameter("date", date)
-                .getResultList().stream().map(MovieResponseDto::new).collect(Collectors.toList());
+                .getResultList();
     }
 }

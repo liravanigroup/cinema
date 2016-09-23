@@ -6,8 +6,8 @@ import pl.com.bottega.cinema.domain.Ticket;
 
 import java.util.Collection;
 
-import static pl.com.bottega.cinema.domain.Validator.collectionValidate;
-import static pl.com.bottega.cinema.domain.Validator.entityIdValidate;
+import static pl.com.bottega.cinema.domain.validators.Validator.collectionValidate;
+import static pl.com.bottega.cinema.domain.validators.Validator.entityIdValidate;
 
 @Getter
 @Setter
