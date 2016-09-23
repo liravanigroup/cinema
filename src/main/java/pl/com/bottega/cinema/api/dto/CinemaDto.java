@@ -1,5 +1,6 @@
-package pl.com.bottega.cinema.api;
+package pl.com.bottega.cinema.api.dto;
 
+import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -13,6 +14,7 @@ import static pl.com.bottega.cinema.domain.Validator.stringValidate;
 @Getter
 @Setter
 @NoArgsConstructor
+@AllArgsConstructor
 public class CinemaDto {
 
     private Long id;
@@ -28,7 +30,7 @@ public class CinemaDto {
         this.city = city;
     }
 
-    void validate() {
+    public void validate() {
         stringValidate(name, "Cinema name is required");
         stringValidate(city, "City name is required");
     }

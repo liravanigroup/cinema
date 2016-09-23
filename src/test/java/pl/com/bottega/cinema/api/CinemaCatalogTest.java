@@ -2,6 +2,7 @@ package pl.com.bottega.cinema.api;
 
 import org.junit.Test;
 import org.mockito.Mock;
+import pl.com.bottega.cinema.api.request.CreateCinemaRequest;
 
 /**
  * Created by bernard.boguszewski on 14.09.2016.

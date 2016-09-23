@@ -1,14 +1,18 @@
 package pl.com.bottega.cinema.ui;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.AllArgsConstructor;
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.web.bind.annotation.*;
 import pl.com.bottega.cinema.api.*;
+import pl.com.bottega.cinema.api.request.CreateCinemaRequest;
+import pl.com.bottega.cinema.api.response.ListAllCinemasResponse;
+import pl.com.bottega.cinema.api.response.ListMoviesResponse;
 
-import java.time.Instant;
 import java.time.LocalDate;
-import java.time.LocalDateTime;
-import java.time.ZoneId;
 import java.util.Date;
+
+import static org.springframework.format.annotation.DateTimeFormat.ISO.DATE;
 
 
 /**
@@ -35,8 +39,7 @@ public class CinemasController {
     }
 
     @GetMapping("/{cinemaId}/movies")
-    public ListMoviesResponse findMoviesAtDate(@PathVariable("cinemaId") Long cinemaId, Date date) {
+    public ListMoviesResponse findMoviesAtDate(@PathVariable("cinemaId") Long cinemaId, @RequestParam("date") @DateTimeFormat(pattern = "yyyy/MM/dd") LocalDate date) {
         return movieCatalog.findMoviesInCinemaByDate(cinemaId, date);
     }
-
 }

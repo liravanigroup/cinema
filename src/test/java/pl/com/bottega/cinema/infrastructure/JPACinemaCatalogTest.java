@@ -10,7 +10,7 @@ import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.context.web.WebAppConfiguration;
 import org.springframework.transaction.annotation.Transactional;
 import pl.com.bottega.cinema.api.CinemaCatalog;
-import pl.com.bottega.cinema.api.ListAllCinemasResponse;
+import pl.com.bottega.cinema.api.response.ListAllCinemasResponse;
 
 import static org.junit.Assert.assertNotNull;
 

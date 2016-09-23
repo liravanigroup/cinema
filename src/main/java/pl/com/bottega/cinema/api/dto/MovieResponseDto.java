@@ -1,9 +1,9 @@
-package pl.com.bottega.cinema.api;
+package pl.com.bottega.cinema.api.dto;
 
+import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import lombok.ToString;
 import pl.com.bottega.cinema.domain.Movie;
 import pl.com.bottega.cinema.domain.Show;
 
@@ -16,9 +16,10 @@ import java.util.stream.Collectors;
  */
 @Getter
 @Setter
-@ToString
 @NoArgsConstructor
+@AllArgsConstructor
 public class MovieResponseDto {
+
     private String title;
     private String description;
     private Collection<String> actors;
@@ -27,18 +28,8 @@ public class MovieResponseDto {
     private Integer length;
     private Collection<ShowDto> shows;
 
-    public MovieResponseDto(Movie movie) {
-        this.title = movie.getTitle();
-        this.description = movie.getDescription();
-        this.actors = movie.getActors();
-        this.genres = movie.getGenres();
-        this.minAge = movie.getMinAge();
-        this.length = movie.getLength();
-        this.shows = getShowDto(movie.getShows());
-    }
-
-    private List<ShowDto> getShowDto(Collection<Show> show) {
-        return show.stream().map(ShowDto::new).collect(Collectors.toList());
+    public MovieResponseDto(Movie m) {
+        this(m.getTitle(), m.getDescription(), m.getActors(), m.getGenres(), m.getMinAge(), m.getLength(), m.getShowsDto());
     }
 
 }

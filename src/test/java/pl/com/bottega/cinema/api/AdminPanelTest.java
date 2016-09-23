@@ -5,6 +5,11 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.runners.MockitoJUnitRunner;
+import pl.com.bottega.cinema.api.factory.MovieFactory;
+import pl.com.bottega.cinema.api.factory.ShowsFactory;
+import pl.com.bottega.cinema.api.request.CreateCinemaRequest;
+import pl.com.bottega.cinema.api.request.CreateMovieRequest;
+import pl.com.bottega.cinema.api.request.CreateShowsRequest;
 import pl.com.bottega.cinema.domain.*;
 
 import java.util.Collection;
@@ -101,10 +106,10 @@ public class AdminPanelTest {
     @Test
     public void shouldCreateShows() {
         //given
-        when(anyShowsFactory.createShow(anyCinemaId, anyCreateShowsRequest)).thenReturn(anyShow);
+        when(anyShowsFactory.createShow(anyCreateShowsRequest)).thenReturn(anyShow);
 
         //when
-        adminPanel.createShows(anyCinemaId, anyCreateShowsRequest);
+        adminPanel.createShows(anyCreateShowsRequest);
 
         //then
         verify(anyShowsRepository).save(anyShow);

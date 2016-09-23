@@ -1,9 +1,6 @@
 package pl.com.bottega.cinema.domain;
 
-import lombok.EqualsAndHashCode;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 import javax.persistence.*;
 import java.io.Serializable;
@@ -11,6 +8,7 @@ import java.io.Serializable;
 @Getter
 @Setter
 @NoArgsConstructor
+@AllArgsConstructor
 @EqualsAndHashCode(exclude = {"id"})
 @Entity
 public class Cinema implements Serializable {
@@ -23,8 +21,7 @@ public class Cinema implements Serializable {
     private String city, name;
 
     public Cinema(String city, String name){
-        this.city = city;
-        this.name = name;
+        this(null, city, name);
     }
 
 }

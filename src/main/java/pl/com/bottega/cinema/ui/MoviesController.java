@@ -3,11 +3,8 @@ package pl.com.bottega.cinema.ui;/* Created by Sergej on 04.09.2016. Bottega IT 
 import lombok.AllArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 import pl.com.bottega.cinema.api.AdminPanel;
-import pl.com.bottega.cinema.api.CreateMovieRequest;
-import pl.com.bottega.cinema.api.UpdatePricesRequest;
-
-import java.math.BigDecimal;
-import java.util.Map;
+import pl.com.bottega.cinema.api.request.CreateMovieRequest;
+import pl.com.bottega.cinema.api.request.UpdatePricesRequest;
 
 @RestController
 @RequestMapping("/movies")
@@ -23,6 +20,7 @@ public class MoviesController {
 
     @PutMapping("/{movieId}/prices")
     public void updatePrices(@PathVariable("movieId") Long movieId, @RequestBody UpdatePricesRequest request){
-        adminPanel.updatePrices(movieId, request);
+        request.setMovieId(movieId);
+        adminPanel.updatePrices(request);
     }
 }

@@ -3,15 +3,21 @@ package pl.com.bottega.cinema.api;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import pl.com.bottega.cinema.api.factory.MovieFactory;
+import pl.com.bottega.cinema.api.factory.ShowsFactory;
+import pl.com.bottega.cinema.api.request.CreateCinemaRequest;
+import pl.com.bottega.cinema.api.request.CreateMovieRequest;
+import pl.com.bottega.cinema.api.request.CreateShowsRequest;
+import pl.com.bottega.cinema.api.request.UpdatePricesRequest;
 import pl.com.bottega.cinema.domain.*;
 
-import java.math.BigDecimal;
 import java.util.Collection;
-import java.util.HashSet;
-import java.util.Map;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 import static com.google.common.base.Preconditions.checkNotNull;
+import static pl.com.bottega.cinema.domain.Validator.existingValidation;
+import static pl.com.bottega.cinema.domain.Validator.notNullValidate;
 
 /**
  * Created by bernard.boguszewski on 04.09.2016.
@@ -29,42 +35,38 @@ public class AdminPanel {
 
     @Transactional
     public void createCinema(CreateCinemaRequest request) {
-        checkNotNull(request);
         request.validate();
         Cinema cinema = cinemaRepository.load(request.getCinema().getName(), request.getCinema().getCity());
-        if (cinema == null) {
-            cinema = cinemaFactory.createCinema(request);
-            cinemaRepository.save(cinema);
-        } else
-            throw new InvalidRequestException(String.format("Cinema %s has already been created in %s", cinema.getName(), cinema.getCity()));
+        existingValidation(cinema, String.format("Cinema %s has already been created in %s", cinema.getName(), cinema.getCity()));
+        cinema = cinemaFactory.createCinema(request);
+        cinemaRepository.save(cinema);
     }
 
     @Transactional
     public void createMovie(CreateMovieRequest request) {
-        checkNotNull(request);
         request.validate();
-        Movie movie = movieFactory.createMovie(request);
+        Movie movie = movieRepository.load(request.getMovie().getTitle(), request.getMovie().getDescription());
+        existingValidation(movie, "Movie has already been created");
+        movie = movieFactory.createMovie(request);
         movieRepository.save(movie);
     }
 
     @Transactional
-    public void createShows(Long cinemaId, CreateShowsRequest request) {
-        checkNotNull(request);
-        Collection<Show> shows = showsFactory.createShow(cinemaId, request);
+    public void createShows(CreateShowsRequest request) {
+        request.validate();
+        Collection<Show> shows = showsFactory.createShow(request);
         showsRepository.save(shows);
     }
 
     @Transactional
-    public void updatePrices(Long movieId, UpdatePricesRequest request) {
-        checkNotNull(request);
+    public void updatePrices(UpdatePricesRequest request) {
         request.validate();
-        Movie movie = movieRepository.load(movieId);
-        if(movie == null)
-            throw new InvalidRequestException("This movie does not exist");
-        Set<TicketPrice> ticketPrices = new HashSet<>();
-        for (String ticketName : request.getPrices().keySet()){
-            ticketPrices.add(new TicketPrice(ticketName, request.getPrices().get(ticketName), movie));
-        }
-        movie.updatePrices(ticketPrices);
+        Movie movie = movieRepository.load(request.getMovieId());
+        notNullValidate(movie, "This movie does not exist");
+        movie.updatePrices(getTicketPrices(request, movie));
+    }
+
+    private Set<TicketPrice> getTicketPrices(UpdatePricesRequest r, Movie m) {
+        return r.getPrices().keySet().stream().map(tn -> new TicketPrice(tn, r.getPrices().get(tn), m)).collect(Collectors.toSet());
     }
 }

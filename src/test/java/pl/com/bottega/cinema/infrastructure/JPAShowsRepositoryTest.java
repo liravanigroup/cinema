@@ -8,12 +8,6 @@ import org.springframework.test.context.TestPropertySource;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.context.web.WebAppConfiguration;
 import pl.com.bottega.cinema.domain.ShowsRepository;
-import pl.com.bottega.cinema.api.ShowDto;
-
-import java.time.LocalDate;
-import java.util.Collection;
-
-import static java.time.Month.SEPTEMBER;
 
 /**
  * Created by Sergej Povzaniuk on 16.09.2016.

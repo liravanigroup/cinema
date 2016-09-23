@@ -1,12 +1,12 @@
 package pl.com.bottega.cinema.infrastructure;
 
 import org.springframework.stereotype.Repository;
-import pl.com.bottega.cinema.api.InvalidRequestException;
 import pl.com.bottega.cinema.domain.Movie;
 import pl.com.bottega.cinema.domain.MovieRepository;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import java.util.List;
 
 /**
  * Created by bernard.boguszewski on 04.09.2016.
@@ -19,17 +19,20 @@ public class JPAMoviesRepository implements MovieRepository {
 
     @Override
     public void save(Movie movie) {
-        entityManager.merge(movie);
+        entityManager.persist(movie);
     }
 
     @Override
     public Movie load(Long movieId) {
-        validate(movieId);
         return entityManager.find(Movie.class, movieId);
     }
 
-    private void validate(Long movieId) {
-        if(movieId == null)
-            throw new InvalidRequestException("Movie id is required");
+    @Override
+    public Movie load(String title, String description) {
+        List<Movie> movies =  entityManager.createQuery("select m FROM Movie m WHERE m.title=:title AND m.description=:descr", Movie.class)
+                .setParameter("title", title)
+                .setParameter("descr", description)
+                .getResultList();
+       return movies.isEmpty() ? null : movies.get(0);
     }
 }

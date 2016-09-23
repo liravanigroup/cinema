@@ -1,8 +1,9 @@
-package pl.com.bottega.cinema.api;
+package pl.com.bottega.cinema.api.request;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.Setter;
+import pl.com.bottega.cinema.api.InvalidRequestException;
 
 import java.math.BigDecimal;
 import java.util.Map;
@@ -16,6 +17,7 @@ import java.util.Map;
 public class UpdatePricesRequest {
 
     private Map<String, BigDecimal> prices;
+    private Long movieId;
 
     public void validate(){
         for(String name : prices.keySet()){

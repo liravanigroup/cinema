@@ -1,4 +1,4 @@
-package pl.com.bottega.cinema.api;
+package pl.com.bottega.cinema.api.dto;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.*;
@@ -12,13 +12,14 @@ import java.time.LocalTime;
 @Getter
 @Setter
 @NoArgsConstructor
+@AllArgsConstructor
 public class ShowDto {
+
     private Long id;
     @JsonFormat(pattern="HH:mm")
     private LocalTime time;
 
-    ShowDto(Show show){
-        this.id = show.getId();
-        this.time = show.getTime();
+    public ShowDto(Show show){
+        this(show.getId(), show.getTime());
     }
 }

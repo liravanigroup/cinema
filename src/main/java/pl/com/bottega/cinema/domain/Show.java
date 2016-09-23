@@ -9,7 +9,6 @@ import java.time.LocalDateTime;
 import java.time.LocalTime;
 
 import static javax.persistence.CascadeType.ALL;
-import static javax.persistence.FetchType.EAGER;
 
 /**
  * Created by bernard.boguszewski on 04.09.2016.
@@ -17,6 +16,7 @@ import static javax.persistence.FetchType.EAGER;
 @Getter
 @Setter
 @NoArgsConstructor
+@AllArgsConstructor
 @EqualsAndHashCode(exclude = {"id"})
 @Entity
 public class Show implements Serializable {
@@ -26,6 +26,7 @@ public class Show implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
     @ManyToOne(cascade = ALL)
     private Cinema cinema;
 
@@ -35,10 +36,7 @@ public class Show implements Serializable {
     private LocalDate date;
     private LocalTime time;
 
-    public Show(Cinema cinema, Movie movie, LocalDateTime dateOfShow){
-        this.cinema = cinema;
-        this.movie = movie;
-        this.date = dateOfShow.toLocalDate();
-        this.time = dateOfShow.toLocalTime();
+    public Show(Cinema cinema, Movie movie, LocalDateTime date){
+        this(null, cinema, movie, date.toLocalDate(), date.toLocalTime());
     }
 }

@@ -8,12 +8,9 @@ import org.springframework.test.context.TestPropertySource;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.context.web.WebAppConfiguration;
 import pl.com.bottega.cinema.api.MovieCatalog;
-import pl.com.bottega.cinema.api.ListMoviesResponse;
+import pl.com.bottega.cinema.api.response.ListMoviesResponse;
 
-import java.time.LocalDate;
 import java.util.Date;
-
-import static java.time.Month.SEPTEMBER;
 
 /**
  * Created by Sergej Povzaniuk on 16.09.2016.
@@ -34,7 +31,7 @@ public class JPAMovieCatalogTest {
 
 
         //when
-        ListMoviesResponse listMoviesResponse = movieCatalog.findMoviesInCinemaByDate(1L, new Date(2016, 9, 20));
+        ListMoviesResponse listMoviesResponse = movieCatalog.findMoviesInCinemaByDate(1L, null);
 
         //then
         System.out.println(listMoviesResponse);

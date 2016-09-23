@@ -1,9 +1,10 @@
-package pl.com.bottega.cinema.api;
+package pl.com.bottega.cinema.api.response;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
-import pl.com.bottega.cinema.api.MovieResponseDto;
+import pl.com.bottega.cinema.api.dto.MovieResponseDto;
 
 import java.util.Collection;
 
@@ -13,6 +14,7 @@ import java.util.Collection;
 @Getter
 @Setter
 @AllArgsConstructor
+@NoArgsConstructor
 public class ListMoviesResponse {
     private Collection<MovieResponseDto> movies;
 }
