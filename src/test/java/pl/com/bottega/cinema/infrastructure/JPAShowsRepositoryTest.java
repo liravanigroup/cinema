@@ -23,7 +23,23 @@ public class JPAShowsRepositoryTest {
 
 
     @Test
-    public void save() throws Exception {
+    public void shouldSaveShow() {
+
+    }
+
+
+    @Test
+    public void shouldSaveSetShows() {
+
+    }
+
+    @Test
+    public void shouldLoadsShowById() {
+
+    }
+
+    @Test
+    public void shouldReturnNullWhenShowIsNotFoundById() {
 
     }
 

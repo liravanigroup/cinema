@@ -12,6 +12,7 @@ import org.springframework.transaction.annotation.Transactional;
 import pl.com.bottega.cinema.api.CinemaCatalog;
 import pl.com.bottega.cinema.api.response.ListAllCinemasResponse;
 
+import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 
 /**
@@ -22,6 +23,8 @@ import static org.junit.Assert.assertNotNull;
 @TestPropertySource({"/jdbc-test.properties", "/hibernate-test.properties"})
 @WebAppConfiguration
 public class JPACinemaCatalogTest {
+
+    public static final int COUNT_CINEMAS_IN_DB = 3;
 
     @Autowired
     private CinemaCatalog cinemaCatalog;
@@ -36,6 +39,8 @@ public class JPACinemaCatalogTest {
         ListAllCinemasResponse listAllCinemasResponse = cinemaCatalog.listAll();
 
         //than
-        assertNotNull(listAllCinemasResponse);
+        assertEquals(COUNT_CINEMAS_IN_DB, listAllCinemasResponse.getCinemas().size());
     }
+
+
 }

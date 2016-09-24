@@ -20,7 +20,7 @@ public class JPATicketRepository implements TicketRepository {
 
     @Override
     public Collection<TicketPrice> load(Long showId) {
-        return entityManager.createNamedQuery("Ticket.findByShowId", TicketPrice.class)
+        return entityManager.createNamedQuery("TicketPrice.findByShowId", TicketPrice.class)
                 .setParameter("showId", showId)
                 .getResultList();
     }

@@ -16,7 +16,7 @@ import java.math.BigDecimal;
 @EqualsAndHashCode(exclude = {"id"})
 @Entity
 @NamedQueries({
-        @NamedQuery(name = "Ticket.findByShowId", query = "SELECT DISTINCT t FROM TicketPrice t " +
+        @NamedQuery(name = "TicketPrice.findByShowId", query = "SELECT DISTINCT t FROM TicketPrice t " +
                 "JOIN FETCH t.movie tm " +
                 "JOIN FETCH tm.shows s " +
                 "WHERE s.id = :showId")
