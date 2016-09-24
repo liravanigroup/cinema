@@ -4,7 +4,7 @@ import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 import pl.com.bottega.cinema.api.request.CalculatePriceRequest;
 import pl.com.bottega.cinema.api.response.CalculatePriceResponse;
-import pl.com.bottega.cinema.domain.Ticket;
+import pl.com.bottega.cinema.domain.TicketPrice;
 import pl.com.bottega.cinema.api.dto.TicketDto;
 import pl.com.bottega.cinema.domain.TicketOrder;
 
@@ -24,16 +24,16 @@ public class PriceCalculator {
     private TicketRepository ticketRepository;
 
     public CalculatePriceResponse calculatePrice(CalculatePriceRequest request) {
-        Collection<Ticket> tickets = ticketRepository.load(request.getShowId());
+        Collection<TicketPrice> tickets = ticketRepository.load(request.getShowId());
         Set<TicketOrder> orders = createOrders(tickets, request.getTickets());
         collectionValidate(orders, "no tickets");
         return new CalculatePriceResponse(orders);
     }
 
-    private Set<TicketOrder> createOrders(Collection<Ticket> tickets, Collection<TicketDto> ticketsDto) {
+    private Set<TicketOrder> createOrders(Collection<TicketPrice> tickets, Collection<TicketDto> ticketsDto) {
         Set<TicketOrder> order = new HashSet<>();
         for(TicketDto ticketOrder : ticketsDto){
-            for(Ticket ticketPrice : tickets){
+            for(TicketPrice ticketPrice : tickets){
                 if (ticketPrice.getType().equals(ticketOrder.getKind()))
                     order.add(new TicketOrder(ticketOrder, ticketPrice));
             }

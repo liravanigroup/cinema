@@ -23,7 +23,7 @@ public class TicketOrder {
         this(kind, count, unitPrice, unitPrice.multiply(new BigDecimal(count)));
     }
 
-    public TicketOrder(TicketDto ticketOrder, Ticket ticketPrice) {
+    public TicketOrder(TicketDto ticketOrder, TicketPrice ticketPrice) {
         this(ticketOrder.getKind(), ticketOrder.getCount(), ticketPrice.getPrice());
     }
 }

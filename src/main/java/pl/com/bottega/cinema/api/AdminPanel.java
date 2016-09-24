@@ -89,7 +89,7 @@ public class AdminPanel {
         movie.updatePrices(getTicketPrices(request, movie));
     }
 
-    private Set<Ticket> getTicketPrices(UpdatePricesRequest r, Movie m) {
-        return r.getPrices().keySet().stream().map(tn -> new Ticket(tn, r.getPrices().get(tn), m)).collect(Collectors.toSet());
+    private Set<TicketPrice> getTicketPrices(UpdatePricesRequest r, Movie m) {
+        return r.getPrices().keySet().stream().map(tn -> new TicketPrice(tn, r.getPrices().get(tn), m)).collect(Collectors.toSet());
     }
 }

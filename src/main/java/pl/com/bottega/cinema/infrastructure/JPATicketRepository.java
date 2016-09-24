@@ -2,7 +2,7 @@ package pl.com.bottega.cinema.infrastructure;
 
 import org.springframework.stereotype.Repository;
 import pl.com.bottega.cinema.api.TicketRepository;
-import pl.com.bottega.cinema.domain.Ticket;
+import pl.com.bottega.cinema.domain.TicketPrice;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -19,8 +19,8 @@ public class JPATicketRepository implements TicketRepository {
 
 
     @Override
-    public Collection<Ticket> load(Long showId) {
-        return entityManager.createNamedQuery("Ticket.findByShowId", Ticket.class)
+    public Collection<TicketPrice> load(Long showId) {
+        return entityManager.createNamedQuery("Ticket.findByShowId", TicketPrice.class)
                 .setParameter("showId", showId)
                 .getResultList();
     }

@@ -21,7 +21,7 @@ public class CalculatePriceRequest {
 
     public void validate() {
         entityIdValidate(showId, "Invalid show Id");
-        preventDuplicationTicketsType(tickets, "Duplicated tickets types", "Invalid ticket type");
         collectionValidate(tickets, "Tickets is required");
+        preventDuplicationTicketsType(tickets, "Duplicated tickets types", "Invalid ticket type");
     }
 }

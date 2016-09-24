@@ -1,7 +1,10 @@
 package pl.com.bottega.cinema.domain;
 
 import com.sun.istack.internal.NotNull;
-import lombok.*;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 import pl.com.bottega.cinema.api.dto.MovieDto;
 import pl.com.bottega.cinema.api.dto.ShowDto;
 
@@ -60,7 +63,7 @@ public class Movie implements Serializable {
     private Set<Show> shows;
 
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "movie", fetch = FetchType.EAGER)
-    private Set<Ticket> prices;
+    private Set<TicketPrice> prices;
 
 
     public Movie(MovieDto m) {
@@ -71,27 +74,9 @@ public class Movie implements Serializable {
         this(null, movieTitle, movieDescription, movieMinAge, movieLength, movieActors, movieGenres, null, null);
     }
 
-    public void updatePrices(Set<Ticket> prices) {
-        if (this.prices.isEmpty()) {
-            this.prices = prices;
-            return;
-        }
-        addUpdatedOrNewPrices(prices);
-    }
-
-    private void addUpdatedOrNewPrices(Set<Ticket> prices) {
-        mark:
-        for (Ticket oldTicket : this.prices) {
-            if (prices.contains(oldTicket))
-                continue;
-            for (Ticket newTicket : prices) {
-                if (oldTicket.equals(newTicket)) {
-                    oldTicket.setPrice(newTicket.getPrice());
-                    continue mark;
-                }
-                prices.add(newTicket);
-            }
-        }
+    public void updatePrices(Set<TicketPrice> prices) {
+        this.prices.clear();
+        this.prices.addAll(prices);
     }
 
     public Collection<ShowDto> getShowsDto() {

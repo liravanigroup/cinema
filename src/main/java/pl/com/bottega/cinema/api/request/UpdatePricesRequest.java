@@ -23,9 +23,9 @@ public class UpdatePricesRequest {
     private Long movieId;
 
     public void validate() {
-        containsValuesValidate(prices.keySet(), "Ticket type must by regular and student", "regular", "student");
+        containsValuesValidate(prices.keySet(), "TicketPrice type must by regular and student", "regular", "student");
         for (String name : prices.keySet()) {
-            stringValidate(name, "Ticket type does not exist");
+            stringValidate(name, "TicketPrice type does not exist");
             priceValidation(prices.get(name), "Price must be greater or equal than zero");
         }
     }
