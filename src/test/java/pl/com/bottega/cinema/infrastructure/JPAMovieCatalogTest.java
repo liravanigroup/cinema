@@ -31,10 +31,10 @@ public class JPAMovieCatalogTest {
 
 
         //when
-        ListMoviesResponse listMoviesResponse = movieCatalog.findMoviesInCinemaByDate(1L, null);
+
 
         //then
-        System.out.println(listMoviesResponse);
+
 
     }
 

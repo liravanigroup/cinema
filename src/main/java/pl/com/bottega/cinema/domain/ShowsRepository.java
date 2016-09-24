@@ -8,4 +8,7 @@ public interface ShowsRepository {
     void save(Collection<Show> shows);
 
     Show load(Long cinemaId, Long movieId, LocalDate date, LocalTime time);
+
+    Show load(Long showId);
+
 }

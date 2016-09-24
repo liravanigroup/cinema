@@ -3,31 +3,30 @@ package pl.com.bottega.cinema.api.request;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.Setter;
-import pl.com.bottega.cinema.api.InvalidRequestException;
+import lombok.ToString;
 
 import java.math.BigDecimal;
 import java.util.Map;
+
+import static pl.com.bottega.cinema.domain.validators.CollectionValidator.containsValuesValidate;
+import static pl.com.bottega.cinema.domain.validators.NumberValidator.priceValidation;
+import static pl.com.bottega.cinema.domain.validators.StringValidator.stringValidate;
 
 /**
  * Created by anna on 18.09.2016.
  */
 @Getter
 @Setter
-@AllArgsConstructor
 public class UpdatePricesRequest {
 
     private Map<String, BigDecimal> prices;
     private Long movieId;
 
-    public void validate(){
-        for(String name : prices.keySet()){
-            if (!prices.containsKey("regular") || !prices.containsKey("student"))
-                throw new InvalidRequestException("Ticket type must by regular or student!");
-            if(name == null || name.equals(""))
-                throw new InvalidRequestException("Ticket type does not exist!");
-            if(prices.get(name) == null || prices.get(name).signum() < 0)
-                throw new InvalidRequestException("Price must be greater or equal than zero!");
-
+    public void validate() {
+        containsValuesValidate(prices.keySet(), "TicketDto type must by regular and student", "regular", "student");
+        for (String name : prices.keySet()) {
+            stringValidate(name, "TicketDto type does not exist");
+            priceValidation(prices.get(name), "Price must be greater or equal than zero");
         }
     }
 }

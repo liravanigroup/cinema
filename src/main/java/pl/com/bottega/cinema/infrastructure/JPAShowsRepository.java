@@ -43,4 +43,9 @@ public class JPAShowsRepository implements ShowsRepository {
         return shows.isEmpty() ? null : shows.get(0);
     }
 
+    @Override
+    public Show load(Long showId) {
+        return entityManager.find(Show.class, showId);
+    }
+
 }

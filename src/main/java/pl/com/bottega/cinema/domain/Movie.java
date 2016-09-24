@@ -9,7 +9,6 @@ import javax.persistence.*;
 import java.io.Serializable;
 import java.util.Collection;
 import java.util.Set;
-import java.util.function.Function;
 import java.util.stream.Collectors;
 
 import static javax.persistence.CascadeType.ALL;
@@ -30,7 +29,8 @@ import static javax.persistence.FetchType.EAGER;
                 query = "SELECT DISTINCT m FROM Movie m " +
                         "JOIN FETCH m.shows s JOIN FETCH s.cinema c " +
                         "JOIN FETCH m.actors JOIN FETCH m.genres " +
-                        "WHERE c.id = :cinemaId AND s.date= :date")
+                        "WHERE c.id = :cinemaId AND s.date = :date " +
+                        "ORDER BY m.title")
 })
 public class Movie implements Serializable {
 
@@ -51,14 +51,17 @@ public class Movie implements Serializable {
 
     @ElementCollection(fetch = EAGER)
     private Set<String> actors;
+
     @ElementCollection(fetch = EAGER)
     private Set<String> genres;
 
     @OneToMany(cascade = ALL, mappedBy = "movie", fetch = EAGER)
+    @OrderBy("time")
     private Set<Show> shows;
 
-    @OneToMany(cascade = ALL, mappedBy = "movie", fetch = EAGER)
-    private Set<TicketPrice> prices;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "movie", fetch = FetchType.EAGER)
+    private Set<Ticket> prices;
+
 
     public Movie(MovieDto m) {
         this(m.getTitle(), m.getDescription(), m.getMinAge(), m.getLength(), m.getActors(), m.getGenres());
@@ -68,8 +71,27 @@ public class Movie implements Serializable {
         this(null, movieTitle, movieDescription, movieMinAge, movieLength, movieActors, movieGenres, null, null);
     }
 
-    public void updatePrices(Set<TicketPrice> prices) {
-        this.prices = prices;
+    public void updatePrices(Set<Ticket> prices) {
+        if (this.prices.isEmpty()) {
+            this.prices = prices;
+            return;
+        }
+        addUpdatedOrNewPrices(prices);
+    }
+
+    private void addUpdatedOrNewPrices(Set<Ticket> prices) {
+        mark:
+        for (Ticket oldTicket : this.prices) {
+            if (prices.contains(oldTicket))
+                continue;
+            for (Ticket newTicket : prices) {
+                if (oldTicket.equals(newTicket)) {
+                    oldTicket.setPrice(newTicket.getPrice());
+                    continue mark;
+                }
+                prices.add(newTicket);
+            }
+        }
     }
 
     public Collection<ShowDto> getShowsDto() {

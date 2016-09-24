@@ -13,7 +13,7 @@ import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.util.Collection;
 
-import static pl.com.bottega.cinema.domain.validators.Validator.entityIdValidate;
+import static pl.com.bottega.cinema.domain.validators.NumberValidator.entityIdValidate;
 
 /**
  * Created by bernard.boguszewski on 04.09.2016.
@@ -23,8 +23,9 @@ import static pl.com.bottega.cinema.domain.validators.Validator.entityIdValidate
 @NoArgsConstructor
 @AllArgsConstructor
 public class CreateShowsRequest {
-    private ShowsDto shows;
+
     private Long cinemaId;
+    private ShowsDto shows;
 
     public void validate() {
         entityIdValidate(cinemaId, "Cinema id is incorrect");

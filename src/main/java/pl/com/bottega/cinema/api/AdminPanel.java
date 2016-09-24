@@ -16,8 +16,8 @@ import java.util.Collection;
 import java.util.Set;
 import java.util.stream.Collectors;
 
-import static pl.com.bottega.cinema.domain.validators.Validator.existingValidation;
-import static pl.com.bottega.cinema.domain.validators.Validator.notNullValidate;
+import static pl.com.bottega.cinema.domain.validators.ObjectValidator.existingValidation;
+import static pl.com.bottega.cinema.domain.validators.ObjectValidator.notNullValidate;
 
 /**
  * Created by bernard.boguszewski on 04.09.2016.
@@ -87,9 +87,10 @@ public class AdminPanel {
         request.validate();
         Movie movie = getExistingMovie(request.getMovieId());
         movie.updatePrices(getTicketPrices(request, movie));
+        movieRepository.save(movie);
     }
 
-    private Set<TicketPrice> getTicketPrices(UpdatePricesRequest r, Movie m) {
-        return r.getPrices().keySet().stream().map(tn -> new TicketPrice(tn, r.getPrices().get(tn), m)).collect(Collectors.toSet());
+    private Set<Ticket> getTicketPrices(UpdatePricesRequest r, Movie m) {
+        return r.getPrices().keySet().stream().map(tn -> new Ticket(tn, r.getPrices().get(tn), m)).collect(Collectors.toSet());
     }
 }

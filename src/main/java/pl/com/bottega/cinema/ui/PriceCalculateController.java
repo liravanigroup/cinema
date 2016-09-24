@@ -6,20 +6,19 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import pl.com.bottega.cinema.api.CustomerService;
 import pl.com.bottega.cinema.api.request.CalculatePriceRequest;
 import pl.com.bottega.cinema.api.response.CalculatePriceResponse;
-import pl.com.bottega.cinema.api.PriceCalculator;
 
 @RestController
 @RequestMapping("/price_calculator")
 @AllArgsConstructor
 public class PriceCalculateController {
 
-    private PriceCalculator priceCalculator;
+    private CustomerService customerService;
 
     @PostMapping
-    public CalculatePriceResponse calculatePrice(@RequestBody CalculatePriceRequest request){
-            return priceCalculator.calculatePrice(request);
+    public CalculatePriceResponse calculatePrice(@RequestBody CalculatePriceRequest request) {
+        return customerService.calculatePrice(request);
     }
-
 }

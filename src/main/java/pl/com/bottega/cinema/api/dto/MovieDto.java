@@ -7,7 +7,10 @@ import lombok.Setter;
 
 import java.util.Set;
 
-import static pl.com.bottega.cinema.domain.validators.Validator.*;
+import static pl.com.bottega.cinema.domain.validators.CollectionValidator.collectionValidate;
+import static pl.com.bottega.cinema.domain.validators.NumberValidator.minAgeValidate;
+import static pl.com.bottega.cinema.domain.validators.NumberValidator.movieLengthValidate;
+import static pl.com.bottega.cinema.domain.validators.StringValidator.stringValidate;
 
 @Getter
 @Setter

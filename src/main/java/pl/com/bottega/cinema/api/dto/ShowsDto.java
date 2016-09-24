@@ -9,13 +9,12 @@ import lombok.Setter;
 import java.time.LocalDateTime;
 import java.util.Set;
 
-import static pl.com.bottega.cinema.domain.validators.Validator.collectionValidate;
-import static pl.com.bottega.cinema.domain.validators.Validator.entityIdValidate;
+import static pl.com.bottega.cinema.domain.validators.CollectionValidator.collectionValidate;
+import static pl.com.bottega.cinema.domain.validators.NumberValidator.entityIdValidate;
 
 /**
  * Created by Sergej Povzaniuk on 14.09.2016.
  */
-
 @Getter
 @Setter
 @NoArgsConstructor
@@ -23,20 +22,19 @@ import static pl.com.bottega.cinema.domain.validators.Validator.entityIdValidate
 public class ShowsDto {
 
     private Long movieId;
-    @JsonFormat(pattern="yyyy/MM/dd HH:mm")
+    @JsonFormat(pattern = "yyyy/MM/dd HH:mm")
     private Set<LocalDateTime> dates;
     private CalendarDto calendar;
 
-    public ShowsDto(Long movieId, Set<LocalDateTime> dates){
+    public ShowsDto(Long movieId, Set<LocalDateTime> dates) {
         this(movieId, dates, null);
     }
 
     public void validate() {
         entityIdValidate(movieId, "Movie id is required");
-        if(calendar == null){
+        if (calendar == null)
             collectionValidate(dates, "Show date is required");
-        }else{
+        else
             calendar.validate();
-        }
     }
 }

@@ -20,6 +20,7 @@ public class JPAMoviesRepository implements MovieRepository {
     @Override
     public void save(Movie movie) {
         entityManager.persist(movie);
+        entityManager.flush();
     }
 
     @Override

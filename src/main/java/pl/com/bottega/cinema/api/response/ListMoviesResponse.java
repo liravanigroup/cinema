@@ -18,6 +18,7 @@ import java.util.stream.Collectors;
 @Setter
 @NoArgsConstructor
 public class ListMoviesResponse {
+
     private Collection<MovieResponseDto> movies;
 
     public ListMoviesResponse(Collection<Movie> movies) {

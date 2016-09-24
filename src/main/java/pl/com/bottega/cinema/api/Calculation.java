@@ -15,6 +15,6 @@ import java.util.Set;
 @Setter
 @AllArgsConstructor
 public class Calculation {
-    private BigDecimal total;
     private Set<TicketOrder> tickets;
+    private BigDecimal totalPrice;
 }

@@ -11,9 +11,9 @@ import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.util.Set;
 
-import static pl.com.bottega.cinema.domain.validators.Validator.collectionValidate;
-import static pl.com.bottega.cinema.domain.validators.Validator.dateSequenceValidate;
-import static pl.com.bottega.cinema.domain.validators.Validator.dateValidate;
+import static pl.com.bottega.cinema.domain.validators.CollectionValidator.collectionValidate;
+import static pl.com.bottega.cinema.domain.validators.DateValidator.dateSequenceValidate;
+import static pl.com.bottega.cinema.domain.validators.ObjectValidator.notNullValidate;
 
 /**
  * Created by Admin on 10.09.2016.
@@ -31,8 +31,8 @@ public class CalendarDto {
     private Set<LocalTime> hours;
 
     public void validate() {
-        dateValidate(fromDate, "First date of movie showing is required");
-        dateValidate(untilDate, "Last date of movie showing is required");
+        notNullValidate(fromDate, "First date of movie showing is required");
+        notNullValidate(untilDate, "Last date of movie showing is required");
         dateSequenceValidate(fromDate, untilDate, "Dates sequence is incorrect");
         collectionValidate(weekDays, "Week days of movie showing is required");
         collectionValidate(hours, "Hours of movie showing is required");

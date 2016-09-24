@@ -30,10 +30,6 @@ public class JPAMovieCatalog implements MovieCatalog {
 
     @Override
     public Collection<Movie> findMoviesInCinemaByDate(Long cinemaId, LocalDate date) {
-        return null;//new ListMoviesResponse(getMoviesDto(cinemaId, date));
-    }
-
-    private List<Movie> getMoviesDto(Long cinemaId, LocalDate date) {
         return entityManager.createNamedQuery("Movie.findByCinemaIdAndDate", Movie.class)
                 .setParameter("cinemaId", cinemaId)
                 .setParameter("date", date)
