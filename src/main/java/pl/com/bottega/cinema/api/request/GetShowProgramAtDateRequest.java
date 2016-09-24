@@ -7,7 +7,6 @@ import lombok.Setter;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
-import static pl.com.bottega.cinema.domain.validators.DateValidator.futureDateValidate;
 import static pl.com.bottega.cinema.domain.validators.NumberValidator.entityIdValidate;
 
 /**
@@ -27,6 +26,5 @@ public class GetShowProgramAtDateRequest {
 
     public void validate() {
         entityIdValidate(cinemaId, "Cinema id is incorrect");
-        futureDateValidate(date, "Date is incorrect");
     }
 }

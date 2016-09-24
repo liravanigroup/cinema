@@ -1,10 +1,7 @@
 package pl.com.bottega.cinema.domain;
 
 import com.sun.istack.internal.NotNull;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 import pl.com.bottega.cinema.api.dto.MovieDto;
 import pl.com.bottega.cinema.api.dto.ShowDto;
 
@@ -25,6 +22,7 @@ import static javax.persistence.FetchType.EAGER;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
+@EqualsAndHashCode
 @NamedQueries({
         @NamedQuery(name = "Movie.findByTitleAndDescription",
                 query = "SELECT m FROM Movie m WHERE m.title=:title AND m.description=:descr"),
@@ -62,7 +60,7 @@ public class Movie implements Serializable {
     @OrderBy("time")
     private Set<Show> shows;
 
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "movie", fetch = FetchType.EAGER)
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "movie", orphanRemoval = true)
     private Set<TicketPrice> prices;
 
 

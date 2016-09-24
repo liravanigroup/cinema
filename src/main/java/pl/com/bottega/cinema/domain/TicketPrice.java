@@ -31,7 +31,7 @@ public class TicketPrice implements Serializable {
     private String type;
     private BigDecimal price;
 
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne
     private Movie movie;
 
     public TicketPrice(String type, BigDecimal price, Movie movie) {
