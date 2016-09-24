@@ -87,7 +87,6 @@ public class AdminPanel {
         request.validate();
         Movie movie = getExistingMovie(request.getMovieId());
         movie.updatePrices(getTicketPrices(request, movie));
-        movieRepository.save(movie);
     }
 
     private Set<Ticket> getTicketPrices(UpdatePricesRequest r, Movie m) {
