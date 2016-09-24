@@ -5,7 +5,7 @@ import org.springframework.stereotype.Service;
 import pl.com.bottega.cinema.api.request.CalculatePriceRequest;
 import pl.com.bottega.cinema.api.response.CalculatePriceResponse;
 import pl.com.bottega.cinema.domain.Ticket;
-import pl.com.bottega.cinema.domain.TicketDto;
+import pl.com.bottega.cinema.api.dto.TicketDto;
 import pl.com.bottega.cinema.domain.TicketOrder;
 
 import java.util.Collection;

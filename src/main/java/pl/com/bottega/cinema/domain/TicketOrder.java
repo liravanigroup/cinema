@@ -3,6 +3,7 @@ package pl.com.bottega.cinema.domain;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.Setter;
+import pl.com.bottega.cinema.api.dto.TicketDto;
 
 import java.math.BigDecimal;
 
