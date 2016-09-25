@@ -46,7 +46,7 @@ public class Reservation implements Serializable {
     private String status;
     private BigDecimal totalPrice;
 
-    public Reservation(Set<TicketOrder> ticekts, Set<Seat> seats, Customer customer, BigDecimal totalPrice) {
-        this(null, ticekts, seats, customer, null, "pending", totalPrice);
+    public Reservation(Set<TicketOrder> tickets, Set<Seat> seats, Customer customer, BigDecimal totalPrice) {
+        this(null, tickets, seats, customer, null, "pending", totalPrice);
     }
 }

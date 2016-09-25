@@ -24,10 +24,14 @@ public class PriceCalculator {
     private TicketRepository ticketRepository;
 
     public CalculatePriceResponse calculatePrice(CalculatePriceRequest request) {
-        Collection<TicketPrice> tickets = ticketRepository.load(request.getShowId());
+        Collection<TicketPrice> tickets = getTicketPrices(request.getShowId());
         Set<TicketOrder> orders = createOrders(tickets, request.getTickets());
         collectionValidate(orders, "no tickets");
         return new CalculatePriceResponse(orders);
+    }
+
+    private Collection<TicketPrice> getTicketPrices(Long showId) {
+        return ticketRepository.load(showId);
     }
 
     private Set<TicketOrder> createOrders(Collection<TicketPrice> tickets, Collection<TicketDto> ticketsDto) {
@@ -39,6 +43,11 @@ public class PriceCalculator {
             }
         }
         return order;
+    }
+
+    public Set<TicketOrder> getCalculationSet(Long showId, Collection<TicketDto> ticketsDto){
+        Collection<TicketPrice> tickets = getTicketPrices(showId);
+        return createOrders(tickets, ticketsDto);
     }
 
 }
