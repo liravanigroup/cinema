@@ -12,6 +12,7 @@ import pl.com.bottega.cinema.api.response.ListMoviesResponse;
 import pl.com.bottega.cinema.api.response.ReservationResponse;
 import pl.com.bottega.cinema.domain.Movie;
 import pl.com.bottega.cinema.domain.Reservation;
+import pl.com.bottega.cinema.domain.ReservationRepository;
 
 import java.util.Collection;
 
@@ -22,10 +23,12 @@ import java.util.Collection;
 @Service
 public class CustomerService {
 
+
     private PriceCalculator priceCalculator;
     private CinemaCatalog cinemaCatalog;
     private MovieCatalog movieCatalog;
     private ReservationFactory reservationFactory;
+    private ReservationRepository reservationRepository;
 
     public ListAllCinemasResponse listAll() {
         return cinemaCatalog.listAll();

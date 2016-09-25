@@ -14,7 +14,7 @@ import java.util.Set;
 /**
  * Created by anna on 25.09.2016.
  */
-@Entity
+
 @Getter
 @Setter
 @AllArgsConstructor
@@ -38,9 +38,10 @@ public class Reservation implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "reservation")
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "reservation", fetch = FetchType.EAGER)
     private Set<TicketOrder> ticekts;
 
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "reservation", fetch = FetchType.EAGER)
     private Set<Seat> seats;
 
     @Embedded
