@@ -15,12 +15,12 @@ import static pl.com.bottega.cinema.domain.validators.NumberValidator.entityIdVa
 @Getter
 @Setter
 @NoArgsConstructor
-public class GetShowProgramAtDateRequest {
+public class GetMoviesAtDateRequest {
 
     private Long cinemaId;
     private LocalDate date;
 
-    public GetShowProgramAtDateRequest(String date) {
+    public GetMoviesAtDateRequest(String date) {
         this.date = LocalDate.parse(date, DateTimeFormatter.ofPattern("yyyy/MM/dd"));
     }
 

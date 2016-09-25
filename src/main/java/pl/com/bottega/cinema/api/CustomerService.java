@@ -3,7 +3,7 @@ package pl.com.bottega.cinema.api;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 import pl.com.bottega.cinema.api.request.CalculatePriceRequest;
-import pl.com.bottega.cinema.api.request.GetShowProgramAtDateRequest;
+import pl.com.bottega.cinema.api.request.GetMoviesAtDateRequest;
 import pl.com.bottega.cinema.api.response.CalculatePriceResponse;
 import pl.com.bottega.cinema.api.response.ListAllCinemasResponse;
 import pl.com.bottega.cinema.api.response.ListMoviesResponse;
@@ -26,7 +26,7 @@ public class CustomerService {
         return cinemaCatalog.listAll();
     }
 
-    public ListMoviesResponse findMoviesInCinemaByDate(GetShowProgramAtDateRequest request) {
+    public ListMoviesResponse findMoviesInCinemaByDate(GetMoviesAtDateRequest request) {
         request.validate();
         Collection<Movie> movies = movieCatalog.findMoviesInCinemaByDate(request.getCinemaId(), request.getDate());
         return new ListMoviesResponse(movies);

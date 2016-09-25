@@ -16,4 +16,8 @@ import pl.com.bottega.cinema.api.dto.ShowDto;
 public class CreateReservationRequest {
 
     private ShowDto showId;
+
+    public void validate(){
+        //TODO
+    }
 }
