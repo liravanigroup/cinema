@@ -5,6 +5,7 @@ import lombok.Getter;
 import lombok.Setter;
 import pl.com.bottega.cinema.domain.TicketOrder;
 
+import java.math.BigDecimal;
 import java.util.Collection;
 
 import static pl.com.bottega.cinema.domain.validators.CollectionValidator.collectionValidate;
@@ -21,6 +22,7 @@ public class ReservationDto {
     private Collection<TicketOrder> tickets;
     private Collection<SeatDto> seats;
     private CustomerDto customer;
+    private BigDecimal totalPrice;
 
     public void validate(){
         entityIdValidate(showId, "Show id is required");
