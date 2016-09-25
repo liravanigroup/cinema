@@ -4,11 +4,12 @@ import lombok.*;
 import pl.com.bottega.cinema.api.Customer;
 import pl.com.bottega.cinema.api.dto.CustomerDto;
 import pl.com.bottega.cinema.api.dto.TicketDto;
-import pl.com.bottega.cinema.api.request.SeatDto;
+import pl.com.bottega.cinema.api.request.CreateReservationRequest;
 
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.Collection;
+import java.util.Set;
 
 /**
  * Created by anna on 25.09.2016.
@@ -19,19 +20,34 @@ import java.util.Collection;
 @AllArgsConstructor
 @NoArgsConstructor
 @EqualsAndHashCode
+@NamedQueries({
+        @NamedQuery(name = "Reservation.findByTitleAndDescription",
+                query = "SELECT r FROM Reservation r WHERE m.title=:title AND m.description=:descr"),
+        @NamedQuery(name = "Movie.findByCinemaIdAndDate",
+                query = "SELECT DISTINCT m FROM Movie m " +
+                        "JOIN FETCH m.shows s JOIN FETCH s.cinema c " +
+                        "JOIN FETCH m.actors JOIN FETCH m.genres " +
+                        "WHERE c.id = :cinemaId AND s.date = :date " +
+                        "ORDER BY m.title")
+})
 public class Reservation implements Serializable {
 
     private static final long serialVersionUID = -4979533539276386479L;
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long showId;
+    private Long id;
 
-    private Collection<TicketOrder> ticekts;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "reservation")
+    private Set<TicketOrder> ticekts;
 
-    private Collection<SeatDto> seats;
-    @OneToMany()
-    private CustomerDto customer;
+    private Set<Seat> seats;
+
+    @Embedded
+    private Customer customer;
 
 
+    public Reservation(CreateReservationRequest request) {
+
+    }
 }
