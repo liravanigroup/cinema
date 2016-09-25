@@ -6,6 +6,8 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import pl.com.bottega.cinema.api.dto.ReservationDto;
 
+import static com.google.common.base.Preconditions.checkNotNull;
+
 /**
  * Created by anna on 24.09.2016.
  */
@@ -20,6 +22,6 @@ public class CreateReservationRequest {
 
 
     public void validate(){
-        //TODO
+        checkNotNull(reservation.getTicekts());
     }
 }

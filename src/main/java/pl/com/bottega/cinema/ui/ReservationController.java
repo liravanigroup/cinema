@@ -18,8 +18,9 @@ public class ReservationController {
     private CustomerService customerService;
 
     @PutMapping
-    public void createReservation(@RequestBody CreateReservationRequest createReservationRequest) {
-        customerService.createReservation(createReservationRequest);
+    public void createReservation(@RequestBody CreateReservationRequest request) {
+        System.out.println(request);
+        customerService.createReservation(request);
     }
 
     @GetMapping

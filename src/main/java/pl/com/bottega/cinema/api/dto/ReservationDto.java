@@ -3,6 +3,7 @@ package pl.com.bottega.cinema.api.dto;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.Setter;
+import lombok.ToString;
 import pl.com.bottega.cinema.domain.TicketOrder;
 
 import java.util.Collection;
@@ -16,6 +17,7 @@ import static pl.com.bottega.cinema.domain.validators.NumberValidator.entityIdVa
 @Getter
 @Setter
 @AllArgsConstructor
+@ToString
 public class ReservationDto {
     private Long showId;
     private Collection<TicketOrder> tickets;

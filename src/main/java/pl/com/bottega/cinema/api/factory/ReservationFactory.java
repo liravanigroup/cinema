@@ -11,6 +11,7 @@ import pl.com.bottega.cinema.domain.Reservation;
 public class ReservationFactory {
 
     public Reservation createReservation(CreateReservationRequest request) {
-        return new Reservation(request);
-    }
+        //return new Reservation(request);
+        return null;
+   }
 }
