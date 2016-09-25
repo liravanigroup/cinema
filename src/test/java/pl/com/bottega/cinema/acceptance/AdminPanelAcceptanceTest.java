@@ -10,13 +10,21 @@ import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.context.web.WebAppConfiguration;
 import org.springframework.transaction.annotation.Transactional;
 import pl.com.bottega.cinema.api.*;
+import pl.com.bottega.cinema.api.dto.CinemaDto;
+import pl.com.bottega.cinema.api.dto.MovieDto;
 import pl.com.bottega.cinema.api.factory.CinemaFactory;
 import pl.com.bottega.cinema.api.factory.MovieFactory;
 import pl.com.bottega.cinema.api.factory.ShowsFactory;
 import pl.com.bottega.cinema.api.request.CreateCinemaRequest;
-import pl.com.bottega.cinema.domain.CinemaRepository;
-import pl.com.bottega.cinema.domain.MovieRepository;
-import pl.com.bottega.cinema.domain.ShowsRepository;
+import pl.com.bottega.cinema.api.request.CreateMovieRequest;
+import pl.com.bottega.cinema.domain.*;
+
+import java.util.Arrays;
+import java.util.HashSet;
+import java.util.Set;
+
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
 
 /**
  * Created by anna on 06.09.2016.
@@ -47,6 +55,18 @@ public class AdminPanelAcceptanceTest {
 
     private AdminPanel adminPanel;
 
+    private CinemaDto cinemaDto;
+
+    private static final String name = "Cinema City";
+    private static final String city = "Lublin";
+    private static final Cinema RIGHT_CINEMA = new Cinema(city, name);
+    private static final String anyTitle = "any title";
+    private static final String anyDescription = "any description";
+    private static final Set<String> anyActorsSet = new HashSet<>(Arrays.asList("any actor1", "any actor2"));
+    private static final Set<String> anyGenresSet = new HashSet<>(Arrays.asList("any genre1", "any genre2"));
+    private static final Integer anyMinAge = 16;
+    private static final int anyLength = 123;
+    private static final Movie RIGHT_MOVIE = new Movie(anyTitle, anyDescription, anyMinAge, anyLength, anyActorsSet, anyGenresSet);
     @Before
     public void setUp() {
         adminPanel = new AdminPanel(movieRepository, cinemaRepository,
@@ -57,18 +77,29 @@ public class AdminPanelAcceptanceTest {
     @Transactional
     public void shouldCreateCinema(){
         //given
-        adminPanel.createCinema(null);
+        cinemaDto = new CinemaDto(name, city);
+        CreateCinemaRequest request = new CreateCinemaRequest(cinemaDto);
 
         //when
-
+        adminPanel.createCinema(request);
 
         //then
-
+        assertNotNull(cinemaRepository.load(name, city));
+        assertEquals(RIGHT_CINEMA, cinemaRepository.load(name, city));
 
     }
 
 
-    private CreateCinemaRequest createCinemaRequest(){
-        return new CreateCinemaRequest();
+    @Test
+    @Transactional
+    public void shouldCreateMovie(){
+
+        MovieDto movieDto = new MovieDto(anyTitle, anyDescription, anyActorsSet, anyGenresSet, anyMinAge, anyLength);
+        CreateMovieRequest request = new CreateMovieRequest(movieDto);
+
+        adminPanel.createMovie(request);
+
+        assertNotNull(movieRepository.load(anyTitle, anyDescription));
+
     }
 }
