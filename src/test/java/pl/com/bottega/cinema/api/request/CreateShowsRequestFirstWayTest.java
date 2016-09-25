@@ -4,9 +4,9 @@ import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
-import pl.com.bottega.cinema.api.dto.CalendarDto;
+import pl.com.bottega.cinema.api.request.dto.CalendarDto;
 import pl.com.bottega.cinema.api.InvalidRequestException;
-import pl.com.bottega.cinema.api.dto.ShowsDto;
+import pl.com.bottega.cinema.api.request.dto.ShowsDto;
 
 import java.time.LocalDateTime;
 import java.util.Arrays;

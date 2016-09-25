@@ -2,8 +2,8 @@ package pl.com.bottega.cinema.domain;
 
 import com.sun.istack.internal.NotNull;
 import lombok.*;
-import pl.com.bottega.cinema.api.dto.MovieDto;
-import pl.com.bottega.cinema.api.dto.ShowDto;
+import pl.com.bottega.cinema.api.request.dto.MovieDto;
+import pl.com.bottega.cinema.api.request.dto.ShowDto;
 
 import javax.persistence.*;
 import java.io.Serializable;

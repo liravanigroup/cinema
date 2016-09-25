@@ -2,14 +2,10 @@ package pl.com.bottega.cinema.api;
 
 import org.junit.Before;
 import org.junit.Test;
-import pl.com.bottega.cinema.api.dto.CinemaDto;
-import pl.com.bottega.cinema.api.dto.MovieDto;
+import pl.com.bottega.cinema.api.request.dto.CinemaDto;
 import pl.com.bottega.cinema.api.factory.CinemaFactory;
-import pl.com.bottega.cinema.api.factory.MovieFactory;
 import pl.com.bottega.cinema.api.request.CreateCinemaRequest;
-import pl.com.bottega.cinema.api.request.CreateMovieRequest;
 import pl.com.bottega.cinema.domain.Cinema;
-import pl.com.bottega.cinema.domain.Movie;
 
 import static org.junit.Assert.assertEquals;
 

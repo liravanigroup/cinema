@@ -3,7 +3,7 @@ package pl.com.bottega.cinema.api.response;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import pl.com.bottega.cinema.api.dto.SeatDto;
+import pl.com.bottega.cinema.api.request.dto.SeatDto;
 import pl.com.bottega.cinema.domain.Seat;
 
 import java.util.Collection;

@@ -1,4 +1,4 @@
-package pl.com.bottega.cinema.api.dto;
+package pl.com.bottega.cinema.api.response.dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -13,11 +13,11 @@ import pl.com.bottega.cinema.domain.Seat;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-public class SeatDto {
+public class SeatResponseDto {
     private Integer row;
     private Integer seat;
 
-
-    public SeatDto(Seat seat) {
+    public SeatResponseDto(Seat seat) {
+        this(seat.getRow(), seat.getSeat());
     }
 }

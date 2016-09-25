@@ -4,7 +4,7 @@ import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
-import pl.com.bottega.cinema.api.dto.CinemaDto;
+import pl.com.bottega.cinema.api.request.dto.CinemaDto;
 import pl.com.bottega.cinema.api.InvalidRequestException;
 
 import static org.mockito.Mockito.doThrow;

@@ -22,10 +22,10 @@ public class ReservationFactory {
     public Reservation createReservation(CreateReservationRequest request) {
 
         Long showId = request.getShowId();
-        Set<TicketOrder> tickets = priceCalculator.calculatePrice(showId, request.getTickets());
+        //Set<TicketOrder> tickets = priceCalculator.calculatePrice(showId, request.getTickets());
         Set<Seat> seats = request.getSeats();
         Customer customer = request.getCustomer();
 
-        return new Reservation(tickets, seats, customer, );
+        return new Reservation();
     }
 }

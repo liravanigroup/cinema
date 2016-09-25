@@ -35,12 +35,11 @@ public class JPAReservationRepository implements ReservationRepository {
     }
 
     @Override
-    public Reservation load(String lastName, String status) {
-        List<Reservation> reservations = entityManager.createNamedQuery("Reservation.findByCustomerLastNameAndStatus", Reservation.class)
-                .setParameter("firstName", lastName)
+    public List<Reservation> load(String lastName, String status) {
+        return entityManager.createNamedQuery("Reservation.findByCustomerLastNameAndStatus", Reservation.class)
+                .setParameter("lastName", lastName)
                 .setParameter("status", status)
                 .getResultList();
-        return getSingleReservation(reservations);
     }
 
     private Reservation getSingleReservation(List<Reservation> reservations) {

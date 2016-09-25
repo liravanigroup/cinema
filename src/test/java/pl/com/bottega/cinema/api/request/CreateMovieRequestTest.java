@@ -5,7 +5,7 @@ import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
 import pl.com.bottega.cinema.api.InvalidRequestException;
-import pl.com.bottega.cinema.api.dto.MovieDto;
+import pl.com.bottega.cinema.api.request.dto.MovieDto;
 
 import java.util.Arrays;
 import java.util.HashSet;

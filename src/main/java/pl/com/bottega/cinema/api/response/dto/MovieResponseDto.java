@@ -1,15 +1,13 @@
-package pl.com.bottega.cinema.api.dto;
+package pl.com.bottega.cinema.api.response.dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import pl.com.bottega.cinema.api.request.dto.ShowDto;
 import pl.com.bottega.cinema.domain.Movie;
-import pl.com.bottega.cinema.domain.Show;
 
 import java.util.Collection;
-import java.util.List;
-import java.util.stream.Collectors;
 
 /**
  * Created by Admin on 15.09.2016.

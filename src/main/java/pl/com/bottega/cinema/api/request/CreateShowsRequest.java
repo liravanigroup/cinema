@@ -4,8 +4,8 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import pl.com.bottega.cinema.api.dto.CalendarDto;
-import pl.com.bottega.cinema.api.dto.ShowsDto;
+import pl.com.bottega.cinema.api.request.dto.CalendarDto;
+import pl.com.bottega.cinema.api.request.dto.ShowsDto;
 
 import java.time.DayOfWeek;
 import java.time.LocalDate;

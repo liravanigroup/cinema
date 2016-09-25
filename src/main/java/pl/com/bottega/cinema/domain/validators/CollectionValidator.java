@@ -3,7 +3,7 @@ package pl.com.bottega.cinema.domain.validators;
 import com.google.common.collect.HashMultiset;
 import lombok.NoArgsConstructor;
 import pl.com.bottega.cinema.api.InvalidRequestException;
-import pl.com.bottega.cinema.api.dto.TicketDto;
+import pl.com.bottega.cinema.api.request.dto.TicketDto;
 
 import java.util.Arrays;
 import java.util.Collection;

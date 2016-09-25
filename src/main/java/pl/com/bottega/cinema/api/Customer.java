@@ -1,9 +1,10 @@
 package pl.com.bottega.cinema.api;
 
+import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import pl.com.bottega.cinema.api.dto.CustomerDto;
+import pl.com.bottega.cinema.api.request.dto.CustomerDto;
 
 import javax.persistence.Embeddable;
 
@@ -12,6 +13,7 @@ import javax.persistence.Embeddable;
  */
 @Getter
 @Setter
+@AllArgsConstructor
 @NoArgsConstructor
 @Embeddable
 public class Customer {
@@ -22,9 +24,6 @@ public class Customer {
     private String phone;
 
     public Customer(CustomerDto customer) {
-        this.firstName = customer.getFirstName();
-        this.lastName = customer.getLastName();
-        this.email = customer.getEmail();
-        this.phone = customer.getPhone();
+        this(customer.getFirstName(), customer.getLastName(), customer.getEmail(), customer.getPhone());
     }
 }

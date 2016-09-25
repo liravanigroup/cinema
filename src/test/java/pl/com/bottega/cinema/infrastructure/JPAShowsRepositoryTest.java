@@ -9,23 +9,18 @@ import org.springframework.test.context.jdbc.Sql;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.context.web.WebAppConfiguration;
 
-import pl.com.bottega.cinema.api.dto.MovieDto;
+import pl.com.bottega.cinema.api.request.dto.MovieDto;
 import pl.com.bottega.cinema.domain.Cinema;
 import pl.com.bottega.cinema.domain.Movie;
 import pl.com.bottega.cinema.domain.Show;
 import pl.com.bottega.cinema.domain.ShowsRepository;
 
 
-import java.time.LocalDate;
 import java.time.LocalDateTime;
-import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import java.util.Arrays;
-import java.util.Collection;
 import java.util.HashSet;
 import java.util.Set;
-
-import static java.time.Month.SEPTEMBER;
 
 /**
  * Created by Sergej Povzaniuk on 16.09.2016.

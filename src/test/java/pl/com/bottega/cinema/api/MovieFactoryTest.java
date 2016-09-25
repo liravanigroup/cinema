@@ -2,7 +2,7 @@ package pl.com.bottega.cinema.api;
 
 import org.junit.Before;
 import org.junit.Test;
-import pl.com.bottega.cinema.api.dto.MovieDto;
+import pl.com.bottega.cinema.api.request.dto.MovieDto;
 import pl.com.bottega.cinema.api.factory.MovieFactory;
 import pl.com.bottega.cinema.api.request.CreateMovieRequest;
 import pl.com.bottega.cinema.domain.Movie;

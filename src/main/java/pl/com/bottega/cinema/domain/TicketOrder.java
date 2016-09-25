@@ -4,7 +4,7 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import pl.com.bottega.cinema.api.dto.TicketDto;
+import pl.com.bottega.cinema.api.request.dto.TicketDto;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;

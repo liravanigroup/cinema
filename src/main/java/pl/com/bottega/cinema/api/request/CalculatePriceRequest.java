@@ -3,7 +3,7 @@ package pl.com.bottega.cinema.api.request;/* Created by Sergej on 18.09.2016. Bo
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
-import pl.com.bottega.cinema.api.dto.TicketDto;
+import pl.com.bottega.cinema.api.request.dto.TicketDto;
 
 import java.util.Collection;
 

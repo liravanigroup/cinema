@@ -1,8 +1,9 @@
-package pl.com.bottega.cinema.api.dto;
+package pl.com.bottega.cinema.api.request.dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.Setter;
+import pl.com.bottega.cinema.api.Customer;
 import pl.com.bottega.cinema.api.InvalidRequestException;
 
 import java.util.regex.Pattern;
@@ -21,6 +22,10 @@ public class CustomerDto {
     private String lastName;
     private String email;
     private String phone;
+
+    public CustomerDto(Customer c) {
+        this(c.getFirstName(), c.getLastName(), c.getEmail(), c.getPhone());
+    }
 
     public void validate() {
         stringValidate(firstName, "First name is required");

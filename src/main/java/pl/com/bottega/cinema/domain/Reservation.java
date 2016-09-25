@@ -3,12 +3,9 @@ package pl.com.bottega.cinema.domain;
 import lombok.*;
 import pl.com.bottega.cinema.api.Customer;
 
-import pl.com.bottega.cinema.api.request.CreateReservationRequest;
-
-
 import javax.persistence.*;
 import java.io.Serializable;
-
+import java.math.BigDecimal;
 import java.util.Set;
 
 /**
@@ -21,9 +18,14 @@ import java.util.Set;
 @EqualsAndHashCode
 @NamedQueries({
         @NamedQuery(name = "Reservation.findByShowIdAndCustomer",
-                query = ""),
+                query = "SELECT r FROM Reservation r " +
+                        "WHERE r.show.id=:showId " +
+                        "AND r.customer.firstName=:firstName " +
+                        "AND r.customer.lastName=:lastName"),
         @NamedQuery(name = "Reservation.findByCustomerLastNameAndStatus",
-                query = "")
+                query = "SELECT r FROM Reservation r " +
+                        "WHERE r.customer.lastName=:lastName " +
+                        "AND r.status=:status")
 })
 @Entity
 public class Reservation implements Serializable {
@@ -37,9 +39,7 @@ public class Reservation implements Serializable {
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "reservation", fetch = FetchType.EAGER)
     private Set<TicketOrder> ticekts;
 
-    public Set<Seat> getSeats() {
-        return seats;
-    }
+    private String status;
 
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "reservation", fetch = FetchType.EAGER)
     private Set<Seat> seats;
@@ -50,9 +50,9 @@ public class Reservation implements Serializable {
     @ManyToOne
     private Show show;
 
-    public Reservation(Set<TicketOrder> ticekts, Set<Seat> seats, Customer customer) {
-        this.ticekts = ticekts;
-        this.seats = seats;
-        this.customer = customer;
+    private BigDecimal totalPrice;
+
+    public Reservation(Set<TicketOrder> ticekts, Set<Seat> seats, Customer customer, BigDecimal totalPrice) {
+        this(null, ticekts, "pending", seats, customer, null, totalPrice);
     }
 }

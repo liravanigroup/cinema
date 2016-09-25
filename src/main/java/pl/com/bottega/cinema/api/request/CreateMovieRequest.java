@@ -4,7 +4,7 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import pl.com.bottega.cinema.api.dto.MovieDto;
+import pl.com.bottega.cinema.api.request.dto.MovieDto;
 
 /**
  * Created by bernard.boguszewski on 04.09.2016.
