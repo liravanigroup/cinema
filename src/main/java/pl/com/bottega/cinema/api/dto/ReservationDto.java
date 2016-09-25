@@ -11,6 +11,7 @@ import java.util.Collection;
 
 import static pl.com.bottega.cinema.domain.validators.CollectionValidator.collectionValidate;
 import static pl.com.bottega.cinema.domain.validators.NumberValidator.entityIdValidate;
+import static pl.com.bottega.cinema.domain.validators.NumberValidator.priceValidation;
 
 /**
  * Created by Admin on 25.09.2016.
@@ -31,5 +32,6 @@ public class ReservationDto {
         collectionValidate(tickets, "Tickets are required");
         collectionValidate(seats, "Seats are required");
         customer.validate();
+        priceValidation(totalPrice, "Total price is required");
     }
 }
