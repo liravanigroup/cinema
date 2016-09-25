@@ -5,5 +5,6 @@ package pl.com.bottega.cinema.domain;
  */
 public interface ReservationRepository {
 
+    void save(Reservation reservation);
 
 }
