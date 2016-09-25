@@ -47,4 +47,8 @@ public class CustomerService {
         Reservation reservation = reservationFactory.createReservation(request);
         return new ReservationResponse(reservation);
     }
+
+    public void getSeatsByShowId(Long showId) {
+
+    }
 }

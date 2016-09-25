@@ -19,6 +19,6 @@ public class ShowController {
 
     @GetMapping("/{showId}/seats")
     public void getSeats(@PathVariable("showId") Long showId){
-        //customerService.getSeatsByShowId(showId);
+        customerService.getSeatsByShowId(showId);
     }
 }
