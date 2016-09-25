@@ -1,6 +1,7 @@
 package pl.com.bottega.cinema.ui;
 
 import org.springframework.stereotype.Repository;
+import pl.com.bottega.cinema.domain.Reservation;
 import pl.com.bottega.cinema.domain.ReservationRepository;
 
 import javax.persistence.EntityManager;
@@ -16,5 +17,8 @@ public class JPAReservationRepository implements ReservationRepository {
     private EntityManager entityManager;
 
 
-
+    @Override
+    public void save(Reservation reservation) {
+        entityManager.persist(reservation);
+    }
 }
