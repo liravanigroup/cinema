@@ -21,6 +21,8 @@ import java.util.Set;
 @EqualsAndHashCode
 @NamedQueries({
         @NamedQuery(name = "Reservation.findByShowIdAndCustomer",
+                query = ""),
+        @NamedQuery(name = "Reservation.findByCustomerLastNameAndStatus",
                 query = "")
 })
 @Entity
@@ -48,5 +50,9 @@ public class Reservation implements Serializable {
     @ManyToOne
     private Show show;
 
-    public Reservation(Set<TicketOrder> ticekts, Set<Seat> seats)
+    public Reservation(Set<TicketOrder> ticekts, Set<Seat> seats, Customer customer) {
+        this.ticekts = ticekts;
+        this.seats = seats;
+        this.customer = customer;
+    }
 }

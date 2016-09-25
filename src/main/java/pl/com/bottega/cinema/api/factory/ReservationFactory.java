@@ -26,6 +26,6 @@ public class ReservationFactory {
         Set<Seat> seats = request.getSeats();
         Customer customer = request.getCustomer();
 
-        return new Reservation(null, tickets, seats, customer, null);
+        return new Reservation(tickets, seats, customer, );
     }
 }
