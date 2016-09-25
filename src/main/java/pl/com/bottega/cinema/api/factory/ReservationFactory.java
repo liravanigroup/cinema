@@ -40,7 +40,6 @@ public class ReservationFactory {
     }
 
     private Set<TicketOrder> getTicketOrders(CreateReservationRequest request, Long showId) {
-        request.getTickets();
-        return priceCalculator.calculatePrice(showId, request);
+        return priceCalculator.getCalculationSet(showId, request.getTickets());
     }
 }
