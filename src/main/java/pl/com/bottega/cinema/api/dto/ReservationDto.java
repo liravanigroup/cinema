@@ -1,9 +1,8 @@
-package pl.com.bottega.cinema.api.request;
+package pl.com.bottega.cinema.api.dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.Setter;
-import pl.com.bottega.cinema.api.dto.CustomerDto;
 import pl.com.bottega.cinema.domain.TicketOrder;
 
 import java.util.Collection;

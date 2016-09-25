@@ -1,4 +1,4 @@
-package pl.com.bottega.cinema.api.request;
+package pl.com.bottega.cinema.api.dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
