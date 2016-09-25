@@ -5,6 +5,8 @@ import lombok.*;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
+import java.io.Serializable;
 
 /**
  * Created by anna on 25.09.2016.
@@ -15,7 +17,9 @@ import javax.persistence.Id;
 @AllArgsConstructor
 @EqualsAndHashCode(exclude = {"id"})
 @Entity
-public class Seat {
+public class Seat implements Serializable{
+
+    private static final long serialVersionUID = -1979533539276386449L;
 
     @Id
     @GeneratedValue
@@ -27,9 +31,6 @@ public class Seat {
     private Integer seat;
 
     public Seat(Integer row, Integer seat, Boolean isFree) {
-        this.row = row;
-        this.seat = seat;
-        this.isFree = isFree;
+        this(null, isFree, row, seat);
     }
-
 }

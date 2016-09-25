@@ -30,29 +30,23 @@ import java.util.Set;
 @Entity
 public class Reservation implements Serializable {
 
-    private static final long serialVersionUID = -4979533539276386479L;
+    private static final long serialVersionUID = -4979533539276386449L;
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "reservation", fetch = FetchType.EAGER)
-    private Set<TicketOrder> ticekts;
-
-    private String status;
-
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "reservation", fetch = FetchType.EAGER)
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    private Set<TicketOrder> tickets;
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     private Set<Seat> seats;
-
     @Embedded
     private Customer customer;
-
     @ManyToOne
     private Show show;
-
+    private String status;
     private BigDecimal totalPrice;
 
     public Reservation(Set<TicketOrder> ticekts, Set<Seat> seats, Customer customer, BigDecimal totalPrice) {
-        this(null, ticekts, "pending", seats, customer, null, totalPrice);
+        this(null, ticekts, seats, customer, null, "pending", totalPrice);
     }
 }

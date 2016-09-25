@@ -3,6 +3,7 @@ package pl.com.bottega.cinema.ui;
 import lombok.AllArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 import pl.com.bottega.cinema.api.AdminPanel;
+import pl.com.bottega.cinema.api.CashierService;
 import pl.com.bottega.cinema.api.CustomerService;
 import pl.com.bottega.cinema.api.request.CreateReservationRequest;
 import pl.com.bottega.cinema.api.request.GetReservationListRequest;
@@ -16,6 +17,7 @@ import pl.com.bottega.cinema.api.request.GetReservationListRequest;
 public class ReservationController {
 
     private CustomerService customerService;
+    private CashierService cashierService;
 
     @PutMapping
     public void createReservation(@RequestBody CreateReservationRequest request) {
@@ -25,6 +27,6 @@ public class ReservationController {
 
     @GetMapping
     public void getReservationByQuery(@ModelAttribute GetReservationListRequest request){
-        System.out.println(request);
+        cashierService.getReservations(request);
     }
 }

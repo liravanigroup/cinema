@@ -7,6 +7,7 @@ import lombok.Setter;
 import pl.com.bottega.cinema.api.request.dto.CustomerDto;
 
 import javax.persistence.Embeddable;
+import java.io.Serializable;
 
 /**
  * Created by anna on 24.09.2016.
@@ -16,7 +17,7 @@ import javax.persistence.Embeddable;
 @AllArgsConstructor
 @NoArgsConstructor
 @Embeddable
-public class Customer {
+public class Customer implements Serializable{
 
     private String firstName;
     private String lastName;

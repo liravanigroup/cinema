@@ -50,6 +50,6 @@ public class ReservationResponseDto {
     }
 
     private Collection<TicketOrderResponseDto> getTicketOrdersResponse(Reservation reservation) {
-        return reservation.getTicekts().stream().map(TicketOrderResponseDto::new).collect(Collectors.toList());
+        return reservation.getTickets().stream().map(TicketOrderResponseDto::new).collect(Collectors.toList());
     }
 }

@@ -42,26 +42,4 @@ public class JPACinemaRepository implements CinemaRepository {
     public Cinema load(Long cinemaId) {
         return entityManager.find(Cinema.class, cinemaId);
     }
-
-
-    /**
-     * Created by Admin on 25.09.2016.
-     */
-    @Repository
-    public static class JPAReservationRepository implements ReservationRepository {
-
-        @PersistenceContext
-        private EntityManager entityManager;
-
-
-        @Override
-        public void save(Reservation reservation) {
-            entityManager.persist(reservation);
-        }
-
-        @Override
-        public Reservation load(Long showId, Customer customer) {
-            return null;
-        }
-    }
 }
