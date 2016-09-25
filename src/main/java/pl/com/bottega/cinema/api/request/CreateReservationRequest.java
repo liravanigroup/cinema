@@ -17,9 +17,7 @@ public class CreateReservationRequest {
 
     private ReservationDto reservation;
 
-
-
     public void validate(){
-        //TODO
+        reservation.validate();
     }
 }
