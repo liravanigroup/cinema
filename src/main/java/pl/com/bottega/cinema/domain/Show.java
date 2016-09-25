@@ -7,6 +7,7 @@ import java.io.Serializable;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
+import java.util.Set;
 
 import static javax.persistence.CascadeType.ALL;
 
@@ -42,8 +43,11 @@ public class Show implements Serializable {
     private LocalDate date;
     private LocalTime time;
 
+    @OneToMany(cascade = ALL, mappedBy = "show")
+    private Set<Reservation> reservations;
+
     public Show(Cinema cinema, Movie movie, LocalDate dateOfShow, LocalTime timeOfShow) {
-        this(null, cinema, movie, dateOfShow, timeOfShow);
+        this(null, cinema, movie, dateOfShow, timeOfShow, null);
     }
 
     public Show(Cinema cinema, Movie movie, LocalDateTime date) {
