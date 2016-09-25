@@ -7,6 +7,7 @@ import pl.com.bottega.cinema.domain.TicketOrder;
 
 import java.util.Collection;
 
+import static pl.com.bottega.cinema.domain.validators.CollectionValidator.collectionValidate;
 import static pl.com.bottega.cinema.domain.validators.NumberValidator.entityIdValidate;
 
 /**
@@ -17,12 +18,14 @@ import static pl.com.bottega.cinema.domain.validators.NumberValidator.entityIdVa
 @AllArgsConstructor
 public class ReservationDto {
     private Long showId;
-    private Collection<TicketOrder> ticekts;
+    private Collection<TicketOrder> tickets;
     private Collection<SeatDto> seats;
     private CustomerDto customer;
 
     public void validate(){
-        entityIdValidate(showId, "");
+        entityIdValidate(showId, "Show id is required");
+        collectionValidate(tickets, "Tickets are required");
+        collectionValidate(seats, "Seats are required");
         customer.validate();
     }
 }
