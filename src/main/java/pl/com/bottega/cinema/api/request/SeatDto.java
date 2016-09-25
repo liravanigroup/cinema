@@ -11,12 +11,6 @@ import lombok.Setter;
 @Setter
 @AllArgsConstructor
 public class SeatDto {
-
-
-
-
-    {"row": 5, "seat": 10},
-    {"row": 5, "seat": 11},
-    {"row": 5, "seat": 12}
-
+    private Integer row;
+    private Integer seat;
 }
