@@ -34,7 +34,7 @@ public class CinemaHall {
     private void fieldSeats(Collection<Seat> seats) {
         for (int row = 0; row < 15; row++) {
             for (int seat = 0; seat < 10; seat++) {
-                seats.add(new Seat(null, true, row, seat));
+                seats.add(new Seat(row, seat, true));
             }
         }
     }

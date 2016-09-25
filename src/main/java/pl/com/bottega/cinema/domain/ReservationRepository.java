@@ -7,5 +7,9 @@ import pl.com.bottega.cinema.api.Customer;
  */
 public interface ReservationRepository {
     void save(Reservation reservation);
+
     Reservation load(Long showId, Customer customer);
+
+    Reservation load(String lastName, String status);
+
 }

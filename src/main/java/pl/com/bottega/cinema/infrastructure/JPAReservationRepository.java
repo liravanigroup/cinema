@@ -34,6 +34,15 @@ public class JPAReservationRepository implements ReservationRepository {
         return getSingleReservation(reservations);
     }
 
+    @Override
+    public Reservation load(String lastName, String status) {
+        List<Reservation> reservations = entityManager.createNamedQuery("Reservation.findByCustomerLastNameAndStatus", Reservation.class)
+                .setParameter("firstName", lastName)
+                .setParameter("status", status)
+                .getResultList();
+        return getSingleReservation(reservations);
+    }
+
     private Reservation getSingleReservation(List<Reservation> reservations) {
         return reservations.isEmpty() ? null : reservations.get(0);
     }
