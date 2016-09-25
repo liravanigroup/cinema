@@ -4,7 +4,7 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import pl.com.bottega.cinema.api.dto.ShowDto;
+import pl.com.bottega.cinema.api.dto.ReservationDto;
 
 /**
  * Created by anna on 24.09.2016.
