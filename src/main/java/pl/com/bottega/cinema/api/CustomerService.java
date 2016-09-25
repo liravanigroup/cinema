@@ -6,7 +6,6 @@ import pl.com.bottega.cinema.api.factory.ReservationFactory;
 import pl.com.bottega.cinema.api.request.CalculatePriceRequest;
 import pl.com.bottega.cinema.api.request.CreateReservationRequest;
 import pl.com.bottega.cinema.api.request.GetMoviesAtDateRequest;
-import pl.com.bottega.cinema.api.request.GetShowProgramAtDateRequest;
 import pl.com.bottega.cinema.api.response.CalculatePriceResponse;
 import pl.com.bottega.cinema.api.response.ListAllCinemasResponse;
 import pl.com.bottega.cinema.api.response.ListMoviesResponse;

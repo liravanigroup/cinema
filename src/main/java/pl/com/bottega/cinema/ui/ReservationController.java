@@ -19,7 +19,7 @@ public class ReservationController {
 
     @PutMapping
     public void createReservation(@RequestBody CreateReservationRequest createReservationRequest) {
-        //customerService.createReservation();
+        customerService.createReservation(createReservationRequest);
     }
 
     @GetMapping
