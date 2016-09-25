@@ -17,5 +17,7 @@ public class ReservationResponse {
 
     private Reservation reservation;
 
-
+    public ReservationResponse reservationResponse(){
+        return null;
+    }
 }

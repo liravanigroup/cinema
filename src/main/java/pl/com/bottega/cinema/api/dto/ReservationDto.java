@@ -34,4 +34,7 @@ public class ReservationDto {
         customer.validate();
         priceValidation(totalPrice, "Total price is required");
     }
+
+
+
 }

@@ -20,7 +20,9 @@ public class SeatsResponse {
     private Collection<SeatDto> freeSeats;
     private Collection<SeatDto> occupiedSeats;
 
-     public void SeatsResponse(Collection<Seat> occupiedSeats, Collection<Seat> freeSeats){
+
+
+    public SeatsResponse(Collection<Seat> occupiedSeats, Collection<Seat> freeSeats){
          this.occupiedSeats = occupiedSeats.stream().map(SeatDto::new).collect(Collectors.toList());
          this.freeSeats = freeSeats.stream().map(SeatDto::new).collect(Collectors.toList());
      }
