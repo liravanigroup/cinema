@@ -49,10 +49,19 @@ public class CustomerService {
     @Transactional
     public ReservationResponse createReservation(CreateReservationRequest request) {
         request.validate();
+        Show show = getExistShow(request.getShowId());
+        validateSeatSequence(show, request.getSeats());
         Reservation reservation = reservationFactory.createReservation(request);
         reservationRepository.save(reservation);
         Reservation loadedReservation = reservationRepository.load(request.getShowId(), request.getCustomer());
         return new ReservationResponse(loadedReservation.getId());
+    }
+
+    private void validateSeatSequence(Show show, Set<Seat> seats) {
+        Set<Reservation> reservations = show.getReservations();
+        CinemaHall cinemaHall = new CinemaHall(reservations);
+        if (!cinemaHall.isAvailableToBuy(seats))
+            throw new  InvalidRequestException("You can not buy this tickets");
     }
 
     @Transactional

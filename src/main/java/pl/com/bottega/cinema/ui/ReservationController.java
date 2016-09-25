@@ -21,7 +21,6 @@ public class ReservationController {
 
     @PutMapping
     public void createReservation(@RequestBody CreateReservationRequest request) {
-        System.out.println(request);
         customerService.createReservation(request);
     }
 
@@ -29,4 +28,6 @@ public class ReservationController {
     public void getReservationByQuery(@ModelAttribute GetReservationListRequest request){
         cashierService.getReservations(request);
     }
+
+
 }

@@ -29,7 +29,6 @@ public class ReservationFactory {
         Set<Seat> seats = request.getSeats();
         Customer customer = request.getCustomer();
         BigDecimal totalPrice = getTotalPrice(tickets);
-
         return new Reservation(tickets, seats, customer, totalPrice);
     }
 
