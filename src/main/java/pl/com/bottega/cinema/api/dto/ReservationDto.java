@@ -6,6 +6,9 @@ import lombok.Setter;
 import pl.com.bottega.cinema.domain.TicketOrder;
 
 import java.util.Collection;
+
+import static pl.com.bottega.cinema.domain.validators.NumberValidator.entityIdValidate;
+
 /**
  * Created by Admin on 25.09.2016.
  */
@@ -17,4 +20,9 @@ public class ReservationDto {
     private Collection<TicketOrder> ticekts;
     private Collection<SeatDto> seats;
     private CustomerDto customer;
+
+    public void validate(){
+        entityIdValidate(showId, "");
+        customer.validate();
+    }
 }
