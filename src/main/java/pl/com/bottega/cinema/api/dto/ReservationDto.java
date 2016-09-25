@@ -8,6 +8,7 @@ import pl.com.bottega.cinema.domain.TicketOrder;
 
 import java.math.BigDecimal;
 import java.util.Collection;
+import java.util.Set;
 
 import static pl.com.bottega.cinema.domain.validators.CollectionValidator.collectionValidate;
 import static pl.com.bottega.cinema.domain.validators.NumberValidator.entityIdValidate;
@@ -22,8 +23,8 @@ import static pl.com.bottega.cinema.domain.validators.NumberValidator.priceValid
 @ToString
 public class ReservationDto {
     private Long showId;
-    private Collection<TicketOrder> tickets;
-    private Collection<SeatDto> seats;
+    private Set<TicketOrder> tickets;
+    private Set<SeatDto> seats;
     private CustomerDto customer;
     private BigDecimal totalPrice;
 

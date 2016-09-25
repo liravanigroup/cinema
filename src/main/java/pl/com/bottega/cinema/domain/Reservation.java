@@ -48,6 +48,5 @@ public class Reservation implements Serializable {
     @ManyToOne
     private Show show;
 
-
-
+    public Reservation(Set<TicketOrder> ticekts, Set<Seat> seats)
 }

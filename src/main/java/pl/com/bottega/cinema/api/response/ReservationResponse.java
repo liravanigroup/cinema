@@ -15,9 +15,9 @@ import pl.com.bottega.cinema.domain.Reservation;
 @AllArgsConstructor
 public class ReservationResponse {
 
-    private Reservation reservation;
+    private String reservationNumber;
 
-    public ReservationResponse reservationResponse(){
-        return null;
+    public ReservationResponse(Long reservationNumber) {
+        this.reservationNumber = reservationNumber.toString();
     }
 }

@@ -46,10 +46,13 @@ public class CustomerService {
         return priceCalculator.calculatePrice(request);
     }
 
+    @Transactional
     public ReservationResponse createReservation(CreateReservationRequest request) {
         request.validate();
         Reservation reservation = reservationFactory.createReservation(request);
-        return new ReservationResponse(reservation);
+        reservationRepository.save(reservation);
+        Reservation loadedReservation = reservationRepository.load(request.getShowId(), request.getCustomer());
+        return new ReservationResponse(loadedReservation.getId());
     }
 
     @Transactional

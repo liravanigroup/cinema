@@ -26,4 +26,10 @@ public class Seat {
     private Integer row;
     private Integer seat;
 
+    public Seat(Integer row, Integer seat, Boolean isFree) {
+        this.row = row;
+        this.seat = seat;
+        this.isFree = isFree;
+    }
+
 }
