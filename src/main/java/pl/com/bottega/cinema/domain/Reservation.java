@@ -8,6 +8,11 @@ import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.Set;
 
+import static javax.persistence.CascadeType.ALL;
+import static javax.persistence.FetchType.EAGER;
+import static javax.persistence.FetchType.LAZY;
+import static javax.persistence.GenerationType.IDENTITY;
+
 /**
  * Created by anna on 25.09.2016.
  */
@@ -15,7 +20,7 @@ import java.util.Set;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-@EqualsAndHashCode
+@ToString
 @NamedQueries({
         @NamedQuery(name = "Reservation.findByShowIdAndCustomer",
                 query = "SELECT r FROM Reservation r " +
@@ -33,20 +38,25 @@ public class Reservation implements Serializable {
     private static final long serialVersionUID = -4979533539276386449L;
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = IDENTITY)
     private Long id;
-    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+
+    @OneToMany(cascade = ALL)
     private Set<TicketOrder> tickets;
-    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+
+    @OneToMany(cascade = ALL)
     private Set<Seat> seats;
-    @Embedded
+
+    @ManyToOne(cascade = ALL)
     private Customer customer;
-    @ManyToOne
+
+    @ManyToOne(cascade = ALL)
     private Show show;
+
     private String status;
     private BigDecimal totalPrice;
 
-    public Reservation(Set<TicketOrder> tickets, Set<Seat> seats, Customer customer, BigDecimal totalPrice) {
-        this(null, tickets, seats, customer, null, "pending", totalPrice);
+    public Reservation(Show show, Set<TicketOrder> tickets, Set<Seat> seats, Customer customer, BigDecimal totalPrice) {
+        this(null, tickets, seats, customer, show, "pending", totalPrice);
     }
 }

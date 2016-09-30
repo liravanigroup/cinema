@@ -62,7 +62,7 @@ public class CinemaHall {
             return false;
         Seat[][] seatArray = new Seat[ROWS_COUNT][SEATS_COUNT];
         getOccupiedSeats().forEach(seat -> seatArray[seat.getRow() - 1][seat.getSeat() - 1] = seat);
-
+return true;
     }
 
     private int countOfFreeSeats() {

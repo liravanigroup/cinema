@@ -4,6 +4,10 @@ import lombok.*;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.Set;
+
+import static javax.persistence.CascadeType.ALL;
+import static javax.persistence.FetchType.EAGER;
 
 @Getter
 @Setter
@@ -24,8 +28,11 @@ public class Cinema implements Serializable {
     private Long id;
     private String city, name;
 
+    @OneToMany(cascade = ALL, mappedBy = "cinema", fetch = EAGER)
+    private Set<Show> shows;
+
     public Cinema(String city, String name) {
-        this(null, city, name);
+        this(null, city, name, null);
     }
 
 }

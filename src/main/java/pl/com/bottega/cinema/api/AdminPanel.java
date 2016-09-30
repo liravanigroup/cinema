@@ -86,10 +86,10 @@ public class AdminPanel {
     public void updatePrices(UpdatePricesRequest request) {
         request.validate();
         Movie movie = getExistingMovie(request.getMovieId());
-        movie.updatePrices(getTicketPrices(request, movie));
+        movie.updatePrices(getTicketPrices(request));
     }
 
-    private Set<TicketPrice> getTicketPrices(UpdatePricesRequest r, Movie m) {
-        return r.getPrices().keySet().stream().map(tn -> new TicketPrice(tn, r.getPrices().get(tn), m)).collect(Collectors.toSet());
+    private Set<TicketPrice> getTicketPrices(UpdatePricesRequest r) {
+        return r.getPrices().keySet().stream().map(tn -> new TicketPrice(tn, r.getPrices().get(tn))).collect(Collectors.toSet());
     }
 }

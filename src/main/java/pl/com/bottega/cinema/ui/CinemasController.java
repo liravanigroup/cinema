@@ -5,6 +5,7 @@ import org.springframework.web.bind.annotation.*;
 import pl.com.bottega.cinema.api.AdminPanel;
 import pl.com.bottega.cinema.api.CustomerService;
 import pl.com.bottega.cinema.api.request.CreateCinemaRequest;
+import pl.com.bottega.cinema.api.request.CreateShowsRequest;
 import pl.com.bottega.cinema.api.request.GetMoviesAtDateRequest;
 import pl.com.bottega.cinema.api.response.ListAllCinemasResponse;
 import pl.com.bottega.cinema.api.response.ListMoviesResponse;
@@ -36,5 +37,11 @@ public class CinemasController {
                                                @RequestParam("date") GetMoviesAtDateRequest request) {
         request.setCinemaId(cinemaId);
         return customerService.findMoviesInCinemaByDate(request);
+    }
+
+    @PutMapping("/{cinemaId}/shows")
+    public void create(@PathVariable("cinemaId") Long cinemaId, @RequestBody CreateShowsRequest request){
+        request.setCinemaId(cinemaId);
+        adminPanel.createShows(request);
     }
 }

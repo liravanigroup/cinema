@@ -1,5 +1,6 @@
 package pl.com.bottega.cinema.domain;
 
+import com.google.common.base.MoreObjects;
 import com.sun.istack.internal.NotNull;
 import lombok.*;
 import pl.com.bottega.cinema.api.request.dto.MovieDto;
@@ -22,16 +23,19 @@ import static javax.persistence.FetchType.EAGER;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-@EqualsAndHashCode
 @NamedQueries({
         @NamedQuery(name = "Movie.findByTitleAndDescription",
-                query = "SELECT m FROM Movie m WHERE m.title=:title AND m.description=:descr"),
+                query = "SELECT m FROM Movie m WHERE m.title=:title AND m.description=:description"),
         @NamedQuery(name = "Movie.findByCinemaIdAndDate",
                 query = "SELECT DISTINCT m FROM Movie m " +
                         "JOIN FETCH m.shows s JOIN FETCH s.cinema c " +
                         "JOIN FETCH m.actors JOIN FETCH m.genres " +
                         "WHERE c.id = :cinemaId AND s.date = :date " +
-                        "ORDER BY m.title")
+                        "ORDER BY m.title"),
+        @NamedQuery(name = "Movie.findByMovieIdWithPrices",
+                query = "SELECT DISTINCT m FROM Movie m " +
+                        "JOIN FETCH m.prices " +
+                        "WHERE m.id = :movieId")
 })
 public class Movie implements Serializable {
 
@@ -60,9 +64,8 @@ public class Movie implements Serializable {
     @OrderBy("time")
     private Set<Show> shows;
 
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "movie", orphanRemoval = true)
+    @OneToMany(cascade = ALL, fetch = EAGER, orphanRemoval = true)
     private Set<TicketPrice> prices;
-
 
     public Movie(MovieDto m) {
         this(m.getTitle(), m.getDescription(), m.getMinAge(), m.getLength(), m.getActors(), m.getGenres());
@@ -79,5 +82,19 @@ public class Movie implements Serializable {
 
     public Collection<ShowDto> getShowsDto() {
         return shows.stream().map(ShowDto::new).collect(Collectors.toList());
+    }
+
+    @Override
+    public String toString() {
+        return "Movie{" +
+                "id=" + id +
+                ", title='" + title + '\'' +
+                ", description='" + description + '\'' +
+                ", minAge=" + minAge +
+                ", length=" + length +
+                ", actors=" + actors +
+                ", genres=" + genres +
+                ", prices=" + prices +
+                '}';
     }
 }

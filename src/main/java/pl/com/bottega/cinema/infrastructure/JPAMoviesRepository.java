@@ -32,7 +32,7 @@ public class JPAMoviesRepository implements MovieRepository {
     public Movie load(String title, String description) {
         List<Movie> movies =  entityManager.createNamedQuery("Movie.findByTitleAndDescription", Movie.class)
                 .setParameter("title", title)
-                .setParameter("descr", description)
+                .setParameter("description", description)
                 .getResultList();
        return getSingleMovie(movies);
     }

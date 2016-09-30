@@ -32,7 +32,7 @@ public class UpdatePricesRequestTest {
     @Before
     public void setUp() throws Exception {
         request = new UpdatePricesRequest();
-        price = new TicketPrice(TYPE, PRICE, MOVIE);
+        price = new TicketPrice(TYPE, PRICE);
 
     }
 

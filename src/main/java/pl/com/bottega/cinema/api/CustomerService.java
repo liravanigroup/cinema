@@ -11,7 +11,6 @@ import pl.com.bottega.cinema.api.response.*;
 import pl.com.bottega.cinema.domain.*;
 
 import java.util.Collection;
-import java.util.LinkedList;
 import java.util.Set;
 
 import static pl.com.bottega.cinema.domain.validators.ObjectValidator.notNullValidate;
@@ -22,7 +21,6 @@ import static pl.com.bottega.cinema.domain.validators.ObjectValidator.notNullVal
 @AllArgsConstructor
 @Service
 public class CustomerService {
-
 
     private PriceCalculator priceCalculator;
     private CinemaCatalog cinemaCatalog;
@@ -43,38 +41,48 @@ public class CustomerService {
 
     public CalculatePriceResponse calculatePrice(CalculatePriceRequest request) {
         request.validate();
-        return priceCalculator.calculatePrice(request);
+        Show show = getExistingShow(request.getShowId());
+        return priceCalculator.calculatePrice(request, show);
     }
 
     @Transactional
     public ReservationResponse createReservation(CreateReservationRequest request) {
-        request.validate();
-        Show show = getExistShow(request.getShowId());
-        validateSeatSequence(show, request.getSeats());
-        Reservation reservation = reservationFactory.createReservation(request);
+        //request.validate();
+        Show show = getExistingShow(request.getShowId());
+        //validateSeatSequence(show, request.getSeats());
+
+        Reservation reservation = reservationFactory.createReservation(request, show);
+        System.out.println(reservation);
         reservationRepository.save(reservation);
-        Reservation loadedReservation = reservationRepository.load(request.getShowId(), request.getCustomer());
+
+        Reservation loadedReservation = getExistingReservation(request);
         return new ReservationResponse(loadedReservation.getId());
+    }
+
+    private Reservation getExistingReservation(CreateReservationRequest request) {
+        Reservation reservation = reservationRepository.load(request.getShowId(), request.getCustomer());
+        notNullValidate(reservation, "Reservation does not exist!");
+        return reservation;
     }
 
     private void validateSeatSequence(Show show, Set<Seat> seats) {
         Set<Reservation> reservations = show.getReservations();
         CinemaHall cinemaHall = new CinemaHall(reservations);
         if (!cinemaHall.isAvailableToBuy(seats))
-            throw new  InvalidRequestException("You can not buy this tickets");
+            throw new InvalidRequestException("You can not buy this tickets");
     }
 
     @Transactional
     public SeatsResponse getSeatsByShowId(Long showId) {
-        Show show = getExistShow(showId);
+        Show show = getExistingShow(showId);
         Set<Reservation> reservations = show.getReservations();
         CinemaHall cinemaHall = new CinemaHall(reservations);
         return cinemaHall.getSeatsResponse();
     }
 
-    private Show getExistShow(Long showId) {
-        Show show =  showsRepository.load(showId);
-        notNullValidate(show, "Show not exist!");
+    private Show getExistingShow(Long showId) {
+        Show show = showsRepository.load(showId);
+        notNullValidate(show, "Show does not exist!");
         return show;
     }
 }

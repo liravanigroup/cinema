@@ -7,6 +7,8 @@ import pl.com.bottega.cinema.api.CashierService;
 import pl.com.bottega.cinema.api.CustomerService;
 import pl.com.bottega.cinema.api.request.CreateReservationRequest;
 import pl.com.bottega.cinema.api.request.GetReservationListRequest;
+import pl.com.bottega.cinema.api.response.ListReservationResponse;
+import pl.com.bottega.cinema.api.response.ReservationResponse;
 
 /**
  * Created by anna on 24.09.2016.
@@ -20,13 +22,13 @@ public class ReservationController {
     private CashierService cashierService;
 
     @PutMapping
-    public void createReservation(@RequestBody CreateReservationRequest request) {
-        customerService.createReservation(request);
+    public ReservationResponse createReservation(@RequestBody CreateReservationRequest request) {
+        return customerService.createReservation(request);
     }
 
     @GetMapping
-    public void getReservationByQuery(@ModelAttribute GetReservationListRequest request){
-        cashierService.getReservations(request);
+    public ListReservationResponse getReservationByQuery(@ModelAttribute GetReservationListRequest request){
+       return cashierService.getReservations(request);
     }
 
 

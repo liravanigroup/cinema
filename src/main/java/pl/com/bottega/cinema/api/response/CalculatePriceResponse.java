@@ -8,9 +8,7 @@ import pl.com.bottega.cinema.api.Calculation;
 import pl.com.bottega.cinema.domain.TicketOrder;
 
 import java.math.BigDecimal;
-import java.math.MathContext;
 import java.util.Set;
-import java.util.function.Consumer;
 
 /**
  * Created by Admin on 18.09.2016.

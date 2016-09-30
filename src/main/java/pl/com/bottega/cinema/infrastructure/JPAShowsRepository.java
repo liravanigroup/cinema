@@ -30,7 +30,7 @@ public class JPAShowsRepository implements ShowsRepository {
     }
 
     public Show load(Long cinemaId, Long movieId, LocalDate date, LocalTime time){
-        List<Show> shows = entityManager.createNamedQuery("Show.findShowsByShowParams", Show.class)
+        List<Show> shows = entityManager.createNamedQuery("Show.findShowsByShowDate", Show.class)
                 .setParameter("cinemaId", cinemaId)
                 .setParameter("movieId", movieId)
                 .setParameter("date", date)
