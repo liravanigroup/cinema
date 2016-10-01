@@ -3,7 +3,6 @@ package pl.com.bottega.cinema.infrastructure;
 import org.springframework.stereotype.Component;
 import pl.com.bottega.cinema.api.CinemaCatalog;
 import pl.com.bottega.cinema.domain.Cinema;
-import pl.com.bottega.cinema.api.response.ListAllCinemasResponse;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -19,8 +18,7 @@ public class JPACinemaCatalog implements CinemaCatalog {
     private EntityManager entityManager;
 
     @Override
-    public ListAllCinemasResponse listAll() {
-        List<Cinema> cinemas = entityManager.createNamedQuery("Cinema.getAll", Cinema.class).getResultList();
-        return new ListAllCinemasResponse(cinemas);
+    public List<Cinema> listAll() {
+        return entityManager.createNamedQuery("Cinema.getAll", Cinema.class).getResultList();
     }
 }

@@ -41,7 +41,7 @@ public class ReservationResponseDto {
         this.tickets = getTicketOrdersResponse(r);
         this.seats = getSeatsResponceDto(r.getSeats());
         this.customer = new CustomerDto(r.getCustomer());
-        this.status = r.getStatus();
+        this.status = r.getStatus().toString().toLowerCase();
         this.totalPrice = r.getTotalPrice();
     }
 

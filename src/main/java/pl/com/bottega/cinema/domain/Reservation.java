@@ -9,9 +9,9 @@ import java.math.BigDecimal;
 import java.util.Set;
 
 import static javax.persistence.CascadeType.ALL;
-import static javax.persistence.FetchType.EAGER;
-import static javax.persistence.FetchType.LAZY;
+import static javax.persistence.EnumType.STRING;
 import static javax.persistence.GenerationType.IDENTITY;
+import static pl.com.bottega.cinema.domain.ReservationStatus.PENDING;
 
 /**
  * Created by anna on 25.09.2016.
@@ -20,17 +20,12 @@ import static javax.persistence.GenerationType.IDENTITY;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
+@EqualsAndHashCode(exclude = {"id"})
 @ToString
 @NamedQueries({
-        @NamedQuery(name = "Reservation.findByShowIdAndCustomer",
-                query = "SELECT r FROM Reservation r " +
-                        "WHERE r.show.id=:showId " +
-                        "AND r.customer.firstName=:firstName " +
-                        "AND r.customer.lastName=:lastName"),
         @NamedQuery(name = "Reservation.findByCustomerLastNameAndStatus",
-                query = "SELECT r FROM Reservation r " +
-                        "WHERE r.customer.lastName=:lastName " +
-                        "AND r.status=:status")
+                query = "SELECT DISTINCT r FROM Reservation r " +
+                        "WHERE r.customer.lastName=:lastName AND r.status=:status")
 })
 @Entity
 public class Reservation implements Serializable {
@@ -53,10 +48,12 @@ public class Reservation implements Serializable {
     @ManyToOne(cascade = ALL)
     private Show show;
 
-    private String status;
+    @Enumerated(value = STRING)
+    private ReservationStatus status;
+
     private BigDecimal totalPrice;
 
     public Reservation(Show show, Set<TicketOrder> tickets, Set<Seat> seats, Customer customer, BigDecimal totalPrice) {
-        this(null, tickets, seats, customer, show, "pending", totalPrice);
+        this(null, tickets, seats, customer, show, PENDING, totalPrice);
     }
 }

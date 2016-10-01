@@ -20,7 +20,6 @@ import static javax.persistence.FetchType.EAGER;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-@EqualsAndHashCode(exclude = {"id"})
 @NamedQueries({
         @NamedQuery(name = "Show.findShowsByShowDate",
                 query = "SELECT s FROM Show s " +

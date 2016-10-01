@@ -2,7 +2,6 @@ package pl.com.bottega.cinema.ui;
 
 import lombok.AllArgsConstructor;
 import org.springframework.web.bind.annotation.*;
-import pl.com.bottega.cinema.api.AdminPanel;
 import pl.com.bottega.cinema.api.CashierService;
 import pl.com.bottega.cinema.api.CustomerService;
 import pl.com.bottega.cinema.api.request.CreateReservationRequest;
@@ -27,7 +26,7 @@ public class ReservationController {
     }
 
     @GetMapping
-    public ListReservationResponse getReservationByQuery(@ModelAttribute GetReservationListRequest request){
+    public ListReservationResponse getReservationByQuery(GetReservationListRequest request){
        return cashierService.getReservations(request);
     }
 

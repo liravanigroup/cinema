@@ -6,6 +6,7 @@ import pl.com.bottega.cinema.api.request.GetReservationListRequest;
 import pl.com.bottega.cinema.api.response.ListReservationResponse;
 import pl.com.bottega.cinema.domain.Reservation;
 import pl.com.bottega.cinema.domain.ReservationRepository;
+import pl.com.bottega.cinema.domain.ReservationStatus;
 
 import java.util.List;
 
@@ -24,6 +25,6 @@ public class CashierService {
     }
 
     private List<Reservation> getReservationsList(GetReservationListRequest request) {
-        return reservationRepository.load(request.getQuery(), request.getStatus());
+        return reservationRepository.load(request.getQuery(), ReservationStatus.valueOf(request.getStatus().toUpperCase()));
     }
 }

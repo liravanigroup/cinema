@@ -1,6 +1,7 @@
 package pl.com.bottega.cinema.api.request;
 
-import lombok.*;
+import lombok.Getter;
+import lombok.Setter;
 
 import static pl.com.bottega.cinema.domain.validators.StringValidator.stringValidate;
 
@@ -9,15 +10,12 @@ import static pl.com.bottega.cinema.domain.validators.StringValidator.stringVali
  */
 @Getter
 @Setter
-@AllArgsConstructor
-@NoArgsConstructor
-@ToString
 public class GetReservationListRequest {
 
     private String query, status;
 
     public void validate() {
-        stringValidate(query, "");
-        stringValidate(status, "");
+        stringValidate(query, "Bad query");
+        stringValidate(status, "Invalid status");
     }
 }

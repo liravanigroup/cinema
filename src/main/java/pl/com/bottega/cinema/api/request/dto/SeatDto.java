@@ -14,11 +14,11 @@ import pl.com.bottega.cinema.domain.Seat;
 @AllArgsConstructor
 @NoArgsConstructor
 public class SeatDto {
+
     private Integer row;
     private Integer seat;
 
-
     public SeatDto(Seat seat) {
-        //TODO ????
+        this(seat.getRow(), seat.getSeat());
     }
 }

@@ -10,7 +10,5 @@ import java.util.List;
 public interface ReservationRepository {
     void save(Reservation reservation);
 
-    Reservation load(Long showId, Customer customer);
-
-    List<Reservation> load(String lastName, String status);
+    List<Reservation> load(String lastName, ReservationStatus status);
 }

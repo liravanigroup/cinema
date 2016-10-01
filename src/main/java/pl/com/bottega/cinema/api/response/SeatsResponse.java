@@ -7,6 +7,7 @@ import pl.com.bottega.cinema.api.request.dto.SeatDto;
 import pl.com.bottega.cinema.domain.Seat;
 
 import java.util.Collection;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 /**
@@ -17,13 +18,11 @@ import java.util.stream.Collectors;
 @NoArgsConstructor
 public class SeatsResponse {
 
-    private Collection<SeatDto> freeSeats;
-    private Collection<SeatDto> occupiedSeats;
+    private Set<SeatDto> freeSeats;
+    private Set<SeatDto> occupiedSeats;
 
-
-
-    public SeatsResponse(Collection<Seat> occupiedSeats, Collection<Seat> freeSeats){
-         this.occupiedSeats = occupiedSeats.stream().map(SeatDto::new).collect(Collectors.toList());
-         this.freeSeats = freeSeats.stream().map(SeatDto::new).collect(Collectors.toList());
+    public SeatsResponse(Set<Seat> occupiedSeats, Set<Seat> freeSeats){
+         this.occupiedSeats = occupiedSeats.stream().map(SeatDto::new).collect(Collectors.toSet());
+         this.freeSeats = freeSeats.stream().map(SeatDto::new).collect(Collectors.toSet());
      }
 }

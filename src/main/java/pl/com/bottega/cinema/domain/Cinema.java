@@ -13,7 +13,6 @@ import static javax.persistence.FetchType.EAGER;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-@EqualsAndHashCode(exclude = {"id"})
 @Entity
 @NamedQueries({
         @NamedQuery(name = "Cinema.findByNameAndCity", query = "SELECT c FROM Cinema c WHERE c.name = :name AND c.city = :city"),

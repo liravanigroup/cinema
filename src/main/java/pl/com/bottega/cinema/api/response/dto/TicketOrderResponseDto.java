@@ -22,6 +22,6 @@ public class TicketOrderResponseDto {
     private BigDecimal totalPrice;
 
     public TicketOrderResponseDto(TicketOrder ticket) {
-        this(ticket.getType(), ticket.getCount(), ticket.getUnitPrice(), ticket.getTotalPrice());
+        this(ticket.getType(), ticket.getQuantity(), ticket.getUnitPrice(), ticket.getTotalPrice());
     }
 }

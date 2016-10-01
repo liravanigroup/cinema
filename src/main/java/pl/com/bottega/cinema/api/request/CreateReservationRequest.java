@@ -40,7 +40,8 @@ public class CreateReservationRequest {
     }
 
     public Set<Seat> getSeats() {
-        return reservation.getSeats().stream().map(seatDto -> new Seat(seatDto.getRow(), seatDto.getSeat(), true))
+        return reservation.getSeats().stream()
+                .map(seatDto -> new Seat(seatDto.getRow(), seatDto.getSeat()))
                 .collect(Collectors.toSet());
     }
 }

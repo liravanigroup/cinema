@@ -3,9 +3,11 @@ package pl.com.bottega.cinema.api.request;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import pl.com.bottega.cinema.api.InvalidRequestException;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
 
 import static pl.com.bottega.cinema.domain.validators.NumberValidator.entityIdValidate;
 
@@ -14,14 +16,21 @@ import static pl.com.bottega.cinema.domain.validators.NumberValidator.entityIdVa
  */
 @Getter
 @Setter
-@NoArgsConstructor
 public class GetMoviesAtDateRequest {
 
     private Long cinemaId;
     private LocalDate date;
 
     public GetMoviesAtDateRequest(String date) {
-        this.date = LocalDate.parse(date, DateTimeFormatter.ofPattern("yyyy/MM/dd"));
+        this.date = getValidDate(date);
+    }
+
+    private LocalDate getValidDate(String date) {
+        try{
+            return LocalDate.parse(date, DateTimeFormatter.ofPattern("yyyy/MM/dd"));
+        }catch (DateTimeParseException ex){
+            throw new InvalidRequestException(ex.getMessage());
+        }
     }
 
     public void validate() {

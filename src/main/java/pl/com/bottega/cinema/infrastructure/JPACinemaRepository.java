@@ -11,6 +11,8 @@ import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import java.util.List;
 
+import static pl.com.bottega.cinema.infrastructure.JPACommonCode.getSingleObject;
+
 /**
  * Created by bernard.boguszewski on 04.09.2016.
  */
@@ -31,11 +33,7 @@ public class JPACinemaRepository implements CinemaRepository {
                 .setParameter("name", name)
                 .setParameter("city", city)
                 .getResultList();
-        return getSingleCinema(cinemas);
-    }
-
-    private Cinema getSingleCinema(List<Cinema> cinemas) {
-        return cinemas.isEmpty() ? null : cinemas.get(0);
+        return getSingleObject(cinemas);
     }
 
     @Override

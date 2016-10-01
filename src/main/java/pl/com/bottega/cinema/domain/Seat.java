@@ -2,7 +2,10 @@ package pl.com.bottega.cinema.domain;
 
 import lombok.*;
 
-import javax.persistence.*;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
 import java.io.Serializable;
 
 /**
@@ -12,7 +15,7 @@ import java.io.Serializable;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-@EqualsAndHashCode(exclude = {"id", "isFree"})
+@EqualsAndHashCode(exclude = {"id"})
 @Entity
 public class Seat implements Serializable{
 
@@ -22,12 +25,10 @@ public class Seat implements Serializable{
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private Boolean isFree;
-
     private Integer row;
     private Integer seat;
 
-    public Seat(Integer row, Integer seat, Boolean isFree) {
-        this(null, isFree, row, seat);
+    public Seat(Integer row, Integer seat) {
+        this(null, row, seat);
     }
 }

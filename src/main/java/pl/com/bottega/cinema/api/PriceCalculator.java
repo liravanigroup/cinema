@@ -23,18 +23,12 @@ import static pl.com.bottega.cinema.domain.validators.CollectionValidator.collec
 @Service
 public class PriceCalculator {
 
-    public CalculatePriceResponse calculatePrice(CalculatePriceRequest request, Show show) {
-        Collection<TicketPrice> tickets = getTicketPrices(show);
-        Set<TicketOrder> orders = createOrders(tickets, request.getTickets());
-        collectionValidate(orders, "no tickets");
-        return new CalculatePriceResponse(orders);
-    }
-
-    private Collection<TicketPrice> getTicketPrices(Show show) {
-        return show.getMovie().getPrices();
+    public Set<TicketOrder> calculatePrice(Collection<TicketDto> ticketsDto, Show show) {
+        return createOrders(show.getMovie().getPrices(), ticketsDto);
     }
 
     private Set<TicketOrder> createOrders(Collection<TicketPrice> tickets, Collection<TicketDto> ticketsDto) {
+        collectionValidate(tickets, "no tickets");
         Set<TicketOrder> order = new HashSet<>();
         for(TicketDto ticketOrder : ticketsDto){
             for(TicketPrice ticketPrice : tickets){
@@ -44,10 +38,4 @@ public class PriceCalculator {
         }
         return order;
     }
-
-    public Set<TicketOrder> getCalculationSet(Show show, Collection<TicketDto> ticketsDto){
-        Collection<TicketPrice> tickets = getTicketPrices(show);
-        return createOrders(tickets, ticketsDto);
-    }
-
 }

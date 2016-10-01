@@ -1,54 +1,44 @@
 package pl.com.bottega.cinema.api;
 
-import com.google.common.collect.Lists;
 import pl.com.bottega.cinema.api.response.SeatsResponse;
 import pl.com.bottega.cinema.domain.Reservation;
 import pl.com.bottega.cinema.domain.Seat;
 
-import java.util.*;
-import java.util.function.Consumer;
+import java.util.HashSet;
+import java.util.Set;
 
 /**
  * Created by anna on 24.09.2016.
  */
 public class CinemaHall {
 
-    public static final int SEATS_COUNT = 15;
-    public static final int ROWS_COUNT = 10;
-    private Collection<Reservation> reservations;
-    private SeatsResponse seatsResponse;
+    private static final int SEATS_COUNT = 15;
+    private static final int ROWS_COUNT = 10;
+    private Set<Reservation> reservations;
 
-    public CinemaHall(Collection<Reservation> reservations) {
+    public CinemaHall(Set<Reservation> reservations) {
         this.reservations = reservations;
     }
 
-    public Collection<Seat> getFreeSeats() {
-        Collection<Seat> seats = new ArrayList<>();
-        fieldSeats(seats);
-        mergeWithOccupied(seats);
-        return seats;
+    private Set<Seat> getFreeSeats() {
+        Set<Seat> freeSeats = new HashSet<>();
+        fillSeats(freeSeats);
+        freeSeats.removeAll(getOccupiedSeats());
+        return freeSeats;
     }
 
-    private void mergeWithOccupied(Collection<Seat> seats) {
-        seats.addAll(getOccupiedSeats());
-    }
-
-    private void fieldSeats(Collection<Seat> seats) {
-        for (int row = 0; row < ROWS_COUNT; row++) {
-            for (int seat = 0; seat < SEATS_COUNT; seat++) {
-                seats.add(new Seat(row, seat, true));
-            }
+    private void fillSeats(Set<Seat> freeSeats) {
+        for (int row = 1; row <= ROWS_COUNT; row++) {
+            for (int seat = 1; seat <= SEATS_COUNT; seat++)
+                freeSeats.add(new Seat(row, seat));
         }
     }
 
-    public Collection<Seat> getOccupiedSeats() {
-        Collection<Seat> result = new LinkedList<>();
-        for (Reservation reservation : reservations) {
-            for (Seat seat : reservation.getSeats()) {
-                result.add(seat);
-            }
-        }
-        return result;
+    private Set<Seat> getOccupiedSeats() {
+        Set<Seat> occupiedSeats = new HashSet<>();
+        for (Reservation reservation : reservations)
+            occupiedSeats.addAll(reservation.getSeats());
+        return occupiedSeats;
     }
 
     public SeatsResponse getSeatsResponse() {
@@ -56,20 +46,43 @@ public class CinemaHall {
     }
 
     public boolean isAvailableToBuy(Set<Seat> seats) {
-        if (seats.size() == 1)
-            return isFree(new LinkedList<>(seats).get(0));
-        if (countOfFreeSeats() < seats.size())
-            return false;
-        Seat[][] seatArray = new Seat[ROWS_COUNT][SEATS_COUNT];
-        getOccupiedSeats().forEach(seat -> seatArray[seat.getRow() - 1][seat.getSeat() - 1] = seat);
-return true;
+        isFreeValidate(seats);
+        return isNearbyPlaces(seats) || !isEnoughNearbySeats(seats);
     }
 
-    private int countOfFreeSeats() {
-        return getFreeSeats().size();
+    private boolean isEnoughNearbySeats(Set<Seat> seats) {
+        int neededNearbyCount = seats.size();
+        int actualNearbyCount = 0;
+        Set<Seat> freeSeats = getFreeSeats();
+        for (int row = 1; row <= ROWS_COUNT; row++) {
+            for (int seat = 1; seat <= SEATS_COUNT; seat++) {
+                if (freeSeats.contains(new Seat(row, seat))) {
+                    actualNearbyCount++;
+                } else {
+                    if (actualNearbyCount >= neededNearbyCount)
+                        return true;
+                    actualNearbyCount = 0;
+                }
+            }
+            if (actualNearbyCount >= neededNearbyCount)
+                return true;
+            actualNearbyCount = 0;
+        }
+        return false;
     }
 
-    private boolean isFree(Seat seat) {
-        return !getOccupiedSeats().contains(seat);
+    private void isFreeValidate(Set<Seat> seats) {
+        if (!getFreeSeats().containsAll(seats))
+            throw new InvalidRequestException("Some places are already occupied");
+    }
+
+    private boolean isNearbyPlaces(Set<Seat> seats) {
+        Seat[] seatsArray = seats.toArray(new Seat[seats.size()]);
+        for (int index = 0; index < seats.size() - 1; index++) {
+            if (!seatsArray[index].getRow().equals(seatsArray[seatsArray.length - 1].getRow())) {
+                return false;
+            }
+        }
+        return true;
     }
 }

@@ -30,7 +30,7 @@ public class CustomerService {
     private ShowsRepository showsRepository;
 
     public ListAllCinemasResponse listAll() {
-        return cinemaCatalog.listAll();
+        return new ListAllCinemasResponse(cinemaCatalog.listAll());
     }
 
     public ListMoviesResponse findMoviesInCinemaByDate(GetMoviesAtDateRequest request) {
@@ -42,34 +42,24 @@ public class CustomerService {
     public CalculatePriceResponse calculatePrice(CalculatePriceRequest request) {
         request.validate();
         Show show = getExistingShow(request.getShowId());
-        return priceCalculator.calculatePrice(request, show);
+        return new CalculatePriceResponse(priceCalculator.calculatePrice(request.getTickets(), show));
     }
 
     @Transactional
     public ReservationResponse createReservation(CreateReservationRequest request) {
-        //request.validate();
+        request.validate();
         Show show = getExistingShow(request.getShowId());
-        //validateSeatSequence(show, request.getSeats());
-
+        validateSeatSequence(show, request.getSeats());
         Reservation reservation = reservationFactory.createReservation(request, show);
-        System.out.println(reservation);
         reservationRepository.save(reservation);
-
-        Reservation loadedReservation = getExistingReservation(request);
-        return new ReservationResponse(loadedReservation.getId());
-    }
-
-    private Reservation getExistingReservation(CreateReservationRequest request) {
-        Reservation reservation = reservationRepository.load(request.getShowId(), request.getCustomer());
-        notNullValidate(reservation, "Reservation does not exist!");
-        return reservation;
+        return new ReservationResponse(reservation.getId());
     }
 
     private void validateSeatSequence(Show show, Set<Seat> seats) {
         Set<Reservation> reservations = show.getReservations();
         CinemaHall cinemaHall = new CinemaHall(reservations);
         if (!cinemaHall.isAvailableToBuy(seats))
-            throw new InvalidRequestException("You can not buy this tickets");
+            throw new InvalidRequestException("Seats are occupied");
     }
 
     @Transactional

@@ -5,6 +5,7 @@ import org.springframework.stereotype.Repository;
 import pl.com.bottega.cinema.api.Customer;
 import pl.com.bottega.cinema.domain.Reservation;
 import pl.com.bottega.cinema.domain.ReservationRepository;
+import pl.com.bottega.cinema.domain.ReservationStatus;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -25,24 +26,10 @@ public class JPAReservationRepository implements ReservationRepository {
     }
 
     @Override
-    public Reservation load(Long showId, Customer customer) {
-        List<Reservation> reservations = entityManager.createNamedQuery("Reservation.findByShowIdAndCustomer", Reservation.class)
-                .setParameter("showId", showId)
-                .setParameter("firstName", customer.getFirstName())
-                .setParameter("lastName", customer.getLastName())
-                .getResultList();
-        return getSingleReservation(reservations);
-    }
-
-    @Override
-    public List<Reservation> load(String lastName, String status) {
+    public List<Reservation> load(String lastName, ReservationStatus status) {
         return entityManager.createNamedQuery("Reservation.findByCustomerLastNameAndStatus", Reservation.class)
                 .setParameter("lastName", lastName)
                 .setParameter("status", status)
                 .getResultList();
-    }
-
-    private Reservation getSingleReservation(List<Reservation> reservations) {
-        return reservations.isEmpty() ? null : reservations.get(0);
     }
 }

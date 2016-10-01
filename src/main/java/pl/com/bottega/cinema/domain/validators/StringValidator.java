@@ -20,7 +20,7 @@ public class StringValidator {
     }
 
     public static void validateEmail(String email, String message) {
-        if(!Pattern.matches("\\w+@[a-zA-Z_]+?\\.[a-zA-Z]{2,6}",email))
+        if(!Pattern.matches("[\\w.-]+@[a-zA-Z_]+?\\.[a-zA-Z]{2,6}",email))
             throw new InvalidRequestException(message);
     }
 

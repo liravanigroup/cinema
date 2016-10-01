@@ -3,10 +3,7 @@ package pl.com.bottega.cinema.domain;
 import lombok.*;
 import pl.com.bottega.cinema.api.request.dto.TicketDto;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 import java.io.Serializable;
 import java.math.BigDecimal;
 import java.math.MathContext;
@@ -29,12 +26,12 @@ public class TicketOrder implements Serializable{
     private Long id;
 
     private String type;
-    private Integer count;
+    private Integer quantity;
     private BigDecimal unitPrice;
     private BigDecimal totalPrice;
 
     private TicketOrder(String kind, Integer count, BigDecimal unitPrice){
-        this(null, kind, count, unitPrice, unitPrice.multiply(new BigDecimal(count), new MathContext(2)));
+        this(null, kind, count, unitPrice, unitPrice.multiply(new BigDecimal(count)));
     }
 
     public TicketOrder(TicketDto ticketOrder, TicketPrice ticketPrice) {

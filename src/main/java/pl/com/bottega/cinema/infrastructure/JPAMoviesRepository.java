@@ -8,6 +8,8 @@ import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import java.util.List;
 
+import static pl.com.bottega.cinema.infrastructure.JPACommonCode.getSingleObject;
+
 /**
  * Created by bernard.boguszewski on 04.09.2016.
  */
@@ -20,7 +22,6 @@ public class JPAMoviesRepository implements MovieRepository {
     @Override
     public void save(Movie movie) {
         entityManager.persist(movie);
-        entityManager.flush();
     }
 
     @Override
@@ -34,10 +35,6 @@ public class JPAMoviesRepository implements MovieRepository {
                 .setParameter("title", title)
                 .setParameter("description", description)
                 .getResultList();
-       return getSingleMovie(movies);
-    }
-
-    private Movie getSingleMovie(List<Movie> movies) {
-        return movies.isEmpty() ? null : movies.get(0);
+       return getSingleObject(movies);
     }
 }

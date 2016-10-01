@@ -36,7 +36,7 @@ public class JPACinemaCatalogTest {
         //given
 
         //when
-        ListAllCinemasResponse listAllCinemasResponse = cinemaCatalog.listAll();
+        ListAllCinemasResponse listAllCinemasResponse = new ListAllCinemasResponse(cinemaCatalog.listAll());
 
         //than
         assertEquals(COUNT_CINEMAS_IN_DB, listAllCinemasResponse.getCinemas().size());

@@ -11,6 +11,8 @@ import java.time.LocalTime;
 import java.util.Collection;
 import java.util.List;
 
+import static pl.com.bottega.cinema.infrastructure.JPACommonCode.getSingleObject;
+
 /**
  * Created by Admin on 14.09.2016.
  */
@@ -36,11 +38,7 @@ public class JPAShowsRepository implements ShowsRepository {
                 .setParameter("date", date)
                 .setParameter("time", time)
                 .getResultList();
-        return getSingleShow(shows);
-    }
-
-    private Show getSingleShow(List<Show> shows) {
-        return shows.isEmpty() ? null : shows.get(0);
+        return getSingleObject(shows);
     }
 
     @Override
