@@ -16,6 +16,7 @@ import java.io.Serializable;
 @NoArgsConstructor
 @AllArgsConstructor
 @EqualsAndHashCode(exclude = {"id"})
+@ToString(exclude = {"id"})
 @Entity
 public class Seat implements Serializable{
 

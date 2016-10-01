@@ -11,4 +11,6 @@ public interface ReservationRepository {
     void save(Reservation reservation);
 
     List<Reservation> load(String lastName, ReservationStatus status);
+
+    Reservation load(Long reservationNumber);
 }

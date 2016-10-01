@@ -32,4 +32,9 @@ public class JPAReservationRepository implements ReservationRepository {
                 .setParameter("status", status)
                 .getResultList();
     }
+
+    @Override
+    public Reservation load(Long reservationNumber) {
+        return entityManager.find(Reservation.class, reservationNumber);
+    }
 }
