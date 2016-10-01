@@ -25,6 +25,7 @@ public class JPAReservationRepository implements ReservationRepository {
         entityManager.persist(reservation);
     }
 
+
     @Override
     public List<Reservation> load(String lastName, ReservationStatus status) {
         return entityManager.createNamedQuery("Reservation.findByCustomerLastNameAndStatus", Reservation.class)

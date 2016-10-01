@@ -25,7 +25,9 @@ import static pl.com.bottega.cinema.domain.ReservationStatus.PENDING;
 @NamedQueries({
         @NamedQuery(name = "Reservation.findByCustomerLastNameAndStatus",
                 query = "SELECT DISTINCT r FROM Reservation r " +
-                        "WHERE r.customer.lastName=:lastName AND r.status=:status")
+                        "WHERE r.customer.lastName=:lastName AND r.status=:status"),
+        @NamedQuery(name = "Reservation.loadReservationByReservationId",
+                query = "SELECT r FROM Reservation r WHERE r.id = :id")
 })
 @Entity
 public class Reservation implements Serializable {
@@ -48,12 +50,19 @@ public class Reservation implements Serializable {
     @ManyToOne(cascade = ALL)
     private Show show;
 
+    @OneToMany(cascade = ALL)
+    private Set<Payment> payments;
+
     @Enumerated(value = STRING)
     private ReservationStatus status;
 
     private BigDecimal totalPrice;
 
     public Reservation(Show show, Set<TicketOrder> tickets, Set<Seat> seats, Customer customer, BigDecimal totalPrice) {
-        this(null, tickets, seats, customer, show, PENDING, totalPrice);
+        this(null, tickets, seats, customer, show, null, PENDING, totalPrice);
+    }
+
+    public void addPayment(Payment payment) {
+        payments.add(payment);
     }
 }

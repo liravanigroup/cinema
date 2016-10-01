@@ -1,6 +1,5 @@
 package pl.com.bottega.cinema.api;
 
-import com.itextpdf.text.DocumentException;
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -11,6 +10,7 @@ import pl.com.bottega.cinema.domain.PDFGenerator;
 import pl.com.bottega.cinema.domain.Reservation;
 import pl.com.bottega.cinema.domain.ReservationRepository;
 import pl.com.bottega.cinema.domain.ReservationStatus;
+import pl.com.bottega.cinema.domain.*;
 
 import java.util.List;
 
@@ -34,6 +34,13 @@ public class CashierService {
 
     private List<Reservation> getReservationsList(GetReservationListRequest request) {
         return reservationRepository.load(request.getQuery(), ReservationStatus.valueOf(request.getStatus().toUpperCase()));
+    }
+
+    public void createPayment(Long reservationNumber, CollectPaymentRequest collectPaymentRequest) {
+        Reservation reservation = getExistingReservation(reservationNumber);
+        Payment payment = new Payment(collectPaymentRequest.getPaymentDto().getType(), collectPaymentRequest.getPaymentDto().getCashierId());
+        reservation.addPayment(payment);
+        reservationRepository.save(reservation);
     }
 
     public ResponseEntity<byte[]> getTicketsInPdf(Long reservationNumber) {

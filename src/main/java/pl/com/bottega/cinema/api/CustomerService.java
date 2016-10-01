@@ -67,7 +67,7 @@ public class CustomerService {
         Show show = getExistingShow(showId);
         Set<Reservation> reservations = show.getReservations();
         CinemaHall cinemaHall = new CinemaHall(reservations);
-        return cinemaHall.getSeatsResponse();
+        return cinemaHall.getSeatsResponse(); // cinemahall nie moze zwracac seat response
     }
 
     private Show getExistingShow(Long showId) {

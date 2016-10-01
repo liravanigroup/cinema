@@ -28,7 +28,7 @@ public class PriceCalculator {
     }
 
     private Set<TicketOrder> createOrders(Collection<TicketPrice> tickets, Collection<TicketDto> ticketsDto) {
-        collectionValidate(tickets, "no tickets");
+        //collectionValidate(tickets, "no tickets");
         Set<TicketOrder> order = new HashSet<>();
         for(TicketDto ticketOrder : ticketsDto){
             for(TicketPrice ticketPrice : tickets){
