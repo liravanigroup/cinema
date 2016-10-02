@@ -36,12 +36,10 @@ public class CashStrategy implements PaymentStrategy {
 
     private String getDescription(PaymentDto payment, Reservation reservation) {
         return String.format(
-                "Payment for reservation #%s; Movie: %s; Seats: %s; Date: %ta %tb %td %tT; provided by cashier: %s",
+                "Payment for reservation #%s; Movie: %s; Seats: %s; provided by cashier: %s",
                 reservation.getId(),
                 reservation.getShow().getMovie().getTitle(),
                 reservation.getSeats(),
-                reservation.getShow().getDate(),
-                reservation.getShow().getTime(),
                 payment.getCashierId()
         );
 
