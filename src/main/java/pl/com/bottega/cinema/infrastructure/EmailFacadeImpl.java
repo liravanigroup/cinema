@@ -3,14 +3,13 @@ package pl.com.bottega.cinema.infrastructure;
 import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;
 import org.springframework.core.io.ByteArrayResource;
-import org.springframework.core.io.InputStreamSource;
 import org.springframework.mail.MailSender;
 import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSenderImpl;
 import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.stereotype.Service;
 import pl.com.bottega.cinema.api.EmailFacade;
-import pl.com.bottega.cinema.domain.PDFGenerator;
+import pl.com.bottega.cinema.api.PdfGenerator;
 import pl.com.bottega.cinema.domain.Reservation;
 
 import javax.mail.MessagingException;
@@ -27,7 +26,7 @@ public class EmailFacadeImpl implements EmailFacade {
     private MailSender mailSender;
     private SimpleMailMessage templateMessage;
     private JavaMailSenderImpl javaMailSender;
-    private PDFGenerator pdfGenerator;
+    private PdfGenerator pdfGenerator;
 
     @Override
     public void sendTickets(Reservation reservation) {

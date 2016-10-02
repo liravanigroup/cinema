@@ -8,8 +8,8 @@ import pl.com.bottega.cinema.api.request.dto.PaymentDto;
 import pl.com.bottega.cinema.domain.Payment;
 import pl.com.bottega.cinema.domain.PaymentType;
 import pl.com.bottega.cinema.domain.Reservation;
-import pl.com.bottega.cinema.domain.ReservationStatus;
 
+import java.math.BigDecimal;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -28,7 +28,7 @@ public class CreditCardStrategy implements PaymentStrategy {
         try {
             Charge charge = Charge.create(getChargeMap(payment, reservation), REQUEST_OPTIONS);
             return new Payment(PaymentType.CREDIT_CARD, charge, reservation);
-        } catch (StripeException e) {
+        } catch (StripeException ex) {
             return new Payment(PaymentType.CREDIT_CARD, CURRENCY, reservation);
         }
     }
@@ -38,14 +38,24 @@ public class CreditCardStrategy implements PaymentStrategy {
         cardMap.put("number", payment.getNumber());
         cardMap.put("exp_month", payment.getMonth());
         cardMap.put("exp_year", payment.getYear());
+        cardMap.put("cvc", payment.getCvc());
         return cardMap;
     }
 
     private Map<String, Object> getChargeMap(PaymentDto payment, Reservation reservation) {
         Map<String, Object> chargeMap = new HashMap<>();
-        chargeMap.put("amount", reservation.getTotalPrice());
+        chargeMap.put("amount", getCentsValue(reservation.getTotalPrice()));
         chargeMap.put("currency", CURRENCY);
+        chargeMap.put("description", getDescription(reservation));
         chargeMap.put("card", getCardMap(payment));
         return chargeMap;
+    }
+
+    private int getCentsValue(BigDecimal amount) {
+        return (int) (amount.doubleValue() * 100);
+    }
+
+    private String getDescription(Reservation reservation) {
+        return String.format("Payment for reservation number %s", reservation.getId());
     }
 }

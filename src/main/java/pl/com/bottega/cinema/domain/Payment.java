@@ -9,6 +9,8 @@ import lombok.Setter;
 import javax.persistence.*;
 import java.io.Serializable;
 
+import static pl.com.bottega.cinema.domain.PaymentStatus.SUCCEEDED;
+
 /**
  * Created by bernard.boguszewski on 01.10.2016.
  */
@@ -38,8 +40,8 @@ public class Payment implements Serializable{
         this.transactionData = new TransactionData(charge, reservation);
     }
 
-    public Payment(PaymentType type, Long cashierId, boolean isSuccessful, TransactionData transactionData) {
-        this(null, type, cashierId, isSuccessful, transactionData);
+    public Payment(PaymentType type, Long cashierId, TransactionData transactionData) {
+        this(null, type, cashierId, true, transactionData);
     }
 
     public Payment(PaymentType type, String currency, Reservation reservation) {
@@ -53,6 +55,6 @@ public class Payment implements Serializable{
     }
 
     public boolean isIsSuccessful() {
-        return isSuccessful;
+        return isSuccessful && transactionData.getStatus() == SUCCEEDED;
     }
 }

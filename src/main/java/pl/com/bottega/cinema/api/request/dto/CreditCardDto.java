@@ -11,7 +11,7 @@ import static pl.com.bottega.cinema.domain.validators.ObjectValidator.notNullVal
 @Getter
 @Setter
 public class CreditCardDto {
-    private Long number;
+    private String number;
     private Byte expirationMonth;
     private Short expirationYear;
     private String cvc;

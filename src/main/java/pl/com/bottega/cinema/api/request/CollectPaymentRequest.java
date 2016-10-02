@@ -27,7 +27,7 @@ public class CollectPaymentRequest {
         return payment.getYear();
     }
 
-    public Long getCardNumber() {
+    public String getCardNumber() {
         return payment.getNumber();
     }
 

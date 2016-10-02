@@ -37,7 +37,7 @@ public class PaymentDto {
         return creditCard.getCvc();
     }
 
-    public Long getNumber() {
+    public String getNumber() {
         return creditCard.getNumber();
     }
 }

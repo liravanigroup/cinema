@@ -23,7 +23,7 @@ import static pl.com.bottega.cinema.domain.validators.ObjectValidator.notNullVal
 public class CashierService {
 
     private ReservationRepository reservationRepository;
-    private PDFGenerator pdfGenerator;
+    private PdfGenerator pdfGenerator;
     private EmailFacade emailFacade;
     private PaymentManager paymentManager;
 

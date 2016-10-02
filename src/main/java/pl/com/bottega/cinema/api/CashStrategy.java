@@ -1,13 +1,13 @@
 package pl.com.bottega.cinema.api;
 
 import pl.com.bottega.cinema.api.request.dto.PaymentDto;
-import pl.com.bottega.cinema.domain.Payment;
-import pl.com.bottega.cinema.domain.PaymentType;
-import pl.com.bottega.cinema.domain.Reservation;
-import pl.com.bottega.cinema.domain.TransactionData;
+import pl.com.bottega.cinema.domain.*;
 
 import java.time.LocalDateTime;
 import java.util.Date;
+
+import static pl.com.bottega.cinema.domain.PaymentStatus.SUCCEEDED;
+import static pl.com.bottega.cinema.domain.PaymentType.CASH;
 
 /**
  * Created by bernard.boguszewski on 01.10.2016.
@@ -15,20 +15,16 @@ import java.util.Date;
 public class CashStrategy implements PaymentStrategy {
 
     private static final String CURRENCY = "usd";
-    private static final boolean PAYMENT_SUCCESS = true;
-    private static final String PAYMENT_STATUS = "successes";
-
 
     @Override
     public Payment pay(PaymentDto payment, Reservation reservation) {
         return new Payment(
-                PaymentType.CASH,
+                CASH,
                 payment.getCashierId(),
-                PAYMENT_SUCCESS,
                 new TransactionData(
                         reservation,
                         CURRENCY,
-                        PAYMENT_STATUS,
+                        SUCCEEDED,
                         getDescription(payment, reservation)
                 )
         );

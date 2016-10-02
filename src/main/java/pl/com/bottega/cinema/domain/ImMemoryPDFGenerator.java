@@ -3,6 +3,7 @@ package pl.com.bottega.cinema.domain;
 import com.itextpdf.text.*;
 import com.itextpdf.text.pdf.PdfWriter;
 import org.springframework.stereotype.Service;
+import pl.com.bottega.cinema.api.PdfGenerator;
 
 
 import java.io.ByteArrayOutputStream;
@@ -12,7 +13,7 @@ import java.io.ByteArrayOutputStream;
  */
 
 @Service
-public class PDFGenerator {
+public class ImMemoryPDFGenerator implements PdfGenerator{
 
     public byte[] getReservationInPDF(Reservation reservation) {
         Document document = new Document(PageSize.A8, 25, 25, 25, 25);
