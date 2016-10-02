@@ -25,6 +25,7 @@ public class Payment implements Serializable{
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @Enumerated(EnumType.STRING)
     private PaymentType type;
     private Long cashierId;
     private Boolean isSuccessful;
