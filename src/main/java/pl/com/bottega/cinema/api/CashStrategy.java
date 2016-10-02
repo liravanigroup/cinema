@@ -9,6 +9,8 @@ import pl.com.bottega.cinema.domain.Payment;
 public class CashStrategy implements PaymentStrategy{
     @Override
     public Payment pay(PaymentDto paymentDto) {
-        return null;
+        Payment payment = new Payment(paymentDto.getType(), paymentDto.getCashierId());
+        payment.setSuccessful(true);
+        return payment;
     }
 }

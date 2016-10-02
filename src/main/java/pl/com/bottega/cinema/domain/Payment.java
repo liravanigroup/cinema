@@ -23,14 +23,17 @@ public class Payment {
     @GeneratedValue
     private Long id;
 
-    private String type;
+    private PaymentType type;
     private Long cashierId;
     private boolean successful;
     //private TransactionData transactionData;
 
-    public Payment(String type, Long cashierId){
+    public Payment(PaymentType type, Long cashierId){
         this.type = type;
         this. cashierId = cashierId;
     }
 
+    public boolean isOnline() {
+        return type.equals(PaymentType.CREDIT_CARD);
+    }
 }

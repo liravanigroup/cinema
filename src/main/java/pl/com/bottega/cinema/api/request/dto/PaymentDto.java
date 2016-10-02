@@ -3,6 +3,7 @@ package pl.com.bottega.cinema.api.request.dto;
 import lombok.Getter;
 import lombok.Setter;
 import pl.com.bottega.cinema.domain.CreditCard;
+import pl.com.bottega.cinema.domain.PaymentType;
 
 /**
  * Created by bernard.boguszewski on 01.10.2016.
@@ -11,7 +12,7 @@ import pl.com.bottega.cinema.domain.CreditCard;
 @Setter
 public class PaymentDto {
 
-    private String type;
+    private PaymentType type;
     private Long cashierId;
     private CreditCard creditCard;
 }

@@ -63,6 +63,22 @@ public class Reservation implements Serializable {
     }
 
     public void addPayment(Payment payment) {
+        checkReservationStatus();
         payments.add(payment);
+        if (payment.isSuccessful())
+            status = ReservationStatus.PAID;
+        else
+            status = ReservationStatus.PAYMENT_FAILED;
+    }
+
+    private void checkReservationStatus(){
+        if (status.equals(ReservationStatus.PAID))
+            throw new IllegalStateException("Reservation is already paid!");
+        if (status.equals(ReservationStatus.CANCELED))
+            throw new IllegalStateException("Reservation is canceled!");
+    }
+
+    public boolean isPaid() {
+        return status.equals(ReservationStatus.PAID);
     }
 }
