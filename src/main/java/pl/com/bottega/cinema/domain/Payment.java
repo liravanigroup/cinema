@@ -29,7 +29,7 @@ public class Payment implements Serializable{
     private PaymentType type;
     private Long cashierId;
     private Boolean isSuccessful;
-    @OneToOne
+    @OneToOne(cascade = CascadeType.ALL)
     private TransactionData transactionData;
 
     public Payment(PaymentType type, Charge charge, Reservation reservation) {

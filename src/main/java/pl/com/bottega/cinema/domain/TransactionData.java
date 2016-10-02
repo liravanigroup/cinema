@@ -28,9 +28,10 @@ public class TransactionData implements Serializable{
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @Temporal(value = TemporalType.TIMESTAMP)
     private Date transactionDate;
     private BigDecimal amount;
-    @OneToOne
+    @OneToOne(cascade = CascadeType.ALL)
     private Reservation reservation;
 
     private String currency;
