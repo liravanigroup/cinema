@@ -2,8 +2,8 @@ package pl.com.bottega.cinema.api.request.dto;
 
 import lombok.Getter;
 import lombok.Setter;
-import pl.com.bottega.cinema.domain.CreditCard;
-import pl.com.bottega.cinema.domain.PaymentType;
+
+import static pl.com.bottega.cinema.domain.validators.StringValidator.stringValidate;
 
 /**
  * Created by bernard.boguszewski on 01.10.2016.
@@ -12,7 +12,28 @@ import pl.com.bottega.cinema.domain.PaymentType;
 @Setter
 public class PaymentDto {
 
-    private PaymentType type;
+    private String type;
     private Long cashierId;
-    private CreditCard creditCard;
+    private CreditCardDto creditCard;
+
+    public void validate() {
+        stringValidate(type, "Type is required");
+        creditCard.validate();
+    }
+
+    public Short getYear() {
+        return creditCard.getExpirationYear();
+    }
+
+    public Byte getMonth() {
+        return creditCard.getExpirationMonth();
+    }
+
+    public String getCvc() {
+        return creditCard.getCvc();
+    }
+
+    public Long getNumber() {
+        return creditCard.getNumber();
+    }
 }

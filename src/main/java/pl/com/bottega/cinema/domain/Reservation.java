@@ -65,7 +65,7 @@ public class Reservation implements Serializable {
     public void addPayment(Payment payment) {
         checkReservationStatus();
         payments.add(payment);
-        if (payment.isSuccessful())
+        if (payment.isIsSuccessful())
             status = ReservationStatus.PAID;
         else
             status = ReservationStatus.PAYMENT_FAILED;

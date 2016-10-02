@@ -1,16 +1,23 @@
 package pl.com.bottega.cinema.api;
 
+import com.stripe.exception.StripeException;
+import com.stripe.model.Charge;
+import com.stripe.net.RequestOptions;
 import lombok.AllArgsConstructor;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import pl.com.bottega.cinema.api.factory.ReservationFactory;
 import pl.com.bottega.cinema.api.request.CalculatePriceRequest;
+import pl.com.bottega.cinema.api.request.CreatePaymentRequest;
 import pl.com.bottega.cinema.api.request.CreateReservationRequest;
 import pl.com.bottega.cinema.api.request.GetMoviesAtDateRequest;
 import pl.com.bottega.cinema.api.response.*;
 import pl.com.bottega.cinema.domain.*;
 
 import java.util.Collection;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Set;
 
 import static pl.com.bottega.cinema.domain.validators.ObjectValidator.notNullValidate;
@@ -28,6 +35,7 @@ public class CustomerService {
     private ReservationFactory reservationFactory;
     private ReservationRepository reservationRepository;
     private ShowsRepository showsRepository;
+    private PaymentManager paymentManager;
 
     public ListAllCinemasResponse listAll() {
         return new ListAllCinemasResponse(cinemaCatalog.listAll());
@@ -74,5 +82,19 @@ public class CustomerService {
         Show show = showsRepository.load(showId);
         notNullValidate(show, "Show does not exist!");
         return show;
+    }
+
+    @Transactional
+    public void payForReservedTickets(CreatePaymentRequest request) {
+        request.validate();
+        Reservation reservation = getExistingReservation(request.getReservationNumber());
+        Payment payment = paymentManager.collectPayment(request, reservation);
+        reservation.addPayment(payment);
+    }
+
+    private Reservation getExistingReservation(Long reservationNumber) {
+        Reservation reservation = reservationRepository.load(reservationNumber);
+        notNullValidate(reservation, "Reservation does not exists");
+        return reservation;
     }
 }
