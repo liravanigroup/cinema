@@ -13,7 +13,8 @@ import static pl.com.bottega.cinema.domain.validators.NumberValidator.entityIdVa
 @Getter
 @Setter
 @ToString
-public class CreatePaymentRequest {
+public class CollectPaymentRequest {
+
     private Long reservationNumber;
     private PaymentDto payment;
 

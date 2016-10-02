@@ -1,7 +1,7 @@
 package pl.com.bottega.cinema.api;
 
 import org.springframework.stereotype.Service;
-import pl.com.bottega.cinema.api.request.CreatePaymentRequest;
+import pl.com.bottega.cinema.api.request.CollectPaymentRequest;
 import pl.com.bottega.cinema.domain.Payment;
 import pl.com.bottega.cinema.domain.Reservation;
 import pl.com.bottega.cinema.domain.ReservationStatus;
@@ -14,7 +14,7 @@ public class PaymentManager {
 
     private PaymentStrategy paymentStrategy;
 
-    public Payment collectPayment(CreatePaymentRequest request, Reservation reservation) {
+    public Payment collectPayment(CollectPaymentRequest request, Reservation reservation) {
         reservationStateValidation(reservation);
         setPaymentStrategy(request.getPayment().getType());
         return paymentStrategy.pay(request.getPayment(), reservation);

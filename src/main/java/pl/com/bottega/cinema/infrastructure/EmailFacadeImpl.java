@@ -1,12 +1,14 @@
 package pl.com.bottega.cinema.infrastructure;
 
 import lombok.AllArgsConstructor;
+import lombok.NoArgsConstructor;
 import org.springframework.core.io.ByteArrayResource;
 import org.springframework.core.io.InputStreamSource;
 import org.springframework.mail.MailSender;
 import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSenderImpl;
 import org.springframework.mail.javamail.MimeMessageHelper;
+import org.springframework.stereotype.Service;
 import pl.com.bottega.cinema.api.EmailFacade;
 import pl.com.bottega.cinema.domain.PDFGenerator;
 import pl.com.bottega.cinema.domain.Reservation;
@@ -18,6 +20,8 @@ import javax.mail.internet.MimeMessage;
  * Created by bernard.boguszewski on 01.10.2016.
  */
 @AllArgsConstructor
+@NoArgsConstructor
+@Service
 public class EmailFacadeImpl implements EmailFacade {
 
     private MailSender mailSender;

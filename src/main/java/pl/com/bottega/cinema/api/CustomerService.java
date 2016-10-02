@@ -1,23 +1,17 @@
 package pl.com.bottega.cinema.api;
 
-import com.stripe.exception.StripeException;
-import com.stripe.model.Charge;
-import com.stripe.net.RequestOptions;
 import lombok.AllArgsConstructor;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import pl.com.bottega.cinema.api.factory.ReservationFactory;
 import pl.com.bottega.cinema.api.request.CalculatePriceRequest;
-import pl.com.bottega.cinema.api.request.CreatePaymentRequest;
+import pl.com.bottega.cinema.api.request.CollectPaymentRequest;
 import pl.com.bottega.cinema.api.request.CreateReservationRequest;
 import pl.com.bottega.cinema.api.request.GetMoviesAtDateRequest;
 import pl.com.bottega.cinema.api.response.*;
 import pl.com.bottega.cinema.domain.*;
 
 import java.util.Collection;
-import java.util.HashMap;
-import java.util.Map;
 import java.util.Set;
 
 import static pl.com.bottega.cinema.domain.validators.ObjectValidator.notNullValidate;
@@ -85,7 +79,7 @@ public class CustomerService {
     }
 
     @Transactional
-    public void payForReservedTickets(CreatePaymentRequest request) {
+    public void payForReservedTickets(CollectPaymentRequest request) {
         request.validate();
         Reservation reservation = getExistingReservation(request.getReservationNumber());
         Payment payment = paymentManager.collectPayment(request, reservation);

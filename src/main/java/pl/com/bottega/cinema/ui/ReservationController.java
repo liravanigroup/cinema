@@ -5,10 +5,9 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import pl.com.bottega.cinema.api.CashierService;
 import pl.com.bottega.cinema.api.CustomerService;
-import pl.com.bottega.cinema.api.request.CreatePaymentRequest;
+import pl.com.bottega.cinema.api.request.CollectPaymentRequest;
 import pl.com.bottega.cinema.api.request.CreateReservationRequest;
 import pl.com.bottega.cinema.api.request.GetReservationListRequest;
-import pl.com.bottega.cinema.api.CollectPaymentRequest;
 import pl.com.bottega.cinema.api.response.ListReservationResponse;
 import pl.com.bottega.cinema.api.response.ReservationResponse;
 
@@ -33,9 +32,11 @@ public class ReservationController {
         return cashierService.getReservations(request);
     }
 
-    @PutMapping("/{reservationNumber}/payment")
-    public void createPayment(@PathVariable("reservationNumber") Long reservationNumber, @RequestBody CollectPaymentRequest collectPaymentRequest) {
-        cashierService.createPayment(reservationNumber, collectPaymentRequest);
+    @PutMapping("/{reservationNumber}/payments")
+    public void createPayment(@PathVariable("reservationNumber") Long reservationNumber,
+                              @RequestBody CollectPaymentRequest request) {
+        request.setReservationNumber(reservationNumber);
+        cashierService.createPayment(request);
     }
 
     @GetMapping(value = "/{reservationNumber}/tickets", produces = "application/pdf")
@@ -45,9 +46,8 @@ public class ReservationController {
 
     @PutMapping("/{reservationNumber}/payment")
     public void payForReservedTickets(@PathVariable("reservationNumber") Long reservationNumber,
-                                                     @RequestBody CreatePaymentRequest request) {
+                                      @RequestBody CollectPaymentRequest request) {
         request.setReservationNumber(reservationNumber);
         customerService.payForReservedTickets(request);
     }
-
 }

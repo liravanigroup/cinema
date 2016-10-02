@@ -5,7 +5,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import pl.com.bottega.cinema.api.request.CreatePaymentRequest;
+import pl.com.bottega.cinema.api.request.CollectPaymentRequest;
 import pl.com.bottega.cinema.api.request.GetReservationListRequest;
 import pl.com.bottega.cinema.api.response.ListReservationResponse;
 import pl.com.bottega.cinema.domain.*;
@@ -37,7 +37,7 @@ public class CashierService {
     }
 
     @Transactional
-    public void createPayment(CreatePaymentRequest request) {
+    public void createPayment(CollectPaymentRequest request) {
         request.validate();
         Reservation reservation = getExistingReservation(request.getReservationNumber());
         Payment payment = paymentManager.collectPayment(request, reservation);

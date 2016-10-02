@@ -29,7 +29,6 @@ public class CashStrategy implements PaymentStrategy {
                         reservation,
                         CURRENCY,
                         PAYMENT_STATUS,
-                        new Date(),
                         getDescription(payment, reservation)
                 )
         );

@@ -37,8 +37,8 @@ public class TransactionData implements Serializable{
     private String description;
     private String status;
 
-    public TransactionData(Reservation reservation, String currency, String paymentStatus, Date transactionDate, String description) {
-        this.transactionDate = transactionDate;
+    public TransactionData(Reservation reservation, String currency, String paymentStatus, String description) {
+        this.transactionDate = new Date();
         this.amount = reservation.getTotalPrice();
         this.reservation = reservation;
         this.currency = currency;
@@ -57,5 +57,10 @@ public class TransactionData implements Serializable{
 
     public TransactionData(Reservation reservation, String currency) {
         this.transactionDate = new Date();
+        this.amount = reservation.getTotalPrice();
+        this.currency = currency;
+        this.description = "";
+        this.status = "filed";
+
     }
 }

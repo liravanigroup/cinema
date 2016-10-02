@@ -41,7 +41,7 @@ public class Payment implements Serializable{
         this(null, type, cashierId, isSuccessful, transactionData);
     }
 
-    public Payment(PaymentType creditCard, String currency, Reservation reservation) {
+    public Payment(PaymentType type, String currency, Reservation reservation) {
         this.type = type;
         this.isSuccessful = false;
         this.transactionData = new TransactionData(reservation, currency);

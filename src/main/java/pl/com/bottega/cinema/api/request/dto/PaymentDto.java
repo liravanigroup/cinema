@@ -3,6 +3,7 @@ package pl.com.bottega.cinema.api.request.dto;
 import lombok.Getter;
 import lombok.Setter;
 
+import static pl.com.bottega.cinema.domain.validators.NumberValidator.entityIdValidate;
 import static pl.com.bottega.cinema.domain.validators.StringValidator.stringValidate;
 
 /**
@@ -18,7 +19,10 @@ public class PaymentDto {
 
     public void validate() {
         stringValidate(type, "Type is required");
-        creditCard.validate();
+        if (cashierId == null)
+            creditCard.validate();
+        else
+            entityIdValidate(cashierId, "Cashier id is incorrect");
     }
 
     public Short getYear() {
